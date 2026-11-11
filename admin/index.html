@@ -26,17 +26,17 @@ header{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:s
 h1{font-size:22px;margin:0;line-height:1.25}
 .sub{color:var(--soft);font-size:13px;margin:2px 0 0}
 .bar{display:flex;flex-wrap:wrap;gap:8px}
-button,.btn{font:500 13.5px var(--font);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 14px;cursor:pointer}
+button{font:500 13.5px var(--font);color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 14px;cursor:pointer}
 button:hover{border-color:var(--accent)}
 button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 button:disabled{opacity:.5;cursor:not-allowed}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
 .layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:18px;align-items:start}
 @media (max-width:820px){.layout{grid-template-columns:1fr}}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
 .card h2{font-size:14px;margin:0 0 10px;color:var(--soft);font-weight:600;letter-spacing:.03em;text-transform:uppercase}
 label.f{display:block;font-size:12.5px;color:var(--soft);margin:10px 0 4px}
-input[type=text],textarea{width:100%;font:400 14.5px var(--font);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+input[type=text],input[type=email],input[type=password],input[type=url],textarea,select{width:100%;font:400 14.5px var(--font);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
 textarea{resize:vertical;min-height:64px}
 .houses{display:flex;flex-direction:column;gap:6px;margin-top:6px}
 .h{display:flex;align-items:center;gap:10px;text-align:left;width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
@@ -47,6 +47,8 @@ textarea{resize:vertical;min-height:64px}
 .pill.ok{background:var(--ok-soft);color:var(--ok)}.pill.bad{background:var(--bad-soft);color:var(--bad)}
 .row2{display:grid;grid-template-columns:1fr 120px;gap:12px}
 @media (max-width:520px){.row2{grid-template-columns:1fr}}
+.row3{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+@media (max-width:520px){.row3{grid-template-columns:1fr}}
 input[type=color]{width:100%;height:40px;border:1px solid var(--line);border-radius:9px;background:var(--bg);padding:3px}
 .q{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:14px}
 .q .lv{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.05em;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
@@ -56,7 +58,7 @@ input[type=color]{width:100%;height:40px;border:1px solid var(--line);border-rad
 .opt.right input[type=text]{border-color:var(--ok);background:var(--ok-soft)}
 .hint{font-size:12.5px;color:var(--soft);margin-top:8px}
 .msg{padding:10px 12px;border-radius:10px;font-size:13.5px;margin-top:10px}
-.msg.bad{background:var(--bad-soft);color:var(--bad)}.msg.ok{background:var(--ok-soft);color:var(--ok)}.msg.warn{background:var(--warn-soft);color:var(--warn)}
+.msg.bad{background:var(--bad-soft);color:var(--bad)}.msg.ok{background:var(--ok-soft);color:var(--ok)}.msg.warn{background:var(--warn-soft);color:var(--warn)}.msg.info{background:var(--accent-soft);color:var(--accent)}
 .issues{margin:6px 0 0;padding-left:18px;font-size:13.5px}
 .issues button{all:unset;cursor:pointer;color:var(--accent);text-decoration:underline}
 details{margin-top:12px}summary{cursor:pointer;font-size:13.5px;color:var(--soft)}
@@ -65,7 +67,11 @@ ol.steps{padding-left:18px;margin:6px 0 0;font-size:13.5px;color:var(--soft)}
 .dist{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;font-size:12.5px;color:var(--soft)}
 .dist span{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:3px 9px}
 .stack>*+*{margin-top:18px}
-#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw}
+.sect{margin-top:18px;padding-top:14px;border-top:1px dashed var(--line)}
+.sect h3{font-size:13px;margin:0 0 4px;color:var(--soft);font-weight:600}
+.vid{margin-top:10px;padding:10px 12px;border:1px dashed var(--line);border-radius:10px}
+.vid .t{font-size:12.5px;color:var(--soft);margin-bottom:2px}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:10px;font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;z-index:9}
 #toast.on{opacity:1}
 @media (prefers-reduced-motion:reduce){#toast{transition:none}}
 </style>
@@ -75,14 +81,14 @@ ol.steps{padding-left:18px;margin:6px 0 0;font-size:13.5px;color:var(--soft)}
   <header>
     <div>
       <h1>Soạn câu hỏi ôn tập 3D</h1>
-      <p class="sub">Sửa hoặc thêm câu hỏi cho 6 nhà, kiểm tra, rồi tải tệp <b>cau-hoi.js</b>. Bản nháp tự lưu trên máy này.</p>
+      <p class="sub">Sửa 6 nhà × 3 câu, thêm thông tin và link video, rồi lưu lên hệ thống (cần đăng nhập quản trị) hoặc tải tệp.</p>
     </div>
     <div class="bar">
       <button id="bImport" type="button">Nhập tệp</button>
-      <button id="bReset" type="button">Dùng bản đang chạy</button>
+      <button id="bReset" type="button">Tải lại bản đang chạy</button>
       <button id="bTry" type="button">Chơi thử bản nháp</button>
-      <button id="bCopy" type="button">Sao chép nội dung</button>
-      <button id="bDown" type="button" class="primary">Tải cau-hoi.js</button>
+      <button id="bDown" type="button">Tải cau-hoi.js</button>
+      <button id="bSave" type="button" class="primary">Lưu lên hệ thống</button>
       <input id="file" type="file" accept=".js,.json,application/json,text/javascript" hidden>
     </div>
   </header>
@@ -91,8 +97,15 @@ ol.steps{padding-left:18px;margin:6px 0 0;font-size:13.5px;color:var(--soft)}
 
   <div class="layout">
     <aside class="stack">
+      <section class="card" id="authCard">
+        <h2>Tài khoản quản trị</h2>
+        <div id="authBody"></div>
+      </section>
       <section class="card">
-        <h2>Thông tin bài</h2>
+        <h2>Bài ôn tập</h2>
+        <label class="f" for="tSlug">Mã bài (chữ thường, số, dấu gạch)</label>
+        <input type="text" id="tSlug" maxlength="40" autocomplete="off">
+        <div id="listBox"></div>
         <label class="f" for="tTen">Tên trò chơi</label><input type="text" id="tTen" maxlength="40">
         <label class="f" for="tDe">Tên bài ôn tập</label><input type="text" id="tDe" maxlength="80">
         <label class="f" for="tPhong">Tên toà nhà ở giữa</label><input type="text" id="tPhong" maxlength="30">
@@ -113,8 +126,8 @@ ol.steps{padding-left:18px;margin:6px 0 0;font-size:13.5px;color:var(--soft)}
         <h2>Đưa lên trang chơi</h2>
         <ol class="steps">
           <li>Sửa xong, bấm <b>Chơi thử bản nháp</b> để chơi bằng nội dung mới (chỉ trên máy này).</li>
-          <li>Bấm <b>Tải cau-hoi.js</b> rồi gửi tệp cho người quản trị trang để cập nhật.</li>
-          <li>Sau khi cập nhật, trang chơi chính thức tự đổi sang câu hỏi mới trong khoảng một phút.</li>
+          <li>Đăng nhập quản trị, bấm <b>Lưu lên hệ thống</b>. Học sinh thấy nội dung mới ngay lần mở trang kế tiếp.</li>
+          <li>Không đăng nhập được? Bấm <b>Tải cau-hoi.js</b> rồi gửi tệp cho người quản trị.</li>
         </ol>
         <details><summary>Xem nội dung tệp sẽ tải</summary><pre id="preview"></pre></details>
       </section>
@@ -124,45 +137,111 @@ ol.steps{padding-left:18px;margin:6px 0 0;font-size:13.5px;color:var(--soft)}
 <div id="toast" role="status"></div>
 
 <script src="/cau-hoi.js"></script>
+<script src="/supabase-config.js"></script>
 <script>
 (function(){
 'use strict';
-var KEY='ontap3d_nhap', MUC=['BIẾT','HIỂU','VẬN DỤNG'], LET=['A','B','C'];
+var KEY='ontap3d_nhap', SES='ontap3d_phien', MUC=['BIẾT','HIỂU','VẬN DỤNG'], LET=['A','B','C'];
+var SB=window.SUPABASE_CFG||null;
 function $(id){return document.getElementById(id)}
 function clone(o){return JSON.parse(JSON.stringify(o))}
 function el(tag,attrs,text){var e=document.createElement(tag);if(attrs)for(var k in attrs){if(k==='class')e.className=attrs[k];else e.setAttribute(k,attrs[k])}if(text!=null)e.textContent=text;return e}
 function shapeOk(c){return !!(c&&Array.isArray(c.nha)&&c.nha.length===6&&c.nha.every(function(n){return n&&Array.isArray(n.cau)&&n.cau.length===3&&n.cau.every(function(q){return q&&Array.isArray(q.chon)&&q.chon.length===3})}))}
+function S(x){return x==null?'':String(x)}
 function normalize(c){
-  c.tenTroChoi=String(c.tenTroChoi||'');c.phuDe=String(c.phuDe||'');c.phongGiua=String(c.phongGiua||'');
+  c.tenTroChoi=S(c.tenTroChoi);c.phuDe=S(c.phuDe);c.phongGiua=S(c.phongGiua);
   c.nha.forEach(function(n,i){
-    n.ten=String(n.ten||'');n.mau=/^#[0-9a-fA-F]{6}$/.test(n.mau||'')?n.mau:'#1f6fe0';n.goc=Number(n.goc)||i*60;
-    n.cau.forEach(function(q,j){q.muc=MUC[j];q.hoi=String(q.hoi||'');q.chon=q.chon.map(function(x){return String(x||'')});
-      q.dung=(q.dung===0||q.dung===1||q.dung===2)?q.dung:0;q.goiy=String(q.goiy||'')});
+    n.ten=S(n.ten);n.mau=/^#[0-9a-fA-F]{6}$/.test(n.mau||'')?n.mau:'#1f6fe0';n.goc=Number(n.goc)||i*60;
+    n.thongTin=S(n.thongTin);n.videoUrl=S(n.videoUrl);n.videoTieuDe=S(n.videoTieuDe);
+    n.cau.forEach(function(q,j){q.muc=MUC[j];q.hoi=S(q.hoi);q.chon=q.chon.map(S);
+      q.dung=(q.dung===0||q.dung===1||q.dung===2)?q.dung:0;q.goiy=S(q.goiy);q.videoUrl=S(q.videoUrl);q.videoTieuDe=S(q.videoTieuDe)});
   });
   return c;
 }
-var base=window.CAU_HINH&&shapeOk(window.CAU_HINH)?normalize(clone(window.CAU_HINH)):null;
-if(!base){document.body.textContent='Không tải được nội dung hiện tại (cau-hoi.js). Hãy tải lại trang.';return}
-var cfg=null,cur=0,savedDraft=false;
-try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(shapeOk(d)){cfg=normalize(d);savedDraft=true}}catch(e){}
-if(!cfg)cfg=clone(base);
+var fileBase=window.CAU_HINH&&shapeOk(window.CAU_HINH)?normalize(clone(window.CAU_HINH)):null;
+if(!fileBase){document.body.textContent='Không tải được nội dung hiện tại (cau-hoi.js). Hãy tải lại trang.';return}
+var base=clone(fileBase),cfg=null,cur=0,savedDraft=false,session=null,remoteOk=false;
+var slug='tin5-ban-quyen';
 
-function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},2600)}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(cfg));savedDraft=true}catch(e){}}
+function toast(m){var t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){t.classList.remove('on')},3200)}
+function saveDraft(){try{localStorage.setItem(KEY,JSON.stringify(cfg));savedDraft=true}catch(e){}}
 
+/* ---------- Supabase (chỉ dùng khoá công khai; quyền do RLS quyết định) ---------- */
+function hdr(token){return {'apikey':SB.key,'Authorization':'Bearer '+(token||SB.key),'Content-Type':'application/json'}}
+function rpc(name,body,token){
+  return fetch(SB.url+'/rest/v1/rpc/'+name,{method:'POST',headers:hdr(token),body:JSON.stringify(body||{})}).then(function(r){
+    return r.json().catch(function(){return null}).then(function(d){if(!r.ok){var e=new Error((d&&d.message)||('Lỗi '+r.status));e.code=d&&d.code;e.status=r.status;throw e}return d})});
+}
+function loadSession(){try{var s=JSON.parse(sessionStorage.getItem(SES)||'null');if(s&&s.access_token)return s}catch(e){}return null}
+function storeSession(s){session=s;try{if(s)sessionStorage.setItem(SES,JSON.stringify(s));else sessionStorage.removeItem(SES)}catch(e){}}
+function fromAuth(d){return {access_token:d.access_token,refresh_token:d.refresh_token,expires_at:Math.floor(Date.now()/1000)+(d.expires_in||3600),email:(d.user&&d.user.email)||''}}
+function login(email,pw){
+  return fetch(SB.url+'/auth/v1/token?grant_type=password',{method:'POST',headers:{'apikey':SB.key,'Content-Type':'application/json'},body:JSON.stringify({email:email,password:pw})})
+   .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error_description||d.msg||'Đăng nhập không thành công');return d})}).then(function(d){storeSession(fromAuth(d))});
+}
+function token(){
+  if(!session)return Promise.reject(new Error('Chưa đăng nhập'));
+  if(session.expires_at-60>Date.now()/1000)return Promise.resolve(session.access_token);
+  return fetch(SB.url+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{'apikey':SB.key,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:session.refresh_token})})
+   .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error('Phiên đăng nhập đã hết hạn, hãy đăng nhập lại');return d})}).then(function(d){storeSession(fromAuth(d));return session.access_token});
+}
+function renderAuth(){
+  var b=$('authBody');b.textContent='';
+  if(!SB){b.appendChild(el('div',{'class':'msg warn'},'Chưa cấu hình kết nối hệ thống.'));return}
+  if(session){
+    b.appendChild(el('div',{'class':'msg ok'},'Đã đăng nhập: '+(session.email||'quản trị')));
+    var o=el('button',{type:'button'},'Đăng xuất');o.style.marginTop='10px';o.addEventListener('click',function(){storeSession(null);renderAuth();refresh();refreshList()});b.appendChild(o);
+  }else{
+    var f=el('form');f.setAttribute('autocomplete','on');
+    f.appendChild(el('label',{'class':'f',for:'aMail'},'Email quản trị'));
+    var m=el('input',{type:'email',id:'aMail',autocomplete:'username',required:'required'});f.appendChild(m);
+    f.appendChild(el('label',{'class':'f',for:'aPw'},'Mật khẩu'));
+    var p=el('input',{type:'password',id:'aPw',autocomplete:'current-password',required:'required'});f.appendChild(p);
+    var s=el('button',{type:'submit','class':'primary'},'Đăng nhập');s.style.marginTop='12px';f.appendChild(s);
+    f.addEventListener('submit',function(ev){ev.preventDefault();s.disabled=true;
+      login(m.value.trim(),p.value).then(function(){p.value='';toast('Đã đăng nhập');renderAuth();refresh();refreshList()}).catch(function(e){s.disabled=false;toast(e.message)})});
+    b.appendChild(f);
+    b.appendChild(el('div',{'class':'hint'},'Chỉ tài khoản quản trị mới lưu được. Không đăng nhập vẫn soạn nháp và tải tệp bình thường.'));
+  }
+}
+function refreshList(){
+  var box=$('listBox');box.textContent='';
+  if(!SB)return;
+  rpc('danh_sach_bai',{},session?session.access_token:null).then(function(list){
+    if(!Array.isArray(list)||!list.length)return;
+    box.appendChild(el('label',{'class':'f',for:'tList'},'Bài đã có trên hệ thống'));
+    var sel=el('select',{id:'tList'});sel.appendChild(el('option',{value:''},'Chọn để tải…'));
+    list.forEach(function(x){sel.appendChild(el('option',{value:x.slug},x.slug+' · '+x.phuDe+(x.xuatBan?'':' (ẩn)')))});
+    sel.addEventListener('change',function(){if(sel.value)loadRemote(sel.value,true)});
+    box.appendChild(sel);
+  }).catch(function(){});
+}
+function loadRemote(sl,announce){
+  if(!SB)return Promise.resolve(false);
+  return rpc('lay_bai',{p_slug:sl},session?session.access_token:null).then(function(d){
+    if(shapeOk(d)){remoteOk=true;base=normalize(d);slug=sl;if(announce){cfg=clone(base);cur=0;try{localStorage.removeItem(KEY)}catch(e){}savedDraft=false;syncTop();renderEditor();refresh();toast('Đã tải bài '+sl)}return true}
+    if(announce)toast('Không tìm thấy bài '+sl);return false;
+  }).catch(function(){if(announce)toast('Không kết nối được hệ thống');return false});
+}
+
+/* ---------- kiểm tra ---------- */
+function okUrl(u){u=u.trim();return !u||/^https:\/\/[^\s]+$/i.test(u)}
 function issues(){
   var r=[];
+  if(!/^[a-z0-9][a-z0-9-]{1,60}$/.test(slug))r.push({h:-1,m:'Mã bài chỉ gồm chữ thường, số, dấu gạch (2–61 ký tự)'});
   if(!cfg.tenTroChoi.trim())r.push({h:-1,m:'Chưa có tên trò chơi'});
   if(!cfg.phuDe.trim())r.push({h:-1,m:'Chưa có tên bài ôn tập'});
   if(!cfg.phongGiua.trim())r.push({h:-1,m:'Chưa có tên toà nhà ở giữa'});
   cfg.nha.forEach(function(n,i){
     if(!n.ten.trim())r.push({h:i,m:'Nhà '+(i+1)+': chưa có tên nhà'});
+    if(!okUrl(n.videoUrl))r.push({h:i,m:'Nhà '+(i+1)+': link video phải bắt đầu bằng https://'});
     n.cau.forEach(function(q,j){
       var p='Nhà '+(i+1)+', câu '+MUC[j]+': ';
       if(!q.hoi.trim())r.push({h:i,m:p+'chưa có câu hỏi'});
       q.chon.forEach(function(x,k){if(!x.trim())r.push({h:i,m:p+'chưa có lựa chọn '+LET[k]})});
       var f=q.chon.map(function(x){return x.trim().toLowerCase()}).filter(Boolean);
       if(new Set(f).size!==f.length)r.push({h:i,m:p+'có hai lựa chọn giống nhau'});
+      if(!okUrl(q.videoUrl))r.push({h:i,m:p+'link video phải bắt đầu bằng https://'});
     });
   });
   return r;
@@ -184,7 +263,7 @@ function renderHouses(all){
 }
 function renderCheck(all){
   var c=$('check');c.textContent='';
-  if(!all.length){c.appendChild(el('div',{'class':'msg ok'},'Đủ 6 nhà × 3 câu, có thể tải tệp.'))}
+  if(!all.length){c.appendChild(el('div',{'class':'msg ok'},'Đủ 6 nhà × 3 câu, có thể lưu hoặc tải tệp.'))}
   else{
     c.appendChild(el('div',{'class':'msg bad'},'Còn '+all.length+' chỗ cần sửa:'));
     var ul=el('ul',{'class':'issues'});
@@ -201,12 +280,21 @@ function outJS(){
   return '/* Nội dung bài ôn tập, tạo bằng trang /admin */\nwindow.CAU_HINH = '+JSON.stringify(cfg,null,2)+';\n';
 }
 function refresh(){var all=issues();renderHouses(all);renderCheck(all);$('preview').textContent=outJS();
-  $('bDown').disabled=all.length>0;$('bTry').disabled=all.length>0;
+  $('bDown').disabled=all.length>0;$('bTry').disabled=all.length>0;$('bSave').disabled=all.length>0||!session;
+  $('bSave').title=session?'':'Cần đăng nhập quản trị để lưu';
   $('banner').textContent='';
-  if(savedDraft){var m=el('div',{'class':'msg warn'},'Đang dùng bản nháp lưu trên máy này (chưa đưa lên trang chính thức). ');$('banner').appendChild(m)}
+  if(savedDraft)$('banner').appendChild(el('div',{'class':'msg warn'},'Đang dùng bản nháp lưu trên máy này (chưa lưu lên hệ thống).'));
+  else if(remoteOk)$('banner').appendChild(el('div',{'class':'msg info'},'Đang mở nội dung từ hệ thống (bài '+slug+').'));
 }
-function onEdit(){save();refresh()}
+function onEdit(){saveDraft();refresh()}
 
+function vidBlock(parent,obj,titleLabel){
+  var box=el('div',{'class':'vid'});box.appendChild(el('div',{'class':'t'},titleLabel));
+  var r=el('div',{'class':'row3'});
+  var a=el('div');var iu=el('input',{type:'url',placeholder:'Dán link YouTube hoặc Vimeo (https://…)','aria-label':titleLabel+': link'});iu.value=obj.videoUrl;iu.addEventListener('input',function(){obj.videoUrl=iu.value;onEdit()});a.appendChild(iu);
+  var b=el('div');var it=el('input',{type:'text',maxlength:'80',placeholder:'Tên video (không bắt buộc)','aria-label':titleLabel+': tên'});it.value=obj.videoTieuDe;it.addEventListener('input',function(){obj.videoTieuDe=it.value;onEdit()});b.appendChild(it);
+  r.appendChild(a);r.appendChild(b);box.appendChild(r);parent.appendChild(box);
+}
 function renderEditor(){
   var n=cfg.nha[cur],box=$('editor');box.textContent='';
   box.appendChild(el('h2',null,'Nhà '+(cur+1)));
@@ -216,6 +304,13 @@ function renderEditor(){
   var b=el('div');b.appendChild(el('label',{'class':'f',for:'hMau'},'Màu mái nhà'));
   var ci=el('input',{type:'color',id:'hMau'});ci.value=n.mau;ci.addEventListener('input',function(){n.mau=ci.value;onEdit()});b.appendChild(ci);
   row.appendChild(a);row.appendChild(b);box.appendChild(row);
+
+  var learn=el('div',{'class':'sect'});learn.appendChild(el('h3',null,'Bài học nhanh (hiện cho học sinh trước khi trả lời)'));
+  learn.appendChild(el('label',{'class':'f',for:'hInfo'},'Thông tin cần nhớ (không bắt buộc)'));
+  var ta0=el('textarea',{id:'hInfo',maxlength:'1200'});ta0.value=n.thongTin;ta0.addEventListener('input',function(){n.thongTin=ta0.value;onEdit()});learn.appendChild(ta0);
+  vidBlock(learn,n,'Video học cho cả nhà này (nếu có)');
+  box.appendChild(learn);
+
   n.cau.forEach(function(q,j){
     var card=el('div',{'class':'q'});
     card.appendChild(el('span',{'class':'lv'},'CÂU '+(j+1)+' · '+MUC[j]));
@@ -232,13 +327,16 @@ function renderEditor(){
     });
     card.appendChild(el('label',{'class':'f',for:'qg'+j},'Gợi ý khi trả lời sai (không nói ra đáp án)'));
     var gi=el('input',{type:'text',id:'qg'+j,maxlength:'160'});gi.value=q.goiy;gi.addEventListener('input',function(){q.goiy=gi.value;onEdit()});card.appendChild(gi);
+    vidBlock(card,q,'Video gợi ý riêng cho câu này (nếu có)');
     box.appendChild(card);
   });
 }
-
-[['tTen','tenTroChoi'],['tDe','phuDe'],['tPhong','phongGiua']].forEach(function(p){
-  var i=$(p[0]);i.value=cfg[p[1]];i.addEventListener('input',function(){cfg[p[1]]=i.value;onEdit()});
-});
+function syncTop(){
+  $('tSlug').value=slug;
+  [['tTen','tenTroChoi'],['tDe','phuDe'],['tPhong','phongGiua']].forEach(function(p){$(p[0]).value=cfg[p[1]]});
+}
+[['tTen','tenTroChoi'],['tDe','phuDe'],['tPhong','phongGiua']].forEach(function(p){$(p[0]).addEventListener('input',function(){cfg[p[1]]=$(p[0]).value;onEdit()})});
+$('tSlug').addEventListener('input',function(){slug=$('tSlug').value.trim().toLowerCase();refresh()});
 
 $('bDown').addEventListener('click',function(){
   if(issues().length)return;
@@ -246,12 +344,19 @@ $('bDown').addEventListener('click',function(){
   a.href=URL.createObjectURL(blob);a.download='cau-hoi.js';document.body.appendChild(a);a.click();a.remove();
   setTimeout(function(){URL.revokeObjectURL(a.href)},2000);toast('Đã tải cau-hoi.js. Hãy gửi tệp cho người quản trị.');
 });
-$('bCopy').addEventListener('click',function(){
-  var t=outJS();
-  function fb(){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Đã sao chép nội dung')}catch(e){toast('Không sao chép được, hãy dùng nút Tải')}ta.remove()}
-  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){toast('Đã sao chép nội dung')},fb);else fb();
+$('bTry').addEventListener('click',function(){if(issues().length)return;saveDraft();window.open('/?thu=1','_blank')});
+$('bSave').addEventListener('click',function(){
+  if(issues().length||!session)return;
+  var btn=$('bSave');btn.disabled=true;btn.textContent='Đang lưu…';
+  token().then(function(t){return rpc('luu_bai',{p_slug:slug,p_data:cfg,p_xuat_ban:true},t)}).then(function(d){
+    base=normalize(d);remoteOk=true;try{localStorage.removeItem(KEY)}catch(e){}savedDraft=false;
+    btn.textContent='Lưu lên hệ thống';refresh();refreshList();toast('Đã lưu và xuất bản bài '+slug);
+  }).catch(function(e){
+    btn.textContent='Lưu lên hệ thống';refresh();
+    var m=e.message||'Không lưu được';if(e.code==='42501'||/quản trị|permission/i.test(m))m='Tài khoản này chưa được cấp quyền quản trị.';
+    toast(m);
+  });
 });
-$('bTry').addEventListener('click',function(){if(issues().length)return;save();window.open('/?thu=1','_blank')});
 $('bImport').addEventListener('click',function(){$('file').click()});
 $('file').addEventListener('change',function(){
   var f=this.files&&this.files[0];if(!f)return;var r=new FileReader();
@@ -260,18 +365,24 @@ $('file').addEventListener('change',function(){
       var t=String(r.result),i=t.indexOf('{'),j=t.lastIndexOf('}');
       var o=JSON.parse(t.slice(i,j+1));
       if(!shapeOk(o))throw new Error('x');
-      cfg=normalize(o);cur=0;save();
-      ['tTen','tDe','tPhong'].forEach(function(id,k){$(id).value=cfg[['tenTroChoi','phuDe','phongGiua'][k]]});
-      renderEditor();refresh();toast('Đã nhập tệp');
+      cfg=normalize(o);cur=0;saveDraft();syncTop();renderEditor();refresh();toast('Đã nhập tệp');
     }catch(e){toast('Tệp không đúng định dạng (cần đúng 6 nhà, mỗi nhà 3 câu, mỗi câu 3 lựa chọn)')}
   };r.readAsText(f);this.value='';
 });
 $('bReset').addEventListener('click',function(){
-  cfg=clone(base);cur=0;try{localStorage.removeItem(KEY)}catch(e){}savedDraft=false;
-  ['tTen','tDe','tPhong'].forEach(function(id,k){$(id).value=cfg[['tenTroChoi','phuDe','phongGiua'][k]]});
-  renderEditor();refresh();toast('Đã quay về bản đang chạy');
+  (SB?loadRemote(slug,false):Promise.resolve(false)).then(function(ok){
+    if(!ok)base=clone(fileBase);
+    cfg=clone(base);cur=0;try{localStorage.removeItem(KEY)}catch(e){}savedDraft=false;
+    syncTop();renderEditor();refresh();toast(ok?'Đã tải lại từ hệ thống':'Đã quay về nội dung trong tệp cau-hoi.js');
+  });
 });
-renderEditor();refresh();
+
+/* ---------- khởi động ---------- */
+session=loadSession();
+try{var d=JSON.parse(localStorage.getItem(KEY)||'null');if(shapeOk(d)){cfg=normalize(d);savedDraft=true}}catch(e){}
+if(!cfg)cfg=clone(base);
+renderAuth();syncTop();renderEditor();refresh();refreshList();
+if(SB){loadRemote(slug,false).then(function(ok){if(ok&&!savedDraft){cfg=clone(base);syncTop();renderEditor()}refresh()})}
 })();
 </script>
 </body>
