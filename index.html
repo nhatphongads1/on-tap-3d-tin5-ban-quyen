@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22 width=%22512%22 height=%22512%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%231e6fd9%22/%3E%3Cpath d=%22M0 46Q32 38 64 46V64H0Z%22 fill=%22%234a97f2%22/%3E%3Cpolygon points=%2244.0%2C5.5 45.4%2C9.1 49.2%2C9.3 46.3%2C11.7 47.2%2C15.4 44.0%2C13.4 40.8%2C15.4 41.7%2C11.7 38.8%2C9.3 42.6%2C9.1%22 fill=%22%23ffd54a%22/%3E%3Cpolygon points=%2238%2C28 44%2C19 50%2C28%22 fill=%22%23cfe4ff%22/%3E%3Crect x=%2238%22 y=%2228%22 width=%2212%22 height=%2220%22 fill=%22%23fff%22/%3E%3Crect x=%2242%22 y=%2232%22 width=%224%22 height=%225%22 rx=%221%22 fill=%22%231e6fd9%22/%3E%3Cpolygon points=%225%2C33 21%2C21 37%2C33%22 fill=%22%23cfe4ff%22/%3E%3Crect x=%228%22 y=%2233%22 width=%2226%22 height=%2215%22 fill=%22%23fff%22/%3E%3Cpath d=%22M14 41l4 4 9-9%22 fill=%22none%22 stroke=%22%231e6fd9%22 stroke-width=%223%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3Crect x=%224%22 y=%2248%22 width=%2256%22 height=%223.5%22 rx=%221.75%22 fill=%22%23fff%22/%3E%3C/svg%3E">
-<title>Ôn tập Tin 5 – Bản quyền nội dung thông tin</title>
+<title>Ôn tập 3D khuôn viên</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
 <style>
@@ -140,7 +140,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div id="labels"></div>
 
 <div class="hud top">
-  <div class="title"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg><b>Ôn tập Tin 5</b><small>Bản quyền nội dung thông tin</small><span class="prog">Điểm <b id="pts">0</b> · Nhà <span id="score">0/6</span><span class="pbar"><em id="pfill"></em></span></span></div>
+  <div class="title"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg><b id="tenGame">Ôn tập 3D</b><small id="phuDe"></small><span class="prog">Điểm <b id="pts">0</b> · Nhà <span id="score">0/6</span><span class="pbar"><em id="pfill"></em></span></span></div>
   <div class="bar" id="bar">
     <button class="btn" id="bHelp">Hướng dẫn</button>
     <button class="btn on" id="bVoice" aria-pressed="true">Giọng đọc: Bật</button>
@@ -161,7 +161,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 </div></div>
 <div class="honor" id="honor" hidden><div class="hcard" role="dialog" aria-modal="true" aria-labelledby="hh"><svg class="lg hlg" viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>
   <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 8h28v14c0 9-6 15-14 15s-14-6-14-15z" fill="#f2b81c" stroke="#b9820c" stroke-width="2"/><path d="M18 12h-8c0 10 4 16 11 17M46 12h8c0 10-4 16-11 17" fill="none" stroke="#b9820c" stroke-width="3"/><rect x="28" y="37" width="8" height="10" fill="#d79a2b"/><rect x="20" y="47" width="24" height="8" rx="2" fill="#b9820c"/><path d="M26 14c0 6 2 10 5 12" stroke="#fff6c8" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
-  <h2 id="hh">Vinh danh</h2><p class="sub" id="hs">Em đã hoàn thành cả 6 nhà ôn tập Bản quyền nội dung thông tin.</p>
+  <h2 id="hh">Vinh danh</h2><p class="sub" id="hs"></p>
   <div class="htot"><span id="hTot">0</span><span style="font-size:15px;color:var(--ink-soft)"> / 270 điểm</span></div>
   <span class="badge" id="hBadge">Giỏi</span>
   <div class="stats"><span><b id="hFirst">0</b>đúng ngay lần đầu</span><span><b id="hRetry">0</b>lần thử lại</span></div>
@@ -180,8 +180,26 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <canvas id="fx" aria-hidden="true"></canvas><div class="toast" id="toast" role="status"></div>
 <div id="load"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg><span>Đang dựng khuôn viên ôn tập…</span></div>
 
+<script src="cau-hoi.js"></script>
+<script>
+/* Chơi thử bản nháp từ trang /admin: mở trang này với ?thu=1 */
+(function(){try{
+  if(/[?&]thu=1(&|$)/.test(location.search)){
+    var d=JSON.parse(localStorage.getItem('ontap3d_nhap')||'null');
+    if(d&&d.nha&&d.nha.length===6){window.CAU_HINH=d;window.__NHAP__=true}
+  }
+}catch(e){}})();
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
+(function(){const C=window.CAU_HINH,q=function(id){return document.getElementById(id)};
+  document.title=C.tenTroChoi+' – '+C.phuDe+(window.__NHAP__?' (bản nháp)':'');
+  q('tenGame').textContent=C.tenTroChoi+(window.__NHAP__?' · NHÁP':'');q('phuDe').textContent=C.phuDe;
+  q('hs').textContent='Em đã hoàn thành cả 6 nhà ôn tập '+C.phuDe+'.';
+  if(!C.nha||C.nha.length!==6)console.error('CAU_HINH.nha phải có đúng 6 nhà');
+  (C.nha||[]).forEach(function(n,i){if(!n.cau||n.cau.length!==3)console.error('Nhà '+(i+1)+' phải có đúng 3 câu')});
+})();
+
 (function(){
 const $=id=>document.getElementById(id);
 function fail(msg){$('load').textContent=msg}
@@ -302,9 +320,7 @@ for(let r=0;r<3;r++)for(let c=0;c<4;c++){
 }
 
 /* ---------- nhà nhỏ quanh vòng đường ---------- */
-const houseSpec=[
-  {a:10,c:'#c4553b',l:'Tác giả'},{a:65,c:'#2f7a5b',l:'Bản quyền'},{a:120,c:'#8a63c9',l:'Dạng nội dung'},{a:175,c:'#d79a2b',l:'Ghi nguồn'},{a:235,c:'#2f6fa0',l:'Tôn trọng riêng tư'},{a:280,c:'#c4553b',l:'Riêng tư với AI'}
-];
+const houseSpec=window.CAU_HINH.nha.map(n=>({a:n.goc,c:n.mau,l:n.ten}));
 const colliders=[{x:0,z:0,r:0}];
 const doors={};const houseObjs=[];
 houseSpec.forEach((s,i)=>{
@@ -440,7 +456,7 @@ function addLabel(text,pos,opt={}){
   const s=document.createElement('span');s.textContent=text;if(opt.color)s.style.setProperty('--c',opt.color);d.appendChild(s);
   labelHost.appendChild(d);const o={el:d,pos,nature:opt.nature,max:opt.max||150};labels.push(o);return o;
 }
-addLabel('Phòng Tin học',new THREE.Vector3(0,3.2,0),{color:'#1f6f6b'});
+addLabel(window.CAU_HINH.phongGiua,new THREE.Vector3(0,3.2,0),{color:'#1f6f6b'});
 const taskLbl=addLabel('Nhiệm vụ',new THREE.Vector3(3.2,6.6,8.5),{cls:'task',max:120});
 addLabel('Đỉnh Tháp',new THREE.Vector3(PEAK.x,py+12.4,PEAK.z),{color:'#c4553b',nature:true,max:220});
 addLabel('Hồ Sen',new THREE.Vector3(-12,1.4,5),{color:'#3a9ac0',nature:true,max:90});
@@ -465,7 +481,7 @@ $('bWalk').onclick=()=>setMode('walk');
 const menu=document.createElement('div');menu.className='menu';menu.hidden=true;document.body.appendChild(menu);
 function buildMenu(){
   menu.textContent='';
-  const items=[['Phòng Tin học',()=>({x:0,z:7.4,face:Math.PI}),false]];
+  const items=[[window.CAU_HINH.phongGiua,()=>({x:0,z:7.4,face:Math.PI}),false]];
   houseObjs.forEach((h,i)=>items.push([(i+1)+' · '+h.name+(i<hDone?'  (xong)':i>hDone?'  (khoá)':''),()=>({x:h.door.x,z:h.door.z,face:Math.atan2(-h.door.x,-h.door.z)}),i]));
   items.push(['Đỉnh Tháp'+(hDone<6?'  (khoá)':''),()=>({x:PEAK.x-dirP.x*5,z:PEAK.z-dirP.y*5,face:stepAngle}),'peak']);
   items.forEach(it=>{const b=document.createElement('button');b.textContent=it[0];
@@ -540,7 +556,7 @@ let sayObj=null;
 function say(t,obj){sayObj=obj;sayLbl.el.firstChild.textContent=t;sayLbl.el.classList.remove('hide');sayT=4.2}
 
 /* ---- nhà, câu hỏi, điểm ---- */
-const HOUSES=[{"name": "Tác giả", "qs": [{"lv": "BIẾT", "q": "Bài thơ trong Hình 24 (SGK trang 24) là của tác giả nào?", "o": ["Ngô Hà Trang", "Xuân Quỳnh", "Em tự viết ra"], "a": 1, "h": "Nhớ lại Hình 24 trong SGK trang 24."}, {"lv": "HIỂU", "q": "Vì sao phải ghi rõ tên tác giả khi dùng nội dung của họ?", "o": ["Để bài của em dài hơn", "Để thầy cô không kiểm tra", "Vì tác giả có quyền cho phép hoặc không cho phép người khác dùng nội dung đó"], "a": 2, "h": "Nghĩ xem ai có quyền quyết định cho dùng nội dung."}, {"lv": "VẬN DỤNG", "q": "Em dùng một bài thơ của một nhà thơ để làm bài trình chiếu. Em nên làm gì?", "o": ["Ghi rõ tên tác giả của bài thơ", "Xoá tên tác giả cho gọn", "Ghi tên em là tác giả"], "a": 0, "h": "Hãy tôn trọng người đã tạo ra bài thơ."}]}, {"name": "Bản quyền", "qs": [{"lv": "BIẾT", "q": "Bản quyền nội dung thông tin là gì?", "o": ["Quyền sao chép bất cứ nội dung nào", "Quyền tải nội dung từ Internet", "Quyền của tác giả cho phép hoặc không cho phép người khác sử dụng nội dung"], "a": 2, "h": "Hãy nghĩ đến quyền của tác giả."}, {"lv": "HIỂU", "q": "Quyền tác giả là gì?", "o": ["Quyền được công nhận là tác giả của nội dung", "Quyền chỉnh sửa nội dung của người khác", "Quyền xoá nội dung của người khác"], "a": 0, "h": "Nghĩ đến việc được ghi tên là người tạo ra nội dung."}, {"lv": "VẬN DỤNG", "q": "Một bạn nói: \"Ảnh trên mạng cứ tải về dùng, không cần xin phép.\" Em thấy thế nào?", "o": ["Đúng, vì ảnh trên mạng ai cũng dùng được", "Chưa đúng, vì ảnh có tác giả và tác giả có quyền cho phép hay không", "Đúng, vì tải về là thành của mình"], "a": 1, "h": "Ảnh trên mạng cũng có người tạo ra nó."}]}, {"name": "Dạng nội dung", "qs": [{"lv": "BIẾT", "q": "Nội dung thông tin có thể được thể hiện dưới dạng nào?", "o": ["Chỉ có dạng văn bản", "Văn bản, hình ảnh, âm thanh hay đa phương tiện", "Chỉ có dạng âm thanh"], "a": 1, "h": "Nội dung thông tin có nhiều dạng khác nhau."}, {"lv": "HIỂU", "q": "Một nội dung thông tin có bắt buộc phải gồm đủ văn bản, hình ảnh và âm thanh không?", "o": ["Có, bắt buộc phải có đủ cả ba dạng", "Có, nhưng chỉ khi đăng lên mạng", "Không bắt buộc gồm tất cả các dạng"], "a": 2, "h": "Hãy nghĩ đến một bài hát chỉ có âm thanh."}, {"lv": "VẬN DỤNG", "q": "Nội dung thông tin trong tệp Em-yeu-truong-em.mp3 được thể hiện dưới dạng gì?", "o": ["Âm thanh", "Hình ảnh", "Văn bản"], "a": 0, "h": "Đuôi .mp3 thường là tệp gì?"}]}, {"name": "Ghi nguồn", "qs": [{"lv": "BIẾT", "q": "Khi dùng thông tin từ website hoahoctro.tienphong.vn, em ghi nguồn như thế nào?", "o": ["Nguồn: hoahoctro.tienphong.vn", "Nguồn: Internet", "Không cần ghi"], "a": 0, "h": "Nên ghi đúng địa chỉ trang web em lấy thông tin."}, {"lv": "HIỂU", "q": "Khi dùng một bài hát không rõ tên tác giả, em ghi nguồn như thế nào?", "o": ["Không ghi nguồn", "Sưu tầm", "Ghi tên em là tác giả"], "a": 1, "h": "Em không biết tác giả nhưng không được nhận là của mình."}, {"lv": "VẬN DỤNG", "q": "Trong bài trình chiếu, các bạn dùng thông tin từ website thieunien.vn. Các bạn cần làm gì để tôn trọng bản quyền?", "o": ["Xoá tên website cho slide gọn", "Nói là do mình tự viết", "Ghi rõ \"Nguồn: thieunien.vn\" trên slide"], "a": 2, "h": "Hãy nghĩ đến người đã đăng thông tin đó."}]}, {"name": "Tôn trọng riêng tư", "qs": [{"lv": "BIẾT", "q": "Sao chép tệp của bạn mà chưa được sự đồng ý có hợp lệ không?", "o": ["Hợp lệ, vì cùng một lớp", "Không hợp lệ", "Hợp lệ nếu bạn không biết"], "a": 1, "h": "Tệp của bạn là của riêng bạn."}, {"lv": "HIỂU", "q": "Đọc tin nhắn trên điện thoại của người khác khi chưa được phép: vì sao em không đồng tình?", "o": ["Vì điện thoại sẽ hết pin", "Vì tin nhắn quá dài", "Vì đó là xâm phạm quyền riêng tư của người khác"], "a": 2, "h": "Tin nhắn là chuyện riêng của người khác."}, {"lv": "VẬN DỤNG", "q": "Em thấy một bạn chia sẻ thông tin riêng tư của người khác khi chưa xin phép. Em nên làm gì?", "o": ["Góp ý, nhắc nhở và nói rõ em không đồng tình", "Cùng chia sẻ cho vui", "Im lặng, coi như không biết"], "a": 0, "h": "Em cần thể hiện thái độ không đồng tình một cách lịch sự."}]}, {"name": "Riêng tư với AI", "qs": [{"lv": "BIẾT", "q": "Khi dùng các công cụ trực tuyến và AI, thông tin cá nhân của em có nguy cơ gì?", "o": ["Có nguy cơ bị lộ", "Luôn được giữ bí mật tuyệt đối", "Tự động biến mất"], "a": 0, "h": "Thông tin đưa lên mạng có thể đến tay người khác."}, {"lv": "HIỂU", "q": "Vì sao cần bảo vệ ảnh khuôn mặt và họ tên thật khi dùng AI?", "o": ["Vì máy tính sẽ chạy chậm", "Vì thông tin có thể bị lộ khi đưa lên công cụ trực tuyến", "Vì AI không biết đọc chữ"], "a": 1, "h": "Nghĩ xem thông tin đã đưa lên mạng còn giữ riêng được không."}, {"lv": "VẬN DỤNG", "q": "Một ứng dụng AI yêu cầu tải ảnh khuôn mặt và họ tên thật để tạo Avatar miễn phí. Em nên làm gì?", "o": ["Tải ảnh khuôn mặt và nhập họ tên thật", "Gửi link cho nhiều bạn cùng dùng", "Từ chối, không đưa ảnh và họ tên thật"], "a": 2, "h": "Ảnh khuôn mặt và họ tên thật là thông tin riêng của em."}]}];
+const HOUSES=window.CAU_HINH.nha.map(n=>({name:n.ten,qs:n.cau.map(c=>({lv:c.muc,q:c.hoi,o:c.chon,a:c.dung,h:c.goiy}))}));
 const BASE={'BIẾT':10,'HIỂU':15,'VẬN DỤNG':20},LVC={'BIẾT':'b','HIỂU':'h','VẬN DỤNG':'v'};
 let hDone=0,curH=-1,qi=0,lastZone=-1,total=0,retries=0,firstTry=0,honorShown=false;
 const prog=HOUSES.map(()=>0),wrongs=HOUSES.map(h=>h.qs.map(()=>0)),got=HOUSES.map(h=>h.qs.map(()=>0));
