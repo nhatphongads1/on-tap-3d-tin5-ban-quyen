@@ -133,6 +133,17 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 #vnote{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:4;font-size:11px;color:#fff;background:rgba(10,30,30,.55);padding:6px 10px;border-radius:10px;pointer-events:none}
 #vnote[hidden]{display:none}
 @media (prefers-reduced-motion:reduce){.title .pbar em{transition:none}.gdots i{transform:none!important}}
+
+.learn{margin:8px 0 10px;border:1px solid #cfe0f7;border-radius:12px;background:#f2f7ff;padding:8px 12px}
+.learn>summary{cursor:pointer;font-weight:600;font-size:13.5px;color:#1e5fb8}
+.learn .linfo{white-space:pre-wrap;font-size:14px;line-height:1.5;margin:8px 0 4px;color:#1c2a3a}
+.vbox{margin:8px 0}
+.vbtn,.vlink{display:inline-block;font:600 13px/1.2 inherit;font-family:inherit;color:#fff;background:#1e6fd9;border:0;border-radius:10px;padding:9px 14px;cursor:pointer;text-decoration:none}
+.vbtn:hover,.vlink:hover{background:#1a5db8}
+.vframe{position:relative;width:100%;aspect-ratio:16/9;margin-top:8px;border-radius:10px;overflow:hidden;background:#000}
+.vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vcap{font-size:12px;color:#5b6b80;margin-top:4px}
+.quiz .card{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1e6fd9"/><path d="M0 46Q32 38 64 46V64H0Z" fill="#4a97f2"/><polygon points="44.0,5.5 45.4,9.1 49.2,9.3 46.3,11.7 47.2,15.4 44.0,13.4 40.8,15.4 41.7,11.7 38.8,9.3 42.6,9.1" fill="#ffd54a"/><polygon points="38,28 44,19 50,28" fill="#cfe4ff"/><rect x="38" y="28" width="12" height="20" fill="#fff"/><rect x="42" y="32" width="4" height="5" rx="1" fill="#1e6fd9"/><polygon points="5,33 21,21 37,33" fill="#cfe4ff"/><rect x="8" y="33" width="26" height="15" fill="#fff"/><path d="M14 41l4 4 9-9" fill="none" stroke="#1e6fd9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="48" width="56" height="3.5" rx="1.75" fill="#fff"/></symbol></svg>
@@ -156,7 +167,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div class="hud bottom"><input id="chat" type="text" maxlength="80" placeholder="Nhắn gì đó… (Enter để gửi)" autocomplete="off" aria-label="Nhắn tin trong khuôn viên"></div>
 
 <div class="quiz" id="quiz" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="qq">
-  <div><small id="qh">Nhiệm vụ</small><span class="lv" id="qlv"></span><button class="spk" id="qsp" title="Đọc lại câu hỏi" aria-label="Đọc lại câu hỏi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="#1e6fd9"/><path d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="#1e6fd9" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="dots" id="qd"></div><h2 id="qq"></h2><div id="qo"></div><div class="fb" id="qf" aria-live="polite"></div>
+  <div><small id="qh">Nhiệm vụ</small><span class="lv" id="qlv"></span><button class="spk" id="qsp" title="Đọc lại câu hỏi" aria-label="Đọc lại câu hỏi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="#1e6fd9"/><path d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="#1e6fd9" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="dots" id="qd"></div><div id="qlearn"></div><h2 id="qq"></h2><div id="qvid"></div><div id="qo"></div><div class="fb" id="qf" aria-live="polite"></div>
   <div class="row"><span style="font-size:12px;color:var(--ink-soft)" id="qs"></span><span><button class="btn" id="qn" hidden>Câu tiếp</button> <button class="btn" id="qc">Đóng</button></span></div>
 </div></div>
 <div class="honor" id="honor" hidden><div class="hcard" role="dialog" aria-modal="true" aria-labelledby="hh"><svg class="lg hlg" viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>
@@ -190,8 +201,30 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   }
 }catch(e){}})();
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="supabase-config.js"></script>
 <script>
+(function(){
+  var SB=window.SUPABASE_CFG,fallback=window.CAU_HINH;
+  var slug=((location.search.match(/[?&]bai=([a-z0-9-]{2,61})/)||[])[1])||'tin5-ban-quyen';
+  var threeOk=false,dataOk=false,started=false;
+  function validShape(c){return !!(c&&Array.isArray(c.nha)&&c.nha.length===6&&c.nha.every(function(n){return n&&Array.isArray(n.cau)&&n.cau.length===3&&n.cau.every(function(q){return q&&Array.isArray(q.chon)&&q.chon.length===3&&q.hoi})}))}
+  function start(){
+    if(started||!threeOk||!dataOk)return;started=true;
+    var s=document.createElement('script');s.text=document.getElementById('game-src').textContent;document.body.appendChild(s);
+  }
+  var t=document.createElement('script');t.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+  t.onload=t.onerror=function(){threeOk=true;start()};document.head.appendChild(t);
+  function done(){dataOk=true;start()}
+  if(window.__NHAP__||!SB||!window.fetch){done();return}
+  var ctl=window.AbortController?new AbortController():null,timer=setTimeout(function(){if(ctl)ctl.abort();done()},4500);
+  fetch(SB.url+'/rest/v1/rpc/lay_bai',{method:'POST',headers:{'apikey':SB.key,'Authorization':'Bearer '+SB.key,'Content-Type':'application/json'},body:JSON.stringify({p_slug:slug}),signal:ctl?ctl.signal:undefined})
+    .then(function(r){return r.ok?r.json():null})
+    .then(function(d){if(validShape(d)){window.CAU_HINH=d;window.__NGUON__='supabase'}else{window.CAU_HINH=fallback;window.__NGUON__='tep'}})
+    .catch(function(){window.CAU_HINH=fallback;window.__NGUON__='tep'})
+    .then(function(){clearTimeout(timer);done()});
+})();
+</script>
+<script type="text/plain" id="game-src">
 (function(){const C=window.CAU_HINH,q=function(id){return document.getElementById(id)};
   document.title=C.tenTroChoi+' – '+C.phuDe+(window.__NHAP__?' (bản nháp)':'');
   q('tenGame').textContent=C.tenTroChoi+(window.__NHAP__?' · NHÁP':'');q('phuDe').textContent=C.phuDe;
@@ -556,7 +589,7 @@ let sayObj=null;
 function say(t,obj){sayObj=obj;sayLbl.el.firstChild.textContent=t;sayLbl.el.classList.remove('hide');sayT=4.2}
 
 /* ---- nhà, câu hỏi, điểm ---- */
-const HOUSES=window.CAU_HINH.nha.map(n=>({name:n.ten,qs:n.cau.map(c=>({lv:c.muc,q:c.hoi,o:c.chon,a:c.dung,h:c.goiy}))}));
+const HOUSES=window.CAU_HINH.nha.map(n=>({name:n.ten,info:n.thongTin||'',vurl:n.videoUrl||'',vtit:n.videoTieuDe||'',qs:n.cau.map(c=>({lv:c.muc,q:c.hoi,o:c.chon,a:c.dung,h:c.goiy,vurl:c.videoUrl||'',vtit:c.videoTieuDe||''}))}));
 const BASE={'BIẾT':10,'HIỂU':15,'VẬN DỤNG':20},LVC={'BIẾT':'b','HIỂU':'h','VẬN DỤNG':'v'};
 let hDone=0,curH=-1,qi=0,lastZone=-1,total=0,retries=0,firstTry=0,honorShown=false;
 const prog=HOUSES.map(()=>0),wrongs=HOUSES.map(h=>h.qs.map(()=>0)),got=HOUSES.map(h=>h.qs.map(()=>0));
@@ -588,7 +621,57 @@ function visitHouse(i){
 }
 function goPeak(){teleport(PEAK.x-dirP.x*5,PEAK.z-dirP.y*5,stepAngle)}
 function openQuiz(i){curH=i;qi=Math.min(prog[i],2);renderQ();$('quiz').hidden=false}
-function closeQuiz(){stopSpeak();$('quiz').hidden=true;if(allDone()&&!honorShown)showHonor()}
+function closeQuiz(){stopSpeak();$('qvid').textContent='';$('qlearn').textContent='';$('quiz').hidden=true;if(allDone()&&!honorShown)showHonor()}
+
+function videoInfo(u){
+  try{
+    const x=new URL(u);if(x.protocol!=='https:')return null;
+    const h=x.hostname.replace(/^www\./,'');let m;
+    if(h==='youtu.be'){m=x.pathname.match(/^\/([A-Za-z0-9_-]{11})/);if(m)return{embed:'https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0'}}
+    if(h==='youtube.com'||h==='m.youtube.com'){
+      m=x.pathname.match(/^\/(?:shorts|embed|live)\/([A-Za-z0-9_-]{11})/);if(m)return{embed:'https://www.youtube-nocookie.com/embed/'+m[1]+'?rel=0'};
+      const v=x.searchParams.get('v');if(v&&/^[A-Za-z0-9_-]{11}$/.test(v))return{embed:'https://www.youtube-nocookie.com/embed/'+v+'?rel=0'};
+    }
+    if(h==='vimeo.com'){m=x.pathname.match(/^\/(\d+)/);if(m)return{embed:'https://player.vimeo.com/video/'+m[1]}}
+    return{link:x.href};
+  }catch(e){return null}
+}
+function videoBlock(url,title){
+  const info=videoInfo(url);if(!info)return null;
+  const box=document.createElement('div');box.className='vbox';
+  const label=title||'Xem video';
+  if(info.embed){
+    const b=document.createElement('button');b.type='button';b.className='vbtn';b.textContent='Xem video: '+label;
+    let open=false;const holder=document.createElement('div');
+    b.onclick=()=>{
+      open=!open;holder.textContent='';
+      if(open){
+        const f=document.createElement('div');f.className='vframe';
+        const ifr=document.createElement('iframe');ifr.src=info.embed;ifr.title=label;ifr.loading='lazy';
+        ifr.allow='accelerometer; encrypted-media; picture-in-picture; fullscreen';ifr.referrerPolicy='strict-origin-when-cross-origin';ifr.setAttribute('allowfullscreen','');
+        f.appendChild(ifr);holder.appendChild(f);b.textContent='Ẩn video';
+      }else b.textContent='Xem video: '+label;
+    };
+    box.appendChild(b);box.appendChild(holder);
+  }else{
+    const a=document.createElement('a');a.className='vlink';a.href=info.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Mở video: '+label;box.appendChild(a);
+  }
+  return box;
+}
+function renderMedia(hs,q){
+  const L=$('qlearn'),V=$('qvid');L.textContent='';V.textContent='';
+  if(hs.info||hs.vurl){
+    const d=document.createElement('details');d.className='learn';
+    const sm=document.createElement('summary');sm.textContent='Bài học nhanh của nhà này';d.appendChild(sm);
+    if(hs.info){const p=document.createElement('div');p.className='linfo';p.textContent=hs.info;d.appendChild(p)}
+    const vb=hs.vurl?videoBlock(hs.vurl,hs.vtit):null;if(vb)d.appendChild(vb);
+    if(qi===0)d.open=true;L.appendChild(d);
+  }
+  if(q.vurl){
+    const vb=videoBlock(q.vurl,q.vtit||'video gợi ý cho câu này');
+    if(vb){const c=document.createElement('div');c.className='vcap';c.textContent='Video giúp em trả lời câu này';V.appendChild(c);V.appendChild(vb)}
+  }
+}
 function renderQ(){
   const hs=HOUSES[curH],q=hs.qs[qi];
   $('qh').textContent='Nhà '+(curH+1)+' · '+hs.name+' · Nhiệm vụ';
@@ -597,6 +680,7 @@ function renderQ(){
   $('qq').textContent=q.q;$('qf').textContent='';$('qs').textContent='Câu '+(qi+1)+'/3 · tối đa '+BASE[q.lv]+' điểm';$('qn').hidden=true;
   const o=$('qo');o.textContent='';delete o.dataset.done;
   q.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>answer(i,b);o.appendChild(b)});
+  renderMedia(hs,q);
   speakQ();
 }
 function answer(i,b){
