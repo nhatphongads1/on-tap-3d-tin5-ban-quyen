@@ -221,7 +221,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   t.onload=t.onerror=function(){threeOk=true;start()};document.head.appendChild(t);
   function done(){dataOk=true;start()}
   if(window.__NHAP__||!SB||!window.fetch){done();return}
-  var ctl=window.AbortController?new AbortController():null,timer=setTimeout(function(){if(ctl)ctl.abort()},4500);
+  var ctl=window.AbortController?new AbortController():null,timer=setTimeout(function(){if(ctl)ctl.abort()},slug==='tin5-ban-quyen'?4500:15000);
   fetch(SB.url+'/rest/v1/rpc/lay_bai',{method:'POST',headers:{'apikey':SB.key,'Authorization':'Bearer '+SB.key,'Content-Type':'application/json'},body:JSON.stringify({p_slug:slug}),signal:ctl?ctl.signal:undefined})
     .then(function(r){return r.ok?r.json():null})
     .then(function(d){if(validShape(d)){window.CAU_HINH=d;window.__NGUON__='supabase'}else{window.CAU_HINH=fallback;window.__NGUON__='tep'}})
