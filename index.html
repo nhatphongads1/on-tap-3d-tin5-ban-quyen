@@ -144,6 +144,9 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .vcap{font-size:12px;color:#5b6b80;margin-top:4px}
 .quiz .card{max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto}
+
+.clue{margin:10px 0;border:1px solid #f0d58a;background:#fff8e1;border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.5;color:#3a2f10}
+.clue b{color:#8a5a00}.clue .btn{margin-top:8px}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1e6fd9"/><path d="M0 46Q32 38 64 46V64H0Z" fill="#4a97f2"/><polygon points="44.0,5.5 45.4,9.1 49.2,9.3 46.3,11.7 47.2,15.4 44.0,13.4 40.8,15.4 41.7,11.7 38.8,9.3 42.6,9.1" fill="#ffd54a"/><polygon points="38,28 44,19 50,28" fill="#cfe4ff"/><rect x="38" y="28" width="12" height="20" fill="#fff"/><rect x="42" y="32" width="4" height="5" rx="1" fill="#1e6fd9"/><polygon points="5,33 21,21 37,33" fill="#cfe4ff"/><rect x="8" y="33" width="26" height="15" fill="#fff"/><path d="M14 41l4 4 9-9" fill="none" stroke="#1e6fd9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="48" width="56" height="3.5" rx="1.75" fill="#fff"/></symbol></svg>
@@ -168,13 +171,13 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div class="hud bottom"><input id="chat" type="text" maxlength="80" placeholder="Nhắn gì đó… (Enter để gửi)" autocomplete="off" aria-label="Nhắn tin trong khuôn viên"></div>
 
 <div class="quiz" id="quiz" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="qq">
-  <div><small id="qh">Nhiệm vụ</small><span class="lv" id="qlv"></span><button class="spk" id="qsp" title="Đọc lại câu hỏi" aria-label="Đọc lại câu hỏi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="#1e6fd9"/><path d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="#1e6fd9" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="dots" id="qd"></div><div id="qlearn"></div><h2 id="qq"></h2><div id="qvid"></div><div id="qo"></div><div class="fb" id="qf" aria-live="polite"></div>
+  <div><small id="qh">Nhiệm vụ</small><span class="lv" id="qlv"></span><button class="spk" id="qsp" title="Đọc lại câu hỏi" aria-label="Đọc lại câu hỏi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="#1e6fd9"/><path d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="#1e6fd9" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="dots" id="qd"></div><div id="qlearn"></div><h2 id="qq"></h2><div id="qvid"></div><div id="qo"></div><div class="fb" id="qf" aria-live="polite"></div><div id="qhint"></div>
   <div class="row"><span style="font-size:12px;color:var(--ink-soft)" id="qs"></span><span><button class="btn" id="qn" hidden>Câu tiếp</button> <button class="btn" id="qc">Đóng</button></span></div>
 </div></div>
 <div class="honor" id="honor" hidden><div class="hcard" role="dialog" aria-modal="true" aria-labelledby="hh"><svg class="lg hlg" viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>
   <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M18 8h28v14c0 9-6 15-14 15s-14-6-14-15z" fill="#f2b81c" stroke="#b9820c" stroke-width="2"/><path d="M18 12h-8c0 10 4 16 11 17M46 12h8c0 10-4 16-11 17" fill="none" stroke="#b9820c" stroke-width="3"/><rect x="28" y="37" width="8" height="10" fill="#d79a2b"/><rect x="20" y="47" width="24" height="8" rx="2" fill="#b9820c"/><path d="M26 14c0 6 2 10 5 12" stroke="#fff6c8" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
   <h2 id="hh">Vinh danh</h2><p class="sub" id="hs"></p>
-  <div class="htot"><span id="hTot">0</span><span style="font-size:15px;color:var(--ink-soft)"> / 270 điểm</span></div>
+  <div class="htot"><span id="hTot">0</span><span style="font-size:15px;color:var(--ink-soft)"> / <span id="hMax">270</span> điểm</span></div>
   <span class="badge" id="hBadge">Giỏi</span>
   <div class="stats"><span><b id="hFirst">0</b>đúng ngay lần đầu</span><span><b id="hRetry">0</b>lần thử lại</span></div>
   <table><thead><tr><th>Nhà</th><th>Biết</th><th>Hiểu</th><th>Vận dụng</th><th>Tổng</th></tr></thead><tbody id="hTb"></tbody></table>
@@ -209,7 +212,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   var SB=window.SUPABASE_CFG,fallback=window.CAU_HINH;
   var slug=((location.search.match(/[?&]bai=([a-z0-9-]{2,61})/)||[])[1])||'tin5-ban-quyen';
   var threeOk=false,dataOk=false,started=false;
-  function validShape(c){return !!(c&&Array.isArray(c.nha)&&c.nha.length===6&&c.nha.every(function(n){return n&&Array.isArray(n.cau)&&n.cau.length===3&&n.cau.every(function(q){return q&&Array.isArray(q.chon)&&q.chon.length===3&&q.hoi})}))}
+  function validShape(c){return !!(c&&Array.isArray(c.nha)&&c.nha.length===6&&c.nha.every(function(n){return n&&Array.isArray(n.cau)&&n.cau.length>=1&&n.cau.length<=10&&n.cau.every(function(q){return q&&Array.isArray(q.chon)&&q.chon.length===3&&q.hoi})}))}
   function start(){
     if(started||!threeOk||!dataOk)return;started=true;
     var s=document.createElement('script');s.text=document.getElementById('game-src').textContent;document.body.appendChild(s);
@@ -218,12 +221,16 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   t.onload=t.onerror=function(){threeOk=true;start()};document.head.appendChild(t);
   function done(){dataOk=true;start()}
   if(window.__NHAP__||!SB||!window.fetch){done();return}
-  var ctl=window.AbortController?new AbortController():null,timer=setTimeout(function(){if(ctl)ctl.abort();done()},4500);
+  var ctl=window.AbortController?new AbortController():null,timer=setTimeout(function(){if(ctl)ctl.abort()},4500);
   fetch(SB.url+'/rest/v1/rpc/lay_bai',{method:'POST',headers:{'apikey':SB.key,'Authorization':'Bearer '+SB.key,'Content-Type':'application/json'},body:JSON.stringify({p_slug:slug}),signal:ctl?ctl.signal:undefined})
     .then(function(r){return r.ok?r.json():null})
     .then(function(d){if(validShape(d)){window.CAU_HINH=d;window.__NGUON__='supabase'}else{window.CAU_HINH=fallback;window.__NGUON__='tep'}})
     .catch(function(){window.CAU_HINH=fallback;window.__NGUON__='tep'})
-    .then(function(){clearTimeout(timer);done()});
+    .then(function(){
+      clearTimeout(timer);
+      if(window.__NGUON__==='tep'&&slug!=='tin5-ban-quyen'){var l=document.getElementById('load');if(l)l.textContent='Không tải được bài ôn tập "'+slug+'". Hãy kiểm tra mạng rồi tải lại trang.';return}
+      done();
+    });
 })();
 </script>
 <script type="text/plain" id="game-src">
@@ -232,7 +239,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   q('tenGame').textContent=C.tenTroChoi+(window.__NHAP__?' · NHÁP':'');q('phuDe').textContent=C.phuDe;
   q('hs').textContent='Em đã hoàn thành cả 6 nhà ôn tập '+C.phuDe+'.';
   if(!C.nha||C.nha.length!==6)console.error('CAU_HINH.nha phải có đúng 6 nhà');
-  (C.nha||[]).forEach(function(n,i){if(!n.cau||n.cau.length!==3)console.error('Nhà '+(i+1)+' phải có đúng 3 câu')});
+  (C.nha||[]).forEach(function(n,i){if(!n.cau||n.cau.length<1||n.cau.length>10)console.error('Nhà '+(i+1)+' cần từ 1 đến 10 câu')});
 })();
 
 (function(){
@@ -591,8 +598,43 @@ let sayObj=null;
 function say(t,obj){sayObj=obj;sayLbl.el.firstChild.textContent=t;sayLbl.el.classList.remove('hide');sayT=4.2}
 
 /* ---- nhà, câu hỏi, điểm ---- */
-const HOUSES=window.CAU_HINH.nha.map(n=>({name:n.ten,info:n.thongTin||'',vurl:n.videoUrl||'',vtit:n.videoTieuDe||'',qs:n.cau.map(c=>({lv:c.muc,q:c.hoi,o:c.chon,a:c.dung,h:c.goiy,vurl:c.videoUrl||'',vtit:c.videoTieuDe||''}))}));
+const HOUSES=window.CAU_HINH.nha.map(n=>({name:n.ten,hint:n.chiDan||'',info:n.thongTin||'',vurl:n.videoUrl||'',vtit:n.videoTieuDe||'',qs:n.cau.map(c=>({lv:c.muc,q:c.hoi,o:c.chon,a:c.dung,h:c.goiy,vurl:c.videoUrl||'',vtit:c.videoTieuDe||''}))}));
 const BASE={'BIẾT':10,'HIỂU':15,'VẬN DỤNG':20},LVC={'BIẾT':'b','HIỂU':'h','VẬN DỤNG':'v'};
+
+function hMax(i){return HOUSES[i].qs.reduce((a,q)=>a+BASE[q.lv],0)}
+function allMax(){return HOUSES.reduce((a,h,i)=>a+hMax(i),0)}
+function allQ(){return HOUSES.reduce((a,h)=>a+h.qs.length,0)}
+function lvSum(i,l){return HOUSES[i].qs.reduce((a,q,k)=>a+(q.lv===l?(got[i][k]||0):0),0)}
+const COLORN=[['#c4553b','đỏ gạch'],['#2f7a5b','xanh lá'],['#8a63c9','tím'],['#d79a2b','vàng nghệ'],['#2f6fa0','xanh dương'],['#e07a3a','cam'],['#d46a9a','hồng'],['#3a9ab0','xanh ngọc']];
+function colorName(hex){
+  const h=String(hex||'#888888').replace('#',''),r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);let best='',bd=1e9;
+  COLORN.forEach(c=>{const x=parseInt(c[0].slice(1,3),16),y=parseInt(c[0].slice(3,5),16),z=parseInt(c[0].slice(5,7),16),d=(r-x)**2+(g-y)**2+(b-z)**2;if(d<bd){bd=d;best=c[1]}});return best;
+}
+function landmark(a){
+  const dl=Math.abs(((a-157+540)%360)-180),dt=Math.abs(((a-320+540)%360)-180);
+  if(dt<40)return 'gần chân cầu thang lên Đỉnh Tháp';if(dl<40)return 'gần Hồ Sen';return '';
+}
+function clueText(i){
+  if(i>=HOUSES.length-1)return 'Chặng cuối: cầu thang lên Đỉnh Tháp đã mở. Em đi lên đó nhận vinh danh nhé.';
+  const nx=HOUSES[i+1],custom=HOUSES[i].hint;
+  if(custom)return custom;
+  const a1=houseSpec[i].a,a2=houseSpec[i+1].a,d=((a2-a1)%360+360)%360,cw=d<=180,arc=cw?d:360-d;
+  let passed=0;houseSpec.forEach((sp,k)=>{if(k===i||k===i+1)return;const dd=cw?((sp.a-a1)%360+360)%360:((a1-sp.a)%360+360)%360;if(dd>0&&dd<arc)passed++});
+  const near=landmark(a2),col=colorName(houseObjs[i+1]?houseObjs[i+1].col:'#888');
+  return 'Nhiệm vụ tiếp theo là «'+nx.name+'». Hãy đi dọc vòng đường '+(cw?'theo chiều kim đồng hồ':'ngược chiều kim đồng hồ')+(passed?', đi qua '+passed+' ngôi nhà':'')+', tìm ngôi nhà mái '+col+(near?' '+near:'')+'.';
+}
+function showClue(i){
+  const box=$('qhint');box.textContent='';
+  const c=document.createElement('div');c.className='clue';
+  const b=document.createElement('b');b.textContent='Chỉ dẫn: ';c.appendChild(b);c.appendChild(document.createTextNode(clueText(i)));
+  if(i<HOUSES.length-1&&houseObjs[i+1]){
+    c.appendChild(document.createElement('br'));
+    const go=document.createElement('button');go.type='button';go.className='btn';go.textContent='Đưa em tới nhà kế tiếp';
+    go.onclick=()=>{const d=houseObjs[i+1].door;closeQuiz();teleport(d.x,d.z,Math.atan2(-d.x,-d.z))};
+    c.appendChild(go);
+  }
+  box.appendChild(c);
+}
 let hDone=0,curH=-1,qi=0,lastZone=-1,total=0,retries=0,firstTry=0,honorShown=false;
 const prog=HOUSES.map(()=>0),wrongs=HOUSES.map(h=>h.qs.map(()=>0)),got=HOUSES.map(h=>h.qs.map(()=>0));
 function allDone(){return hDone>=6}
@@ -622,7 +664,7 @@ function visitHouse(i){
   openQuiz(i);
 }
 function goPeak(){teleport(PEAK.x-dirP.x*5,PEAK.z-dirP.y*5,stepAngle)}
-function openQuiz(i){curH=i;qi=Math.min(prog[i],2);renderQ();$('quiz').hidden=false}
+function openQuiz(i){curH=i;qi=Math.min(prog[i],HOUSES[i].qs.length-1);renderQ();$('quiz').hidden=false}
 function closeQuiz(){stopSpeak();$('qvid').textContent='';$('qlearn').textContent='';$('quiz').hidden=true;if(allDone()&&!honorShown)showHonor()}
 
 function videoInfo(u){
@@ -678,8 +720,8 @@ function renderQ(){
   const hs=HOUSES[curH],q=hs.qs[qi];
   $('qh').textContent='Nhà '+(curH+1)+' · '+hs.name+' · Nhiệm vụ';
   const lv=$('qlv');lv.textContent=q.lv;lv.className='lv '+LVC[q.lv];
-  $('qd').innerHTML='';for(let k=0;k<3;k++){const d=document.createElement('i');if(k<prog[curH])d.className='d';else if(k===qi)d.className='c';$('qd').appendChild(d)}
-  $('qq').textContent=q.q;$('qf').textContent='';$('qs').textContent='Câu '+(qi+1)+'/3 · tối đa '+BASE[q.lv]+' điểm';$('qn').hidden=true;
+  $('qd').innerHTML='';for(let k=0;k<hs.qs.length;k++){const d=document.createElement('i');if(k<prog[curH])d.className='d';else if(k===qi)d.className='c';$('qd').appendChild(d)}
+  $('qq').textContent=q.q;$('qf').textContent='';$('qhint').textContent='';$('qs').textContent='Câu '+(qi+1)+'/'+hs.qs.length+' · tối đa '+BASE[q.lv]+' điểm';$('qn').hidden=true;
   const o=$('qo');o.textContent='';delete o.dataset.done;
   q.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>answer(i,b);o.appendChild(b)});
   renderMedia(hs,q);
@@ -700,16 +742,16 @@ function answer(i,b){
   $('pts').textContent=total;
   speak('Chính xác!');
   burst(cx,cy,60,false);floatPts('+'+pts,cx,cy-30,false);
-  if(prog[curH]>=3){
+  if(prog[curH]>=HOUSES[curH].qs.length){
     hDone=Math.max(hDone,curH+1);
     const hs=got[curH].reduce((a,c)=>a+c,0),hn=curH+1;
-    $('qf').textContent='Hoàn thành Nhà '+hn+'! Điểm nhà: '+hs+'/45.';speak('Chính xác! Em đã hoàn thành nhà số '+hn+'.');
+    $('qf').textContent='Hoàn thành Nhà '+hn+'! Điểm nhà: '+hs+'/'+hMax(curH)+'.';speak('Chính xác! Em đã hoàn thành nhà số '+hn+'. '+clueText(curH));
     setTimeout(()=>{burst(innerWidth/2,innerHeight*.4,170,true);burst(innerWidth*.3,innerHeight*.35,90,true);burst(innerWidth*.7,innerHeight*.35,90,true);floatPts('Nhà '+hn+': '+hs+' điểm',innerWidth/2,innerHeight*.3,true)},350);
-    refresh();$('qn').textContent='Xong';$('qn').hidden=false;
+    refresh();showClue(curH);$('qn').textContent='Xong';$('qn').hidden=false;
     if(!allDone())toast('Nhà '+(hn+1)+' đã mở');
   }else{$('qn').textContent='Câu tiếp';$('qn').hidden=false}
 }
-$('qn').onclick=()=>{if(prog[curH]>=3)closeQuiz();else{qi=prog[curH];renderQ()}};
+$('qn').onclick=()=>{if(prog[curH]>=HOUSES[curH].qs.length)closeQuiz();else{qi=prog[curH];renderQ()}};
 $('qc').onclick=closeQuiz;
 $('quiz').addEventListener('pointerdown',e=>{if(e.target===$('quiz'))closeQuiz()});
 window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('quiz').hidden)closeQuiz()});
@@ -743,14 +785,14 @@ function floatPts(txt,x,y,big){
 let honorT=0;
 function showHonor(){
   honorShown=true;
-  const pct=total/270,bd=pct>=.9?['Xuất sắc','#d79a2b']:pct>=.75?['Giỏi','#2f9a5d']:pct>=.5?['Khá','#2f78c4']:['Cố gắng','#7a6a8f'];
+  const pct=total/allMax(),bd=pct>=.9?['Xuất sắc','#d79a2b']:pct>=.75?['Giỏi','#2f9a5d']:pct>=.5?['Khá','#2f78c4']:['Cố gắng','#7a6a8f'];
   $('hTot').textContent=total;$('hBadge').textContent='Huy hiệu '+bd[0];$('hBadge').style.background=bd[1];
-  $('hFirst').textContent=firstTry+'/18';$('hRetry').textContent=retries;
+  $('hMax').textContent=allMax();$('hFirst').textContent=firstTry+'/'+allQ();$('hRetry').textContent=retries;
   const tb=$('hTb');tb.textContent='';
   HOUSES.forEach((h,i)=>{const tr=document.createElement('tr');
-    [(i+1)+'. '+h.name,got[i][0],got[i][1],got[i][2],got[i].reduce((a,c)=>a+c,0)].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});tb.appendChild(tr)});
+    [(i+1)+'. '+h.name,lvSum(i,'BIẾT'),lvSum(i,'HIỂU'),lvSum(i,'VẬN DỤNG'),got[i].reduce((a,c)=>a+c,0)].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});tb.appendChild(tr)});
   $('honor').hidden=false;
-  speak('Chúc mừng em! Em đã hoàn thành cả sáu nhà. Em được '+total+' điểm trên 270 điểm, huy hiệu '+bd[0]+', đúng ngay lần đầu '+firstTry+' trên 18 câu.');
+  speak('Chúc mừng em! Em đã hoàn thành cả sáu nhà. Em được '+total+' điểm trên '+allMax()+' điểm, huy hiệu '+bd[0]+', đúng ngay lần đầu '+firstTry+' trên '+allQ()+' câu.');
   burst(innerWidth/2,innerHeight*.35,200,true);
   if(!reduce){clearInterval(honorT);honorT=setInterval(()=>{if($('honor').hidden)return;burst(Math.random()*innerWidth,Math.random()*innerHeight*.6,90,true)},900)}
 }
@@ -796,6 +838,10 @@ document.addEventListener('pointerdown',firstGesture,true);document.addEventList
 
 /* ---- thẻ hướng dẫn ---- */
 const GSTEPS=[{"t": "Đi dạo trong khuôn viên", "x": "Máy tính: bấm các phím W A S D hoặc bấm vào mặt đất để đi, kéo chuột để xoay. Điện thoại: chạm vào mặt đất để đi, kéo ngón tay để xoay.", "i": "<svg viewBox=\"0 0 220 110\"><rect width=\"220\" height=\"110\" rx=\"14\" fill=\"#dcecff\"/><ellipse cx=\"160\" cy=\"88\" rx=\"46\" ry=\"12\" fill=\"#8fc46a\"/><rect x=\"62\" y=\"12\" width=\"26\" height=\"26\" rx=\"6\" fill=\"#fff\" stroke=\"#1e6fd9\" stroke-width=\"2.5\"/><text x=\"75\" y=\"31\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#1e6fd9\">W</text><rect x=\"32\" y=\"44\" width=\"26\" height=\"26\" rx=\"6\" fill=\"#fff\" stroke=\"#1e6fd9\" stroke-width=\"2.5\"/><text x=\"45\" y=\"63\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#1e6fd9\">A</text><rect x=\"62\" y=\"44\" width=\"26\" height=\"26\" rx=\"6\" fill=\"#fff\" stroke=\"#1e6fd9\" stroke-width=\"2.5\"/><text x=\"75\" y=\"63\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#1e6fd9\">S</text><rect x=\"92\" y=\"44\" width=\"26\" height=\"26\" rx=\"6\" fill=\"#fff\" stroke=\"#1e6fd9\" stroke-width=\"2.5\"/><text x=\"105\" y=\"63\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#1e6fd9\">D</text><ellipse cx=\"160\" cy=\"88\" rx=\"26\" ry=\"6\" fill=\"none\" stroke=\"#fff\" stroke-width=\"3\"/><ellipse cx=\"160\" cy=\"88\" rx=\"12\" ry=\"3\" fill=\"#fff\"/><path d=\"M160 36l0 40M160 76l-7-9M160 76l7-9\" stroke=\"#1e6fd9\" stroke-width=\"4\" fill=\"none\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"}, {"t": "Bấm vào nhà để nhận nhiệm vụ", "x": "Bấm vào ngôi nhà đang sáng màu, hoặc bấm vào nhãn Nhiệm vụ màu xanh. Thẻ câu hỏi sẽ hiện ra.", "i": "<svg viewBox=\"0 0 220 110\"><rect width=\"220\" height=\"110\" rx=\"14\" fill=\"#dcecff\"/><rect x=\"0\" y=\"92\" width=\"220\" height=\"18\" fill=\"#8fc46a\"/><rect x=\"70\" y=\"52\" width=\"80\" height=\"42\" fill=\"#fff\" stroke=\"#9db4d0\" stroke-width=\"2\"/><polygon points=\"62,52 110,22 158,52\" fill=\"#d4533b\"/><rect x=\"100\" y=\"68\" width=\"20\" height=\"26\" fill=\"#a9754d\"/><rect x=\"72\" y=\"2\" width=\"76\" height=\"22\" rx=\"11\" fill=\"#1e6fd9\"/><text x=\"110\" y=\"18\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#fff\">Nhiệm vụ</text><path d=\"M170 60l-8 22 6-3 5 8 4-2-5-8 8-1z\" fill=\"#fff\" stroke=\"#1e6fd9\" stroke-width=\"2.5\" stroke-linejoin=\"round\"/></svg>"}, {"t": "Mỗi nhà có 3 câu hỏi", "x": "Câu Biết, rồi câu Hiểu, rồi câu Vận dụng. Em trả lời đúng cả 3 câu thì nhà tiếp theo mới mở khoá. Chọn sai thì thử lại nhé.", "i": "<svg viewBox=\"0 0 220 110\"><rect width=\"220\" height=\"110\" rx=\"14\" fill=\"#dcecff\"/><rect x=\"8\" y=\"22\" width=\"56\" height=\"26\" rx=\"13\" fill=\"#2f78c4\"/><text x=\"36\" y=\"40\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#fff\">Biết</text><rect x=\"82\" y=\"22\" width=\"56\" height=\"26\" rx=\"13\" fill=\"#d28a14\"/><text x=\"110\" y=\"40\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#fff\">Hiểu</text><rect x=\"148\" y=\"22\" width=\"68\" height=\"26\" rx=\"13\" fill=\"#2f9a5d\"/><text x=\"182\" y=\"40\" text-anchor=\"middle\" font-size=\"12.5\" font-weight=\"700\" fill=\"#fff\">Vận dụng</text><path d=\"M66 35h14M140 35h6\" stroke=\"#1e6fd9\" stroke-width=\"3\" stroke-linecap=\"round\"/><rect x=\"30\" y=\"64\" width=\"34\" height=\"28\" rx=\"5\" fill=\"#fff\" stroke=\"#9db4d0\" stroke-width=\"2\"/><path d=\"M38 64v-7a9 9 0 0118 0v7\" fill=\"none\" stroke=\"#9db4d0\" stroke-width=\"3\"/><path d=\"M78 78h30\" stroke=\"#1e6fd9\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M104 70l8 8-8 8\" fill=\"none\" stroke=\"#1e6fd9\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"126\" y=\"64\" width=\"34\" height=\"28\" rx=\"5\" fill=\"#fff\" stroke=\"#3b9b64\" stroke-width=\"2\"/><path d=\"M134 64v-7a9 9 0 0118 -3\" fill=\"none\" stroke=\"#3b9b64\" stroke-width=\"3\"/><path d=\"M135 78l6 6 10-11\" fill=\"none\" stroke=\"#3b9b64\" stroke-width=\"3.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"}, {"t": "Điểm số và pháo hoa", "x": "Đúng ngay lần đầu được nhiều điểm hơn: Biết 10, Hiểu 15, Vận dụng 20. Sai rồi mới đúng thì được một nửa điểm. Câu nào đúng cũng có pháo hoa!", "i": "<svg viewBox=\"0 0 220 110\"><rect width=\"220\" height=\"110\" rx=\"14\" fill=\"#1b2a4a\"/><g stroke-width=\"3\" stroke-linecap=\"round\"><path d=\"M60 55l-26-16M60 55l-30 6M60 55l-18 24M60 55l8-30M60 55l22 22\" stroke=\"#ff7a7a\"/><path d=\"M155 50l-24-22M155 50l30-14M155 50l32 14M155 50l-4 32M155 50l-30 18\" stroke=\"#ffd54a\"/></g><text x=\"60\" y=\"100\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"800\" fill=\"#ffd54a\">+10</text><text x=\"110\" y=\"24\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"800\" fill=\"#7fe3a0\">+20</text><text x=\"170\" y=\"100\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"800\" fill=\"#8ccaff\">+15</text></svg>"}, {"t": "Lên Đỉnh Tháp nhận vinh danh", "x": "Xong cả 6 nhà, cầu thang lên Đỉnh Tháp sẽ mở. Em lên đó để xem điểm và nhận huy hiệu nhé!", "i": "<svg viewBox=\"0 0 220 110\"><rect width=\"220\" height=\"110\" rx=\"14\" fill=\"#dcecff\"/><polygon points=\"0,110 80,110 150,60 150,110\" fill=\"#8fc46a\"/><path d=\"M30 104l20-6 20-12 20-12 20-12 14-10\" fill=\"none\" stroke=\"#fff\" stroke-width=\"7\" stroke-dasharray=\"9 6\"/><rect x=\"150\" y=\"38\" width=\"30\" height=\"62\" fill=\"#fff\" stroke=\"#9db4d0\" stroke-width=\"2\"/><polygon points=\"142,38 165,18 188,38\" fill=\"#d4533b\"/><rect x=\"159\" y=\"62\" width=\"12\" height=\"38\" fill=\"#a9754d\"/><path d=\"M158 6h14v6a7 7 0 01-14 0zM172 8h5c0 5-2 7-5 7M158 8h-5c0 5 2 7 5 7M165 19v4M161 23h8\" fill=\"#ffd54a\" stroke=\"#b9820c\" stroke-width=\"2\"/></svg>"}];
+(function(){const n=Math.min.apply(null,HOUSES.map(h=>h.qs.length));GSTEPS.forEach(st=>{
+  st.t=st.t.replace('3 câu hỏi',n+' câu hỏi');
+  st.x=st.x.replace('Câu Biết, rồi câu Hiểu, rồi câu Vận dụng. Em trả lời đúng cả 3 câu','Các câu đi từ dễ đến khó (Biết, Hiểu, Vận dụng). Em trả lời đúng cả '+n+' câu').replace('Chọn sai thì thử lại nhé.','Xong câu cuối, em nhận chỉ dẫn đến nhiệm vụ kế tiếp. Chọn sai thì thử lại nhé.');
+})})();
 let gi=0;
 function seenFlag(){try{return localStorage.getItem('ontap3d_da_xem_huong_dan')==='1'}catch(e){return false}}
 function setSeen(){try{localStorage.setItem('ontap3d_da_xem_huong_dan','1')}catch(e){}}
