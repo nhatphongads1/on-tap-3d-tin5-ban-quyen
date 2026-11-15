@@ -22,7 +22,8 @@ window.CAU_HINH = {
             "Em tự viết ra"
           ],
           "dung": 1,
-          "goiy": "Nhớ lại Hình 24 trong SGK trang 24."
+          "goiy": "Nhớ lại Hình 24 trong SGK trang 24.",
+          "giaiThich": "Bài thơ trong Hình 24 (SGK trang 24) là thơ của nhà thơ Xuân Quỳnh — ghi nhớ tên tác giả giúp em biết ai là người đã sáng tác bài thơ."
         },
         {
           "muc": "HIỂU",
@@ -33,7 +34,8 @@ window.CAU_HINH = {
             "Vì tác giả có quyền cho phép hoặc không cho phép người khác dùng nội dung đó"
           ],
           "dung": 2,
-          "goiy": "Nghĩ xem ai có quyền quyết định cho dùng nội dung."
+          "goiy": "Nghĩ xem ai có quyền quyết định cho dùng nội dung.",
+          "giaiThich": "Tác giả là người tạo ra nội dung nên chỉ tác giả mới có quyền quyết định ai được dùng; ghi tên tác giả là cách tôn trọng quyền đó."
         },
         {
           "muc": "VẬN DỤNG",
@@ -44,7 +46,8 @@ window.CAU_HINH = {
             "Ghi tên em là tác giả"
           ],
           "dung": 0,
-          "goiy": "Hãy tôn trọng người đã tạo ra bài thơ."
+          "goiy": "Hãy tôn trọng người đã tạo ra bài thơ.",
+          "giaiThich": "Khi dùng thơ của người khác, em phải ghi rõ tên tác giả để mọi người biết ai sáng tác và để tôn trọng công sức của họ."
         }
       ]
     },
@@ -62,7 +65,8 @@ window.CAU_HINH = {
             "Quyền của tác giả cho phép hoặc không cho phép người khác sử dụng nội dung"
           ],
           "dung": 2,
-          "goiy": "Hãy nghĩ đến quyền của tác giả."
+          "goiy": "Hãy nghĩ đến quyền của tác giả.",
+          "giaiThich": "Bản quyền thuộc về tác giả — chỉ tác giả mới có quyền quyết định ai được dùng nội dung của mình và dùng như thế nào."
         },
         {
           "muc": "HIỂU",
@@ -73,7 +77,8 @@ window.CAU_HINH = {
             "Quyền xoá nội dung của người khác"
           ],
           "dung": 0,
-          "goiy": "Nghĩ đến việc được ghi tên là người tạo ra nội dung."
+          "goiy": "Nghĩ đến việc được ghi tên là người tạo ra nội dung.",
+          "giaiThich": "Quyền tác giả là quyền được mọi người công nhận mình là người đã tạo ra nội dung đó, không phải quyền sửa hay xóa nội dung của người khác."
         },
         {
           "muc": "VẬN DỤNG",
@@ -84,7 +89,8 @@ window.CAU_HINH = {
             "Đúng, vì tải về là thành của mình"
           ],
           "dung": 1,
-          "goiy": "Ảnh trên mạng cũng có người tạo ra nó."
+          "goiy": "Ảnh trên mạng cũng có người tạo ra nó.",
+          "giaiThich": "Ảnh trên mạng cũng có tác giả của nó, và tác giả mới có quyền cho phép hay không cho phép người khác dùng — nên em không thể cứ tải về là dùng."
         }
       ]
     },
@@ -102,7 +108,8 @@ window.CAU_HINH = {
             "Chỉ có dạng âm thanh"
           ],
           "dung": 1,
-          "goiy": "Nội dung thông tin có nhiều dạng khác nhau."
+          "goiy": "Nội dung thông tin có nhiều dạng khác nhau.",
+          "giaiThich": "Nội dung thông tin rất đa dạng — có thể là chữ viết, hình ảnh, âm thanh hoặc kết hợp nhiều dạng trong một nội dung đa phương tiện."
         },
         {
           "muc": "HIỂU",
@@ -113,7 +120,8 @@ window.CAU_HINH = {
             "Không bắt buộc gồm tất cả các dạng"
           ],
           "dung": 2,
-          "goiy": "Hãy nghĩ đến một bài hát chỉ có âm thanh."
+          "goiy": "Hãy nghĩ đến một bài hát chỉ có âm thanh.",
+          "giaiThich": "Một nội dung thông tin không cần phải có đủ cả ba dạng — ví dụ một bài hát chỉ có âm thanh vẫn là nội dung thông tin."
         },
         {
           "muc": "VẬN DỤNG",
@@ -124,7 +132,8 @@ window.CAU_HINH = {
             "Văn bản"
           ],
           "dung": 0,
-          "goiy": "Đuôi .mp3 thường là tệp gì?"
+          "goiy": "Đuôi .mp3 thường là tệp gì?",
+          "giaiThich": "Đuôi .mp3 là tệp âm thanh, nên nội dung trong tệp này được thể hiện dưới dạng âm thanh."
         }
       ]
     },
@@ -142,7 +151,8 @@ window.CAU_HINH = {
             "Không cần ghi"
           ],
           "dung": 0,
-          "goiy": "Nên ghi đúng địa chỉ trang web em lấy thông tin."
+          "goiy": "Nên ghi đúng địa chỉ trang web em lấy thông tin.",
+          "giaiThich": "Em cần ghi đúng địa chỉ trang web đã lấy thông tin để mọi người biết thông tin đó từ đâu ra."
         },
         {
           "muc": "HIỂU",
@@ -153,7 +163,8 @@ window.CAU_HINH = {
             "Ghi tên em là tác giả"
           ],
           "dung": 1,
-          "goiy": "Em không biết tác giả nhưng không được nhận là của mình."
+          "goiy": "Em không biết tác giả nhưng không được nhận là của mình.",
+          "giaiThich": "Khi không biết tên tác giả, em ghi 'Sưu tầm' — vừa không nhận bài hát là của mình, vừa cho biết em đã lấy từ nguồn khác."
         },
         {
           "muc": "VẬN DỤNG",
@@ -164,7 +175,8 @@ window.CAU_HINH = {
             "Ghi rõ \"Nguồn: thieunien.vn\" trên slide"
           ],
           "dung": 2,
-          "goiy": "Hãy nghĩ đến người đã đăng thông tin đó."
+          "goiy": "Hãy nghĩ đến người đã đăng thông tin đó.",
+          "giaiThich": "Ghi rõ nguồn trên slide cho thấy thông tin là của website thieunien.vn — đó là cách tôn trọng bản quyền và công sức của người làm ra thông tin."
         }
       ]
     },
@@ -182,7 +194,8 @@ window.CAU_HINH = {
             "Hợp lệ nếu bạn không biết"
           ],
           "dung": 1,
-          "goiy": "Tệp của bạn là của riêng bạn."
+          "goiy": "Tệp của bạn là của riêng bạn.",
+          "giaiThich": "Tệp của bạn là tài sản riêng của bạn — sao chép khi chưa được bạn đồng ý là không hợp lệ."
         },
         {
           "muc": "HIỂU",
@@ -193,7 +206,8 @@ window.CAU_HINH = {
             "Vì đó là xâm phạm quyền riêng tư của người khác"
           ],
           "dung": 2,
-          "goiy": "Tin nhắn là chuyện riêng của người khác."
+          "goiy": "Tin nhắn là chuyện riêng của người khác.",
+          "giaiThich": "Tin nhắn là chuyện riêng tư của người khác — đọc khi chưa được phép là xâm phạm quyền riêng tư của họ."
         },
         {
           "muc": "VẬN DỤNG",
@@ -204,7 +218,8 @@ window.CAU_HINH = {
             "Im lặng, coi như không biết"
           ],
           "dung": 0,
-          "goiy": "Em cần thể hiện thái độ không đồng tình một cách lịch sự."
+          "goiy": "Em cần thể hiện thái độ không đồng tình một cách lịch sự.",
+          "giaiThich": "Em nên góp ý nhẹ nhàng để bạn dừng lại và nói rõ em không đồng tình — như vậy vừa bảo vệ người bị chia sẻ thông tin, vừa giúp bạn nhận ra việc làm chưa đúng."
         }
       ]
     },
@@ -222,7 +237,8 @@ window.CAU_HINH = {
             "Tự động biến mất"
           ],
           "dung": 0,
-          "goiy": "Thông tin đưa lên mạng có thể đến tay người khác."
+          "goiy": "Thông tin đưa lên mạng có thể đến tay người khác.",
+          "giaiThich": "Thông tin em đưa lên các công cụ trực tuyến và AI có thể bị lộ cho người khác, nên không có gì là bí mật tuyệt đối trên mạng."
         },
         {
           "muc": "HIỂU",
@@ -233,7 +249,8 @@ window.CAU_HINH = {
             "Vì AI không biết đọc chữ"
           ],
           "dung": 1,
-          "goiy": "Nghĩ xem thông tin đã đưa lên mạng còn giữ riêng được không."
+          "goiy": "Nghĩ xem thông tin đã đưa lên mạng còn giữ riêng được không.",
+          "giaiThich": "Ảnh khuôn mặt và họ tên thật là thông tin riêng của em — một khi đã đưa lên công cụ trực tuyến thì có thể bị lộ và bị người khác dùng sai mục đích."
         },
         {
           "muc": "VẬN DỤNG",
@@ -244,7 +261,8 @@ window.CAU_HINH = {
             "Từ chối, không đưa ảnh và họ tên thật"
           ],
           "dung": 2,
-          "goiy": "Ảnh khuôn mặt và họ tên thật là thông tin riêng của em."
+          "goiy": "Ảnh khuôn mặt và họ tên thật là thông tin riêng của em.",
+          "giaiThich": "Ảnh khuôn mặt và họ tên thật là thông tin riêng tư quan trọng — em không nên đưa cho ứng dụng lạ, dù nó hứa tạo Avatar miễn phí."
         }
       ]
     }
