@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22 width=%22512%22 height=%22512%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%231e6fd9%22/%3E%3Cpath d=%22M0 46Q32 38 64 46V64H0Z%22 fill=%22%234a97f2%22/%3E%3Cpolygon points=%2244.0%2C5.5 45.4%2C9.1 49.2%2C9.3 46.3%2C11.7 47.2%2C15.4 44.0%2C13.4 40.8%2C15.4 41.7%2C11.7 38.8%2C9.3 42.6%2C9.1%22 fill=%22%23ffd54a%22/%3E%3Cpolygon points=%2238%2C28 44%2C19 50%2C28%22 fill=%22%23cfe4ff%22/%3E%3Crect x=%2238%22 y=%2228%22 width=%2212%22 height=%2220%22 fill=%22%23fff%22/%3E%3Crect x=%2242%22 y=%2232%22 width=%224%22 height=%225%22 rx=%221%22 fill=%22%231e6fd9%22/%3E%3Cpolygon points=%225%2C33 21%2C21 37%2C33%22 fill=%22%23cfe4ff%22/%3E%3Crect x=%228%22 y=%2233%22 width=%2226%22 height=%2215%22 fill=%22%23fff%22/%3E%3Cpath d=%22M14 41l4 4 9-9%22 fill=%22none%22 stroke=%22%231e6fd9%22 stroke-width=%223%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3Crect x=%224%22 y=%2248%22 width=%2256%22 height=%223.5%22 rx=%221.75%22 fill=%22%23fff%22/%3E%3C/svg%3E">
 <title>Ôn tập 3D khuôn viên</title>
-<meta name="build-id" content="ontap3d-hopnhat-20261116">
+<meta name="build-id" content="ontap3d-hopnhat-20261116-fix1">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
 <style>
@@ -346,7 +346,7 @@ body:has(.notice:not([hidden])) .hud.bottom{display:none}
 <div class="roster" id="roster" aria-live="polite"><h4 id="rTitle">Đang chơi (1)</h4><div class="rs" id="rStat"></div><ul id="rList"></ul></div>
 <div class="guide" id="entry" hidden><div class="gcard" role="dialog" aria-modal="true" aria-labelledby="et">
   <div class="ghead"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>Vào khuôn viên ôn tập</div>
-  <h3 id="et" style="margin-top:4px">Tên gọi của em</h3>
+  <h3 id="et" style="margin-top:4px">Bước 1/2 — Tên gọi của em</h3>
   <input id="eName" type="text" maxlength="16" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Ví dụ: Minh Thư" aria-describedby="eNote">
   <p class="enote" id="eNote">Dùng tên gọi hoặc biệt danh, không ghi họ tên đầy đủ hay số điện thoại.</p>
   <div class="enote" style="margin:0">Màu áo của em</div>
@@ -359,7 +359,7 @@ body:has(.notice:not([hidden])) .hud.bottom{display:none}
 <div id="vnote" hidden>Máy này chưa có giọng đọc tiếng Việt</div>
 <div class="guide" id="hsform" hidden><div class="gcard" role="dialog" aria-modal="true" aria-labelledby="hst">
   <div class="ghead"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>Chào em!</div>
-  <h3 id="hst">Em là ai nào?</h3><p>Điền tên và lớp để thầy xem được kết quả của em nhé. Thông tin chỉ dùng trong lớp học.</p>
+  <h3 id="hst">Bước 2/2 — Tên + lớp của em</h3><p>Điền tên và lớp để thầy xem được kết quả của em nhé. Thông tin chỉ dùng trong lớp học. Bỏ qua được — bấm "Để sau" nếu em chưa muốn điền.</p>
   <label class="f" for="hsTen">Họ và tên</label>
   <input id="hsTen" type="text" maxlength="50" placeholder="Ví dụ: Nguyễn Văn An" autocomplete="off">
   <div class="row2"><div><label class="f" for="hsKhoi">Khối</label><select id="hsKhoi"><option value="4">Khối 4</option><option value="5" selected>Khối 5</option></select></div>
@@ -426,7 +426,7 @@ body:has(.notice:not([hidden])) .hud.bottom{display:none}
 </script>
 <script type="text/plain" id="game-src">
 (function(){const C=window.CAU_HINH,q=function(id){return document.getElementById(id)};
-  window.__BUILD_ID__='ontap3d-hopnhat-20261116';console.log('[ontap3d] build ontap3d-hopnhat-20261116');
+  window.__BUILD_ID__='ontap3d-hopnhat-20261116-fix1';console.log('[ontap3d] build ontap3d-hopnhat-20261116-fix1');
   document.title=C.tenTroChoi+' – '+C.phuDe+(window.__NHAP__?' (bản nháp)':'');
   q('tenGame').textContent=C.tenTroChoi+(window.__NHAP__?' · NHÁP':'');q('phuDe').textContent=C.phuDe;
   q('hs').textContent='Em đã hoàn thành cả 6 nhà ôn tập '+C.phuDe+'.';
@@ -751,7 +751,7 @@ function makeBird(color){
   const wgR=new THREE.BoxGeometry(.62,.04,.26);wgR.translate(.31,0,0);
   const wr=new THREE.Mesh(wgR,bm);wr.position.set(.12,.06,0);g.add(wr);
   const tl=new THREE.Mesh(new THREE.BoxGeometry(.16,.03,.3),bm);tl.position.set(0,.02,-.36);g.add(tl);
-  g.scale.setScalar(1.3);
+  g.scale.setScalar(1.9);
   return {g:g,wl:wl,wr:wr};
 }
 const PERCHES=[];
@@ -763,7 +763,7 @@ const birds=[];
   const perch=PERCHES[(rnd()*PERCHES.length)|0];
   b.g.position.set(perch.x,perch.y,perch.z);
   scene.add(b.g);
-  birds.push({g:b.g,wl:b.wl,wr:b.wr,cx:(rnd()-.5)*10,cz:(rnd()-.5)*10,r:13+rnd()*8,h:12+rnd()*4,sp:.14+rnd()*.1,ph:rnd()*Math.PI*2,mode:'perch',t:2+rnd()*4,perch:perch,from:null});
+  birds.push({g:b.g,wl:b.wl,wr:b.wr,cx:(rnd()-.5)*8,cz:(rnd()-.5)*8,r:9+rnd()*6,h:9+rnd()*3,sp:.14+rnd()*.1,ph:rnd()*Math.PI*2,mode:'perch',t:2+rnd()*4,perch:perch,from:null});
 });
 window.__birds=birds;
 window.__updateBirds=updateBirds;window.__updatePups=updatePups;
@@ -805,11 +805,12 @@ function makePup(furC,dkC){
   const ns=new THREE.Mesh(new THREE.SphereGeometry(.05,6,5),mat('#222222'));ns.position.set(0,.46,.52);g.add(ns);
   const tl=box(.06,.06,.28,fur,0,.44,-.36,false);tl.rotation.x=-.5;tl.name='tail';g.add(tl);
   [[-.12,.2],[.12,.2],[-.12,-.2],[.12,-.2]].forEach(function(p){g.add(box(.08,.22,.08,dk,p[0],.11,p[1]))});
+  g.scale.setScalar(1.3);
   return g;
 }
 function randomPupTarget(){
   for(let k=0;k<12;k++){
-    var a=rnd()*Math.PI*2,r=8+rnd()*16,x=Math.cos(a)*r,z=Math.sin(a)*r;
+    var a=rnd()*Math.PI*2,r=4+rnd()*10,x=Math.cos(a)*r,z=Math.sin(a)*r;
     if(hAt(x,z)<-.2)continue;
     var ok=true;
     houseObjs.forEach(function(h){if(Math.hypot(x-h.door.x,z-h.door.z)<4)ok=false});
@@ -1276,6 +1277,7 @@ function refresh(){
 function visitHouse(i){
   {const ph=phase();if(ph==='wait'){toast('Đang chờ thầy bấm Bắt đầu nhé');return}if(ph==='end'){toast('Đã hết giờ làm nhiệm vụ');return}}
   if(!QUICK){const d=houseObjs[i].door;if(Math.hypot(player.position.x-d.x,player.position.z-d.z)>9){toast('Nhà này còn xa. Em đi theo mũi tên chỉ hướng để tìm nhé');return}}
+  if(mode==='walk'){const d=houseObjs[i].door;cam.yaw=Math.atan2(d.x,d.z)+Math.PI;goal.dist=13;goal.pitch=.5}
   showBoard(i);
 }
 function goPeak(){teleport(PEAK.x-dirP.x*5,PEAK.z-dirP.y*5,stepAngle)}
