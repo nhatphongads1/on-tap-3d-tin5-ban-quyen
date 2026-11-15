@@ -81,7 +81,7 @@ ol.steps{padding-left:18px;margin:6px 0 0;font-size:13.5px;color:var(--soft)}
   <header>
     <div>
       <h1>Soạn câu hỏi ôn tập 3D</h1>
-      <p class="sub">Sửa 6 nhà × 3 câu, thêm thông tin và link video, rồi lưu lên hệ thống (cần đăng nhập quản trị) hoặc tải tệp.</p>
+      <p class="sub">Sửa 6 nhà (mỗi nhà 1–10 câu, 4 dạng: trắc nghiệm, đúng/sai, sắp xếp, điền từ), thêm giải thích và hình ảnh, rồi lưu lên hệ thống (cần đăng nhập quản trị) hoặc tải tệp.</p>
     </div>
     <div class="bar">
       <button id="bImport" type="button">Nhập tệp</button>
@@ -136,8 +136,8 @@ ol.steps{padding-left:18px;margin:6px 0 0;font-size:13.5px;color:var(--soft)}
 </div>
 <div id="toast" role="status"></div>
 
-<script src="/cau-hoi.js"></script>
-<script src="/supabase-config.js"></script>
+<script src="cau-hoi.js"></script>
+<script src="supabase-config.js"></script>
 <script>
 (function(){
 'use strict';
@@ -146,15 +146,31 @@ var SB=window.SUPABASE_CFG||null;
 function $(id){return document.getElementById(id)}
 function clone(o){return JSON.parse(JSON.stringify(o))}
 function el(tag,attrs,text){var e=document.createElement(tag);if(attrs)for(var k in attrs){if(k==='class')e.className=attrs[k];else e.setAttribute(k,attrs[k])}if(text!=null)e.textContent=text;return e}
-function shapeOk(c){return !!(c&&Array.isArray(c.nha)&&c.nha.length===6&&c.nha.every(function(n){return n&&Array.isArray(n.cau)&&n.cau.length===3&&n.cau.every(function(q){return q&&Array.isArray(q.chon)&&q.chon.length===3})}))}
+function qOk(q){
+  if(!q||typeof q.hoi!=='string')return false;
+  var t=q.loai||'choice';
+  if(t==='choice')return Array.isArray(q.chon)&&q.chon.length===3&&(q.dung===0||q.dung===1||q.dung===2);
+  if(t==='truefalse')return typeof q.dapAn==='boolean';
+  if(t==='reorder')return Array.isArray(q.dapAn)&&q.dapAn.length>=2&&q.dapAn.length<=4;
+  if(t==='fillblank')return !!(q.dapAn&&typeof q.dapAn.chinh==='string');
+  return false;
+}
+function shapeOk(c){return !!(c&&Array.isArray(c.nha)&&c.nha.length===6&&c.nha.every(function(n){return n&&Array.isArray(n.cau)&&n.cau.length>=1&&n.cau.length<=10&&n.cau.every(qOk)}))}
 function S(x){return x==null?'':String(x)}
 function normalize(c){
   c.tenTroChoi=S(c.tenTroChoi);c.phuDe=S(c.phuDe);c.phongGiua=S(c.phongGiua);
   c.nha.forEach(function(n,i){
     n.ten=S(n.ten);n.mau=/^#[0-9a-fA-F]{6}$/.test(n.mau||'')?n.mau:'#1f6fe0';n.goc=Number(n.goc)||i*60;
-    n.thongTin=S(n.thongTin);n.videoUrl=S(n.videoUrl);n.videoTieuDe=S(n.videoTieuDe);
-    n.cau.forEach(function(q,j){q.muc=MUC[j];q.hoi=S(q.hoi);q.chon=q.chon.map(S);
-      q.dung=(q.dung===0||q.dung===1||q.dung===2)?q.dung:0;q.goiy=S(q.goiy);q.videoUrl=S(q.videoUrl);q.videoTieuDe=S(q.videoTieuDe)});
+    n.thongTin=S(n.thongTin);n.videoUrl=S(n.videoUrl);n.videoTieuDe=S(n.videoTieuDe);n.chiDan=S(n.chiDan);
+    n.cau.forEach(function(q,j){
+      q.muc=MUC.indexOf(q.muc)>=0?q.muc:MUC[Math.min(j,2)];
+      q.loai=['choice','truefalse','reorder','fillblank'].indexOf(q.loai)>=0?q.loai:'choice';
+      q.hoi=S(q.hoi);
+      if(q.loai==='choice'){q.chon=Array.isArray(q.chon)?q.chon.map(S):['','',''];while(q.chon.length<3)q.chon.push('');q.chon=q.chon.slice(0,3);q.dung=(q.dung===0||q.dung===1||q.dung===2)?q.dung:0;q.dapAn=null}
+      else if(q.loai==='truefalse'){q.chon=null;q.dung=null;q.dapAn=q.dapAn===false?false:true}
+      else if(q.loai==='reorder'){q.chon=null;q.dung=null;q.dapAn=Array.isArray(q.dapAn)?q.dapAn.map(S).filter(Boolean):[];while(q.dapAn.length<2)q.dapAn.push('')}
+      else{q.chon=null;q.dung=null;q.dapAn=(q.dapAn&&typeof q.dapAn==='object')?{chinh:S(q.dapAn.chinh),phu:Array.isArray(q.dapAn.phu)?q.dapAn.phu.map(S).filter(Boolean):[]}:{chinh:'',phu:[]}}
+      q.goiy=S(q.goiy);q.giaiThich=S(q.giaiThich);q.hinh=S(q.hinh||q.hinhAnh||'');q.videoUrl=S(q.videoUrl);q.videoTieuDe=S(q.videoTieuDe)});
   });
   return c;
 }
@@ -236,17 +252,28 @@ function issues(){
     if(!n.ten.trim())r.push({h:i,m:'Nhà '+(i+1)+': chưa có tên nhà'});
     if(!okUrl(n.videoUrl))r.push({h:i,m:'Nhà '+(i+1)+': link video phải bắt đầu bằng https://'});
     n.cau.forEach(function(q,j){
-      var p='Nhà '+(i+1)+', câu '+MUC[j]+': ';
+      var p='Nhà '+(i+1)+', câu '+(j+1)+' ('+q.muc+'): ';
       if(!q.hoi.trim())r.push({h:i,m:p+'chưa có câu hỏi'});
-      q.chon.forEach(function(x,k){if(!x.trim())r.push({h:i,m:p+'chưa có lựa chọn '+LET[k]})});
-      var f=q.chon.map(function(x){return x.trim().toLowerCase()}).filter(Boolean);
-      if(new Set(f).size!==f.length)r.push({h:i,m:p+'có hai lựa chọn giống nhau'});
+      if(q.loai==='choice'){
+        q.chon.forEach(function(x,k){if(!x.trim())r.push({h:i,m:p+'chưa có lựa chọn '+LET[k]})});
+        var f=q.chon.map(function(x){return x.trim().toLowerCase()}).filter(Boolean);
+        if(new Set(f).size!==f.length)r.push({h:i,m:p+'có hai lựa chọn giống nhau'});
+      }else if(q.loai==='truefalse'){
+        if(typeof q.dapAn!=='boolean')r.push({h:i,m:p+'chưa chọn đáp án đúng là Đúng hay Sai'});
+      }else if(q.loai==='reorder'){
+        if(!Array.isArray(q.dapAn)||q.dapAn.length<2)r.push({h:i,m:p+'cần ít nhất 2 mục để sắp xếp'});
+        (q.dapAn||[]).forEach(function(x,k){if(!String(x).trim())r.push({h:i,m:p+'mục sắp xếp '+(k+1)+' còn trống'})});
+      }else if(q.loai==='fillblank'){
+        if(q.hoi.indexOf('___')<0)r.push({h:i,m:p+'câu điền từ cần có ___ trong câu hỏi'});
+        if(!q.dapAn||!String(q.dapAn.chinh||'').trim())r.push({h:i,m:p+'chưa có đáp án điền từ'});
+      }
+      if(q.hinh&&!/^(hinh\/[A-Za-z0-9_.\/\-]+|https:\/\/[^\s]+)$/.test(q.hinh.trim()))r.push({h:i,m:p+'đường dẫn hình chưa đúng (dạng hinh/bai6/ten.png hoặc link https://)'});
       if(!okUrl(q.videoUrl))r.push({h:i,m:p+'link video phải bắt đầu bằng https://'});
     });
   });
   return r;
 }
-function dist(){var c=[0,0,0];cfg.nha.forEach(function(n){n.cau.forEach(function(q){c[q.dung]++})});return c}
+function dist(){var c=[0,0,0];cfg.nha.forEach(function(n){n.cau.forEach(function(q){if(q.loai==='choice'&&(q.dung===0||q.dung===1||q.dung===2))c[q.dung]++})});return c}
 function houseIssues(i,all){return all.filter(function(x){return x.h===i}).length}
 
 function renderHouses(all){
@@ -263,7 +290,7 @@ function renderHouses(all){
 }
 function renderCheck(all){
   var c=$('check');c.textContent='';
-  if(!all.length){c.appendChild(el('div',{'class':'msg ok'},'Đủ 6 nhà × 3 câu, có thể lưu hoặc tải tệp.'))}
+  if(!all.length){c.appendChild(el('div',{'class':'msg ok'},'Đủ 6 nhà, '+(function(){var t=0;cfg.nha.forEach(function(n){t+=n.cau.length});return t})()+' câu — có thể lưu hoặc tải tệp.'))}
   else{
     c.appendChild(el('div',{'class':'msg bad'},'Còn '+all.length+' chỗ cần sửa:'));
     var ul=el('ul',{'class':'issues'});
@@ -274,7 +301,7 @@ function renderCheck(all){
   var d=dist(),dv=el('div',{'class':'dist'});
   dv.appendChild(el('span',null,'Đáp án A: '+d[0]));dv.appendChild(el('span',null,'B: '+d[1]));dv.appendChild(el('span',null,'C: '+d[2]));
   c.appendChild(dv);
-  if(Math.max.apply(null,d)>9)c.appendChild(el('div',{'class':'msg warn'},'Đáp án đúng đang dồn về một vị trí. Nên chia đều A, B, C để học sinh khó đoán.'));
+  var tot=d[0]+d[1]+d[2];if(tot>0&&Math.max.apply(null,d)>Math.ceil(tot*.6))c.appendChild(el('div',{'class':'msg warn'},'Đáp án đúng đang dồn về một vị trí. Nên chia đều A, B, C để học sinh khó đoán.'));
 }
 function outJS(){
   return '/* Nội dung bài ôn tập, tạo bằng trang /admin */\nwindow.CAU_HINH = '+JSON.stringify(cfg,null,2)+';\n';
@@ -304,6 +331,8 @@ function renderEditor(){
   var b=el('div');b.appendChild(el('label',{'class':'f',for:'hMau'},'Màu mái nhà'));
   var ci=el('input',{type:'color',id:'hMau'});ci.value=n.mau;ci.addEventListener('input',function(){n.mau=ci.value;onEdit()});b.appendChild(ci);
   row.appendChild(a);row.appendChild(b);box.appendChild(row);
+  box.appendChild(el('label',{'class':'f',for:'hChi'},'Chỉ dẫn tới nhà kế tiếp (hiện sau khi xong nhà này — không bắt buộc)'));
+  var ci2=el('input',{type:'text',id:'hChi',maxlength:'200'});ci2.value=n.chiDan||'';ci2.addEventListener('input',function(){n.chiDan=ci2.value;onEdit()});box.appendChild(ci2);
 
   var learn=el('div',{'class':'sect'});learn.appendChild(el('h3',null,'Bài học nhanh (hiện cho học sinh trước khi trả lời)'));
   learn.appendChild(el('label',{'class':'f',for:'hInfo'},'Thông tin cần nhớ (không bắt buộc)'));
@@ -313,23 +342,86 @@ function renderEditor(){
 
   n.cau.forEach(function(q,j){
     var card=el('div',{'class':'q'});
-    card.appendChild(el('span',{'class':'lv'},'CÂU '+(j+1)+' · '+MUC[j]));
-    card.appendChild(el('label',{'class':'f',for:'qh'+j},'Câu hỏi'));
-    var ta=el('textarea',{id:'qh'+j,maxlength:'220'});ta.value=q.hoi;ta.addEventListener('input',function(){q.hoi=ta.value;onEdit()});card.appendChild(ta);
-    card.appendChild(el('div',{'class':'hint'},'Chọn nút tròn ở đầu dòng để đánh dấu đáp án đúng.'));
-    q.chon.forEach(function(x,k){
-      var o=el('div',{'class':'opt'+(q.dung===k?' right':'')});
-      var rd=el('input',{type:'radio',name:'dung'+j,'aria-label':'Đáp án đúng là '+LET[k]});rd.checked=(q.dung===k);
-      rd.addEventListener('change',function(){q.dung=k;Array.prototype.forEach.call(card.querySelectorAll('.opt'),function(oo,idx){oo.classList.toggle('right',idx===k)});onEdit()});
-      o.appendChild(rd);o.appendChild(el('span',{'class':'letter'},LET[k]));
-      var ip=el('input',{type:'text',maxlength:'160','aria-label':'Lựa chọn '+LET[k]+' của câu '+MUC[j]});ip.value=x;ip.addEventListener('input',function(){q.chon[k]=ip.value;onEdit()});
-      o.appendChild(ip);card.appendChild(o);
+    card.appendChild(el('span',{'class':'lv'},'CÂU '+(j+1)+' · '+q.muc));
+    var selRow=el('div',{'class':'row3'});
+    var sMuc=el('div');
+    sMuc.appendChild(el('label',{'class':'f',for:'qm'+j},'Mức độ'));
+    var msel=el('select',{id:'qm'+j});
+    MUC.forEach(function(m){var o=el('option',{value:m},m);if(q.muc===m)o.selected=true;msel.appendChild(o)});
+    msel.addEventListener('change',function(){q.muc=msel.value;onEdit();renderEditor();refresh()});
+    sMuc.appendChild(msel);selRow.appendChild(sMuc);
+    var sLoai=el('div');
+    sLoai.appendChild(el('label',{'class':'f',for:'ql'+j},'Dạng câu hỏi'));
+    var lsel=el('select',{id:'ql'+j});
+    [['choice','Trắc nghiệm (3 lựa chọn)'],['truefalse','Đúng / Sai'],['reorder','Sắp xếp thứ tự'],['fillblank','Điền từ vào chỗ trống']].forEach(function(x){var o=el('option',{value:x[0]},x[1]);if(q.loai===x[0])o.selected=true;lsel.appendChild(o)});
+    lsel.addEventListener('change',function(){
+      q.loai=lsel.value;
+      if(q.loai==='choice'){q.chon=['','',''];q.dung=0;q.dapAn=null}
+      else if(q.loai==='truefalse'){q.chon=null;q.dung=null;q.dapAn=true}
+      else if(q.loai==='reorder'){q.chon=null;q.dung=null;q.dapAn=['','']}
+      else{q.chon=null;q.dung=null;q.dapAn={chinh:'',phu:[]}}
+      onEdit();renderEditor();refresh();
     });
+    sLoai.appendChild(lsel);selRow.appendChild(sLoai);
+    card.appendChild(selRow);
+    card.appendChild(el('label',{'class':'f',for:'qh'+j},q.loai==='fillblank'?'Câu hỏi (ghi ___ ở chỗ cần điền)':'Câu hỏi'));
+    var ta=el('textarea',{id:'qh'+j,maxlength:'220'});ta.value=q.hoi;ta.addEventListener('input',function(){q.hoi=ta.value;onEdit()});card.appendChild(ta);
+    if(q.loai==='choice'){
+      card.appendChild(el('div',{'class':'hint'},'Chọn nút tròn ở đầu dòng để đánh dấu đáp án đúng.'));
+      q.chon.forEach(function(x,k){
+        var o=el('div',{'class':'opt'+(q.dung===k?' right':'')});
+        var rd=el('input',{type:'radio',name:'dung'+j,'aria-label':'Đáp án đúng là '+LET[k]});rd.checked=(q.dung===k);
+        rd.addEventListener('change',function(){q.dung=k;Array.prototype.forEach.call(card.querySelectorAll('.opt'),function(oo,idx){oo.classList.toggle('right',idx===k)});onEdit()});
+        o.appendChild(rd);o.appendChild(el('span',{'class':'letter'},LET[k]));
+        var ip=el('input',{type:'text',maxlength:'160','aria-label':'Lựa chọn '+LET[k]+' của câu '+q.muc});ip.value=x;ip.addEventListener('input',function(){q.chon[k]=ip.value;onEdit()});
+        o.appendChild(ip);card.appendChild(o);
+      });
+    }else if(q.loai==='truefalse'){
+      card.appendChild(el('div',{'class':'hint'},'Chọn đáp án đúng của mệnh đề trên.'));
+      [['Đúng',true],['Sai',false]].forEach(function(x,k){
+        var o=el('div',{'class':'opt'+(q.dapAn===x[1]?' right':'')});
+        var rd=el('input',{type:'radio',name:'tf'+j,'aria-label':'Đáp án đúng là '+x[0]});rd.checked=(q.dapAn===x[1]);
+        rd.addEventListener('change',function(){q.dapAn=x[1];Array.prototype.forEach.call(card.querySelectorAll('.opt'),function(oo,idx){oo.classList.toggle('right',idx===k)});onEdit()});
+        o.appendChild(rd);o.appendChild(el('span',{'class':'letter'},x[0]));
+        card.appendChild(o);
+      });
+    }else if(q.loai==='reorder'){
+      card.appendChild(el('div',{'class':'hint'},'Nhập các mục theo ĐÚNG thứ tự (trò chơi sẽ tự xáo trộn khi hiện cho học sinh). Ít nhất 2, tối đa 4 mục.'));
+      q.dapAn.forEach(function(x,k){
+        var o=el('div',{'class':'opt'});
+        o.appendChild(el('span',{'class':'letter'},String(k+1)));
+        var ip=el('input',{type:'text',maxlength:'120','aria-label':'Mục sắp xếp '+(k+1)});ip.value=x;ip.addEventListener('input',function(){q.dapAn[k]=ip.value;onEdit()});
+        o.appendChild(ip);card.appendChild(o);
+      });
+      var rb=el('div',{'class':'bar'});rb.style.marginTop='8px';
+      var addI=el('button',{type:'button'},'+ Thêm mục');addI.disabled=q.dapAn.length>=4;
+      addI.addEventListener('click',function(){q.dapAn.push('');onEdit();renderEditor();refresh()});
+      var delI=el('button',{type:'button'},'− Bớt mục');delI.disabled=q.dapAn.length<=2;
+      delI.addEventListener('click',function(){q.dapAn.pop();onEdit();renderEditor();refresh()});
+      rb.appendChild(addI);rb.appendChild(delI);card.appendChild(rb);
+    }else{
+      card.appendChild(el('label',{'class':'f',for:'qf'+j},'Đáp án điền đúng (chính)'));
+      var fi=el('input',{type:'text',id:'qf'+j,maxlength:'60'});fi.value=q.dapAn.chinh;fi.addEventListener('input',function(){q.dapAn.chinh=fi.value;onEdit()});card.appendChild(fi);
+      card.appendChild(el('label',{'class':'f',for:'qp'+j},'Đáp án phụ được chấp nhận (cách nhau bằng dấu phẩy, không bắt buộc)'));
+      var pi=el('input',{type:'text',id:'qp'+j,maxlength:'160'});pi.value=(q.dapAn.phu||[]).join(', ');pi.addEventListener('input',function(){q.dapAn.phu=pi.value.split(',').map(function(x){return x.trim()}).filter(Boolean);onEdit()});card.appendChild(pi);
+    }
     card.appendChild(el('label',{'class':'f',for:'qg'+j},'Gợi ý khi trả lời sai (không nói ra đáp án)'));
     var gi=el('input',{type:'text',id:'qg'+j,maxlength:'160'});gi.value=q.goiy;gi.addEventListener('input',function(){q.goiy=gi.value;onEdit()});card.appendChild(gi);
+    card.appendChild(el('label',{'class':'f',for:'qe'+j},'Giải thích hiện sau khi trả lời đúng'));
+    var ei=el('textarea',{id:'qe'+j,maxlength:'300'});ei.value=q.giaiThich;ei.addEventListener('input',function(){q.giaiThich=ei.value;onEdit()});card.appendChild(ei);
+    card.appendChild(el('label',{'class':'f',for:'qi'+j},'Hình minh hoạ (vd hinh/bai6/hinh31.png — không bắt buộc)'));
+    var ii=el('input',{type:'text',id:'qi'+j,maxlength:'160'});ii.value=q.hinh;ii.addEventListener('input',function(){q.hinh=ii.value;onEdit()});card.appendChild(ii);
     vidBlock(card,q,'Video gợi ý riêng cho câu này (nếu có)');
+    if(n.cau.length>1){
+      var delQ=el('button',{type:'button'},'Xoá câu này');delQ.style.marginTop='10px';
+      delQ.addEventListener('click',function(){n.cau.splice(j,1);onEdit();renderEditor();refresh()});
+      card.appendChild(delQ);
+    }
     box.appendChild(card);
   });
+  var addQ=el('button',{type:'button','class':'primary'},'+ Thêm câu hỏi');addQ.style.marginTop='14px';addQ.disabled=n.cau.length>=10;
+  addQ.addEventListener('click',function(){n.cau.push({muc:'BIẾT',loai:'choice',hoi:'',chon:['','',''],dung:0,goiy:'',giaiThich:'',hinh:'',videoUrl:'',videoTieuDe:''});onEdit();renderEditor();refresh()});
+  box.appendChild(addQ);
 }
 function syncTop(){
   $('tSlug').value=slug;
@@ -366,7 +458,7 @@ $('file').addEventListener('change',function(){
       var o=JSON.parse(t.slice(i,j+1));
       if(!shapeOk(o))throw new Error('x');
       cfg=normalize(o);cur=0;saveDraft();syncTop();renderEditor();refresh();toast('Đã nhập tệp');
-    }catch(e){toast('Tệp không đúng định dạng (cần đúng 6 nhà, mỗi nhà 3 câu, mỗi câu 3 lựa chọn)')}
+    }catch(e){toast('Tệp không đúng định dạng (cần đúng 6 nhà, mỗi nhà 1–10 câu đúng dạng)')}
   };r.readAsText(f);this.value='';
 });
 $('bReset').addEventListener('click',function(){
