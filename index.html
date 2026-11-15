@@ -184,6 +184,16 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .mm[hidden]{display:none}
 .mm canvas{width:160px;height:160px}
 @media (max-width:560px){.nav{top:calc(112px + env(safe-area-inset-top,0px));font-size:11.5px}.mm canvas{width:120px;height:120px}}
+
+.certbox{position:fixed;inset:0;z-index:11;background:rgba(8,20,40,.7);display:flex;align-items:center;justify-content:center;padding:12px;overflow:auto}
+.certbox[hidden]{display:none!important}
+.certin{background:#fff;border-radius:16px;padding:12px;max-width:min(980px,100%);margin:auto;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.certin canvas{width:100%;height:auto;display:block;border-radius:8px;border:1px solid var(--line)}
+.certin .row{justify-content:center;flex-wrap:wrap;margin-top:10px}
+.certin .btn{box-shadow:none;border:1px solid var(--line);font-size:14px;padding:11px 18px}
+.certin .btn.go{background:#1e6fd9;color:#fff;border-color:#1e6fd9;font-weight:700}
+#certp{display:none}
+@media print{@page{size:A4 landscape;margin:0}body>*:not(#certp){display:none!important}#certp{display:block!important;position:static}#certp img{width:297mm;height:210mm;display:block}body{background:#fff;overflow:visible}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1e6fd9"/><path d="M0 46Q32 38 64 46V64H0Z" fill="#4a97f2"/><polygon points="44.0,5.5 45.4,9.1 49.2,9.3 46.3,11.7 47.2,15.4 44.0,13.4 40.8,15.4 41.7,11.7 38.8,9.3 42.6,9.1" fill="#ffd54a"/><polygon points="38,28 44,19 50,28" fill="#cfe4ff"/><rect x="38" y="28" width="12" height="20" fill="#fff"/><rect x="42" y="32" width="4" height="5" rx="1" fill="#1e6fd9"/><polygon points="5,33 21,21 37,33" fill="#cfe4ff"/><rect x="8" y="33" width="26" height="15" fill="#fff"/><path d="M14 41l4 4 9-9" fill="none" stroke="#1e6fd9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="48" width="56" height="3.5" rx="1.75" fill="#fff"/></symbol></svg>
@@ -196,6 +206,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
     <button class="btn" id="bHelp">Hướng dẫn</button>
     <button class="btn on" id="bRoom" aria-pressed="true">Bạn chơi cùng</button>
     <button class="btn on" id="bMap" aria-pressed="true">Bản đồ nhỏ</button>
+    <button class="btn" id="bCert">Giấy chứng nhận</button>
     <button class="btn" id="bQuick" hidden aria-pressed="false">Tới nhà nhanh: Tắt</button>
     <button class="btn on" id="bVoice" aria-pressed="true">Giọng đọc: Bật</button>
     <button class="btn on" id="bSound" aria-pressed="true">Âm thanh: Bật</button>
@@ -222,7 +233,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   <div class="stats"><span><b id="hFirst">0</b>đúng ngay lần đầu</span><span><b id="hRetry">0</b>lần thử lại</span></div>
   <table><thead><tr><th>Nhà</th><th>Biết</th><th>Hiểu</th><th>Vận dụng</th><th>Tổng</th></tr></thead><tbody id="hTb"></tbody></table>
   <input id="nick" type="text" maxlength="20" placeholder="Biệt danh (không bắt buộc, không lưu)" autocomplete="off" aria-label="Biệt danh tuỳ chọn">
-  <div class="row"><button class="btn" id="hPlay">Chơi lại</button><button class="btn" id="hPeak">Lên Đỉnh Tháp</button><button class="btn" id="hClose">Đóng</button></div>
+  <div class="row"><button class="btn" id="hCert">Giấy chứng nhận</button><button class="btn" id="hPlay">Chơi lại</button><button class="btn" id="hPeak">Lên Đỉnh Tháp</button><button class="btn" id="hClose">Đóng</button></div>
 </div></div>
 <div class="guide" id="guide" hidden><div class="gcard" role="dialog" aria-modal="true" aria-labelledby="gt">
   <div class="ghead"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>Cách chơi<span id="gn">1/5</span></div>
@@ -233,6 +244,8 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 </div></div>
 <div class="nav" id="nav" role="status"><svg id="navArr" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1e6fd9"/><path d="M16 5l8 14-8-3.5L8 19z" fill="#fff"/></svg><span id="navTxt"></span></div>
 <div class="mm" id="mm"><canvas id="mmc" width="160" height="160" aria-label="Bản đồ nhỏ, phía trên là hướng Bắc"></canvas></div>
+<div class="certbox" id="cert" hidden><div class="certin" role="dialog" aria-modal="true" aria-label="Giấy chứng nhận"><canvas id="certc" aria-label="Giấy chứng nhận hoàn thành bài ôn tập"></canvas><div class="row"><button class="btn go" id="certDl" type="button">Tải ảnh PNG</button><button class="btn" id="certPrint" type="button">In (A4)</button><button class="btn" id="certClose" type="button">Đóng</button></div></div></div>
+<div id="certp" aria-hidden="true"></div>
 <div class="roster" id="roster" aria-live="polite"><h4 id="rTitle">Đang chơi (1)</h4><div class="rs" id="rStat"></div><ul id="rList"></ul></div>
 <div class="guide" id="entry" hidden><div class="gcard" role="dialog" aria-modal="true" aria-labelledby="et">
   <div class="ghead"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>Vào khuôn viên ôn tập</div>
@@ -1255,6 +1268,72 @@ function navUpdate(dt,now){
   if(NAVQ.mapOn&&now-NAVQ.mapT>110){NAVQ.mapT=now;drawMap(now)}
 }
 window.__dbg={tp:(x,z)=>teleport(x,z,0),houses:()=>HP.map(h=>[+h.x.toFixed(1),+h.z.toFixed(1)]),quick:()=>QUICK,dist:()=>NAVQ.d,labels:()=>houseObjs.map(h=>h.lbl.el.style.visibility)};
+
+/* ============ GIẤY CHỨNG NHẬN (canvas A4 ngang, tạo hoàn toàn trên máy học sinh, không gửi đi đâu) ============ */
+const CERT_SIGN=(function(){const m=location.search.match(/[?&]ky=([^&]{1,60})/);let t='';try{t=m?decodeURIComponent(m[1].replace(/\+/g,' ')):''}catch(e){}t=cleanName(t).slice(0,40);return t||window.CAU_HINH.chuKy||'Thầy Phong – Giáo viên Tin học'})();
+const CERT_W=1754,CERT_H=1240;
+function badgeOf(){const pct=total/allMax();return pct>=.9?['Xuất sắc','#d79a2b']:pct>=.75?['Giỏi','#2f9a5d']:pct>=.5?['Khá','#2f78c4']:['Cố gắng','#7a6a8f']}
+function certReason(){return allDone()?'':'Em cần hoàn thành đủ '+HOUSES.length+' chốt để nhận giấy chứng nhận.'}
+function wrapText(g,text,x,y,maxW,lh){
+  const words=text.split(' ');let line='',yy=y;
+  words.forEach(w=>{const t=line?line+' '+w:w;if(g.measureText(t).width>maxW&&line){g.fillText(line,x,yy);line=w;yy+=lh}else line=t});
+  g.fillText(line,x,yy);return yy;
+}
+function drawCert(cv){
+  cv.width=CERT_W;cv.height=CERT_H;const g=cv.getContext('2d'),F='"Be Vietnam Pro","Segoe UI",system-ui,sans-serif',B='#1e6fd9',D='#12376b';
+  g.fillStyle='#fff';g.fillRect(0,0,CERT_W,CERT_H);
+  /* nền xanh nhạt góc */
+  const gr=g.createLinearGradient(0,0,0,CERT_H);gr.addColorStop(0,'#eef5ff');gr.addColorStop(.25,'#fff');gr.addColorStop(.8,'#fff');gr.addColorStop(1,'#e3eefc');g.fillStyle=gr;g.fillRect(40,40,CERT_W-80,CERT_H-80);
+  /* viền đôi */
+  g.strokeStyle=B;g.lineWidth=14;g.strokeRect(34,34,CERT_W-68,CERT_H-68);
+  g.strokeStyle='#8fb8f0';g.lineWidth=3;g.strokeRect(62,62,CERT_W-124,CERT_H-124);
+  [[62,62],[CERT_W-62,62],[62,CERT_H-62],[CERT_W-62,CERT_H-62]].forEach(p=>{g.fillStyle=B;g.beginPath();g.arc(p[0],p[1],14,0,6.283);g.fill()});
+  g.textAlign='center';g.fillStyle=B;g.font='700 34px '+F;g.fillText('ÔN TẬP 3D · KHUÔN VIÊN HỌC TẬP',CERT_W/2,168);
+  g.fillStyle=D;g.font='800 118px '+F;g.fillText('GIẤY CHỨNG NHẬN',CERT_W/2,306);
+  g.strokeStyle='#ffd54a';g.lineWidth=8;g.beginPath();g.moveTo(CERT_W/2-300,342);g.lineTo(CERT_W/2+300,342);g.stroke();
+  g.fillStyle='#52615f';g.font='500 40px '+F;g.fillText('Chứng nhận em',CERT_W/2,430);
+  g.fillStyle=B;let fs=130;g.font='800 '+fs+'px '+F;while(g.measureText(myName).width>1300&&fs>60){fs-=6;g.font='800 '+fs+'px '+F}
+  g.fillText(myName,CERT_W/2,570);
+  g.strokeStyle='#cfdcee';g.lineWidth=3;g.beginPath();g.moveTo(CERT_W/2-520,602);g.lineTo(CERT_W/2+520,602);g.stroke();
+  g.fillStyle='#1c2a29';g.font='500 42px '+F;g.fillText('đã hoàn thành bài ôn tập',CERT_W/2,676);
+  g.fillStyle=D;g.font='700 52px '+F;const endY=wrapText(g,window.CAU_HINH.tenTroChoi+' – '+window.CAU_HINH.phuDe,CERT_W/2,750,1250,64);
+  const bd=badgeOf();
+  g.fillStyle='#1c2a29';g.font='500 42px '+F;g.fillText('với kết quả',CERT_W/2,endY+64);
+  g.fillStyle=B;g.font='800 84px '+F;g.fillText(total+' / '+allMax()+' điểm',CERT_W/2,endY+146);
+  g.fillStyle=bd[1];const bw=360,bh=64,bx=CERT_W/2-bw/2,by=endY+172;
+  g.beginPath();g.roundRect?g.roundRect(bx,by,bw,bh,32):g.rect(bx,by,bw,bh);g.fill();
+  g.fillStyle='#fff';g.font='700 36px '+F;g.fillText('Huy hiệu '+bd[0],CERT_W/2,by+45);
+  /* chân giấy */
+  const fy=CERT_H-170;
+  g.textAlign='left';g.fillStyle='#52615f';g.font='500 30px '+F;
+  const d=new Date(),ds='Ngày '+d.getDate()+' tháng '+(d.getMonth()+1)+' năm '+d.getFullYear();
+  g.fillText(ds,150,fy);g.fillText(ROOM==='chung'?'Phòng chung':'Mã phòng: '+ROOM.toUpperCase(),150,fy+44);
+  g.textAlign='center';g.fillStyle=D;g.font='italic 700 46px '+F;g.fillText(CERT_SIGN,CERT_W-420,fy);
+  g.strokeStyle='#8a9aa8';g.lineWidth=2;g.beginPath();g.moveTo(CERT_W-720,fy+14);g.lineTo(CERT_W-120,fy+14);g.stroke();
+  g.fillStyle='#52615f';g.font='500 26px '+F;g.fillText('Người cấp giấy',CERT_W-420,fy+52);
+  /* con dấu huy hiệu */
+  const sx=CERT_W/2,sy=fy+22;
+  g.save();g.translate(sx,sy);g.scale(.85,.85);g.fillStyle=bd[1];g.beginPath();for(let i=0;i<24;i++){const a=i/24*Math.PI*2,r=i%2?78:92;g.lineTo(Math.cos(a)*r,Math.sin(a)*r)}g.closePath();g.fill();
+  g.fillStyle='#fff';g.beginPath();g.arc(0,0,62,0,6.283);g.fill();g.fillStyle=bd[1];g.beginPath();g.arc(0,0,54,0,6.283);g.fill();
+  g.fillStyle='#fff';g.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,r=i%2?12:28;g.lineTo(Math.cos(a)*r,Math.sin(a)*r-6)}g.closePath();g.fill();
+  g.font='700 17px '+F;g.textAlign='center';g.fillText(bd[0].toUpperCase(),0,38);g.restore();
+}
+let certBusy=false;
+function openCert(){
+  const why=certReason();if(why){toast(why);return}
+  if(certBusy)return;certBusy=true;
+  const go=()=>{drawCert($('certc'));$('cert').hidden=false;certBusy=false;try{$('certDl').focus()}catch(e){}};
+  try{Promise.race([document.fonts.load('800 60px "Be Vietnam Pro"'),new Promise(r=>setTimeout(r,1200))]).then(go,go)}catch(e){go()}
+}
+$('bCert').onclick=openCert;$('hCert').onclick=()=>{hideHonor();openCert()};
+$('certClose').onclick=()=>{$('cert').hidden=true};
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('cert').hidden)$('cert').hidden=true});
+$('certDl').onclick=()=>{
+  try{$('certc').toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='giay-chung-nhan-'+(myName||'em').replace(/[^\p{L}\p{N}]+/gu,'-')+'.png';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)},'image/png')}catch(e){toast('Máy này chưa tải được ảnh. Em hãy chụp màn hình giấy chứng nhận nhé.')}
+};
+$('certPrint').onclick=()=>{
+  try{$('certp').innerHTML='';const im=new Image();im.src=$('certc').toDataURL('image/png');im.onload=()=>{$('certp').appendChild(im);setTimeout(()=>window.print(),150)}}catch(e){toast('Máy này chưa in được.')}
+};
 
 /* ---------- vòng lặp ---------- */
 const skyK=[new THREE.Color('#b9e0f0'),new THREE.Color('#f2b48a'),new THREE.Color('#0d1530')];
