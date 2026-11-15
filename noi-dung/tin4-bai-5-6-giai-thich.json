@@ -1,0 +1,495 @@
+{
+  "nha": [
+    {
+      "cau": [
+        {
+          "hoi": "Ngoài tạo, đổi tên và xoá, em còn thao tác nào với tệp và thư mục?",
+          "muc": "BIẾT",
+          "chon": [
+            "Phóng to hoặc thu nhỏ",
+            "Tô màu cho thư mục",
+            "Di chuyển hoặc sao chép"
+          ],
+          "dung": 2,
+          "goiy": "Nhớ lại các thao tác mới của bài 5.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Ngoài tạo, đổi tên và xoá, em còn có thể di chuyển hoặc sao chép tệp và thư mục đến thư mục khác."
+        },
+        {
+          "hoi": "Sau khi di chuyển một thư mục đến thư mục khác, thư mục ấy còn ở vị trí cũ không?",
+          "muc": "BIẾT",
+          "chon": [
+            "Không, chỉ còn ở vị trí mới",
+            "Còn, ở cả vị trí cũ và vị trí mới",
+            "Còn, nhưng chỉ ở vị trí cũ"
+          ],
+          "dung": 0,
+          "goiy": "Di chuyển nghĩa là dời đi.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Di chuyển nghĩa là dời đi — thư mục chỉ còn ở vị trí mới, không còn ở vị trí cũ nữa."
+        },
+        {
+          "hoi": "Khi di chuyển một thư mục có chứa tệp và thư mục con, các tệp và thư mục con đó sẽ thế nào?",
+          "muc": "HIỂU",
+          "chon": [
+            "Ở lại vị trí cũ",
+            "Cùng chuyển đến vị trí mới",
+            "Bị xoá hết"
+          ],
+          "dung": 1,
+          "goiy": "Nghĩ về cả chiếc hộp cùng đồ bên trong.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Khi di chuyển một thư mục, tất cả tệp và thư mục con bên trong cũng chuyển theo đến vị trí mới, giống như mang cả chiếc hộp cùng đồ bên trong đi."
+        },
+        {
+          "hoi": "Vì sao di chuyển thư mục là cách tốt nhất khi một bạn đổi sang nhóm mới trong cây thư mục?",
+          "muc": "HIỂU",
+          "chon": [
+            "Vì còn để lại một bản ở nhóm cũ",
+            "Vì xoá được cả nhóm cũ",
+            "Vì chỉ một thao tác là thư mục cùng nội dung sang nhóm mới và không còn ở nhóm cũ"
+          ],
+          "dung": 2,
+          "goiy": "So sánh số bước và kết quả với việc tạo mới rồi xoá.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Chỉ một thao tác di chuyển là thư mục cùng toàn bộ nội dung đã sang nhóm mới và không còn ở nhóm cũ — nhanh và gọn hơn tạo mới rồi xoá."
+        },
+        {
+          "hoi": "Một bạn chuyển từ nhóm 1 sang nhóm 2, cây thư mục phải đổi theo. Cách làm tốt nhất là gì?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Di chuyển thư mục của bạn từ nhóm 1 sang nhóm 2",
+            "Tạo thư mục mới ở nhóm 2 rồi xoá thư mục ở nhóm 1",
+            "Sao chép thư mục sang nhóm 2 rồi xoá thư mục ở nhóm 1"
+          ],
+          "dung": 0,
+          "goiy": "Chọn cách ít bước nhất mà vẫn đúng kết quả.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Di chuyển thư mục là cách ít bước nhất mà vẫn đúng kết quả: thư mục của bạn sang nhóm 2, không còn ở nhóm 1."
+        }
+      ],
+      "goc": 10,
+      "mau": "#c4553b",
+      "ten": "Di chuyển tệp, thư mục",
+      "chiDan": null,
+      "thongTin": "Ngoài tạo, đổi tên và xoá, em còn có thể di chuyển hoặc sao chép tệp và thư mục đến thư mục khác. Khi di chuyển một thư mục, tất cả tệp và thư mục con bên trong cũng chuyển đến vị trí mới và không còn ở vị trí cũ.",
+      "videoUrl": null,
+      "videoTieuDe": null
+    },
+    {
+      "cau": [
+        {
+          "hoi": "Khi sao chép một thư mục đến vị trí khác, thư mục ấy tồn tại ở đâu?",
+          "muc": "BIẾT",
+          "chon": [
+            "Chỉ ở vị trí mới",
+            "Ở cả vị trí mới và vị trí cũ",
+            "Chỉ ở vị trí cũ"
+          ],
+          "dung": 1,
+          "goiy": "Sao chép là tạo thêm một bản.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Sao chép là tạo thêm một bản mới — thư mục gốc vẫn còn ở vị trí cũ, đồng thời có thêm một bản ở vị trí mới."
+        },
+        {
+          "hoi": "Thao tác nào làm cho tệp xuất hiện ở hai nơi cùng lúc?",
+          "muc": "BIẾT",
+          "chon": [
+            "Xoá tệp",
+            "Đổi tên tệp",
+            "Sao chép tệp"
+          ],
+          "dung": 2,
+          "goiy": "Hai nơi đều có tệp.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Chỉ sao chép mới tạo thêm một bản tệp nữa, nên tệp xuất hiện ở cả hai nơi cùng lúc."
+        },
+        {
+          "hoi": "Sao chép một thư mục có chứa tệp. Các tệp bên trong sẽ thế nào?",
+          "muc": "HIỂU",
+          "chon": [
+            "Tồn tại ở cả vị trí mới và vị trí cũ",
+            "Chỉ còn ở vị trí mới",
+            "Bị mất khi sao chép"
+          ],
+          "dung": 0,
+          "goiy": "Cả thư mục được nhân bản, kèm nội dung.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Sao chép thư mục là nhân bản cả thư mục kèm nội dung bên trong — nên các tệp có mặt ở cả hai nơi."
+        },
+        {
+          "hoi": "Sau thao tác nào thì thư mục KHÔNG còn ở vị trí cũ?",
+          "muc": "HIỂU",
+          "chon": [
+            "Sao chép thư mục",
+            "Di chuyển thư mục",
+            "Tạo thư mục mới"
+          ],
+          "dung": 1,
+          "goiy": "Phân biệt dời đi và nhân bản.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Di chuyển là dời đi nên thư mục không còn ở chỗ cũ; sao chép thì vẫn để lại một bản ở vị trí cũ."
+        },
+        {
+          "hoi": "Em cần có tệp Gioi thieu trong thư mục của mình nhưng tệp ở ổ đĩa D: vẫn phải giữ nguyên. Em làm thế nào?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Di chuyển tệp sang thư mục của em",
+            "Xoá tệp ở ổ đĩa D: rồi tạo lại",
+            "Sao chép tệp vào thư mục của em"
+          ],
+          "dung": 2,
+          "goiy": "Tệp gốc phải còn nguyên.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Sao chép giúp em có thêm một bản trong thư mục của mình, trong khi tệp gốc ở ổ đĩa D: vẫn còn nguyên."
+        }
+      ],
+      "goc": 70,
+      "mau": "#2f7a5b",
+      "ten": "Sao chép tệp, thư mục",
+      "chiDan": null,
+      "thongTin": "Khi sao chép một thư mục đến vị trí khác, tất cả tệp và thư mục con bên trong tồn tại ở cả vị trí mới và vị trí cũ. Di chuyển thì không để lại ở chỗ cũ, sao chép thì có ở cả hai nơi.",
+      "videoUrl": null,
+      "videoTieuDe": null
+    },
+    {
+      "cau": [
+        {
+          "hoi": "Thao tác nhầm với tệp và thư mục có thể gây ra tác hại nào?",
+          "muc": "BIẾT",
+          "chon": [
+            "Làm mất thông tin",
+            "Làm máy tính chạy nhanh hơn",
+            "Làm tăng dung lượng ổ đĩa"
+          ],
+          "dung": 0,
+          "goiy": "Hậu quả là điều không ai mong muốn.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Thao tác nhầm với tệp và thư mục có thể làm mất thông tin — đó là hậu quả không ai mong muốn."
+        },
+        {
+          "hoi": "Vì sao không nên sao chép hay di chuyển tệp, thư mục của người khác?",
+          "muc": "HIỂU",
+          "chon": [
+            "Vì sẽ làm máy tính tắt nguồn",
+            "Vì làm đảo lộn trật tự, gây khó khăn cho người sử dụng",
+            "Vì tệp sẽ tự đổi tên"
+          ],
+          "dung": 1,
+          "goiy": "Nghĩ về người đang dùng chung máy.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Tệp của người khác đã được sắp xếp theo ý họ — sao chép hay di chuyển sẽ làm đảo lộn trật tự và gây khó khăn cho người dùng chung máy."
+        },
+        {
+          "hoi": "Vì sao không nên sao chép một tệp vào thật nhiều thư mục trên máy tính?",
+          "muc": "HIỂU",
+          "chon": [
+            "Vì tệp sẽ tự xoá sau đó",
+            "Vì máy tính sẽ không mở được tệp nào",
+            "Vì khó quản lí tệp và tốn bộ nhớ lưu trữ"
+          ],
+          "dung": 2,
+          "goiy": "Nhiều bản thì quản lí và dung lượng ra sao?",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Nhiều bản của cùng một tệp khiến em khó quản lí và tốn thêm bộ nhớ lưu trữ của máy tính."
+        },
+        {
+          "hoi": "Máy tính phòng thực hành có nhiều tệp sẵn có không phải của em. Em nên làm gì?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Chỉ thao tác với tệp và thư mục do mình tự tạo ra",
+            "Xoá bớt tệp cũ cho máy gọn",
+            "Sao chép hết vào thư mục của mình"
+          ],
+          "dung": 0,
+          "goiy": "Tệp nào là của em?",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Em chỉ nên thao tác với tệp và thư mục do mình tự tạo ra — tệp của người khác thì không được xoá hay sao chép."
+        },
+        {
+          "hoi": "Một bạn xoá thư mục nháp của mình, một bạn xoá tệp trong thư mục Windows ở ổ đĩa C:, một bạn đổi tên thư mục con của mình. Bạn nào thao tác không đúng?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Bạn xoá thư mục nháp của mình",
+            "Bạn xoá tệp trong thư mục Windows ở ổ đĩa C:",
+            "Bạn đổi tên thư mục con của mình"
+          ],
+          "dung": 1,
+          "goiy": "Nghĩ xem tệp nào không do em tạo ra.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Tệp trong thư mục Windows ở ổ đĩa C: là tệp của hệ thống, không do bạn tạo ra — xoá chúng có thể làm máy tính bị lỗi. Hai bạn kia chỉ thao tác với tệp, thư mục của mình nên đúng."
+        }
+      ],
+      "goc": 130,
+      "mau": "#8a63c9",
+      "ten": "Tác hại khi làm nhầm",
+      "chiDan": null,
+      "thongTin": "Thao tác nhầm với tệp và thư mục có thể làm mất thông tin, gây lỗi chương trình, đảo lộn trật tự lưu trữ, tốn bộ nhớ. Em chỉ nên thao tác với tệp và thư mục do mình tự tạo ra.",
+      "videoUrl": null,
+      "videoTieuDe": null
+    },
+    {
+      "cau": [
+        {
+          "hoi": "Phần mềm được cá nhân hoặc tổ chức sản xuất ra để làm gì?",
+          "muc": "BIẾT",
+          "chon": [
+            "Chỉ để tặng miễn phí cho mọi người",
+            "Chỉ để dùng trong trường học",
+            "Đáp ứng nhu cầu làm việc, học tập, giải trí của con người"
+          ],
+          "dung": 2,
+          "goiy": "Nhớ định nghĩa mở đầu mục 1.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Phần mềm được cá nhân hoặc tổ chức sản xuất ra để đáp ứng nhu cầu làm việc, học tập và giải trí của con người."
+        },
+        {
+          "hoi": "Theo bảng, PowerPoint và Kiran's Typing Tutor khác nhau thế nào về quyền sử dụng?",
+          "muc": "HIỂU",
+          "chon": [
+            "PowerPoint không miễn phí, Kiran's Typing Tutor miễn phí",
+            "PowerPoint miễn phí, Kiran's Typing Tutor không miễn phí",
+            "Cả hai đều không miễn phí"
+          ],
+          "dung": 0,
+          "goiy": "Xem cột Quyền sử dụng trong bảng.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Theo bảng quyền sử dụng, PowerPoint của Microsoft không miễn phí còn Kiran's Typing Tutor là phần mềm miễn phí."
+        },
+        {
+          "hoi": "Trên Internet, làm sao nhận biết một phần mềm là miễn phí?",
+          "muc": "HIỂU",
+          "chon": [
+            "Có nhiều ngôi sao đánh giá",
+            "Phần giá ghi Miễn phí, không có số tiền",
+            "Do công ty nước ngoài làm ra"
+          ],
+          "dung": 1,
+          "goiy": "Nhìn dòng giá dưới tên phần mềm.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Phần mềm miễn phí có phần giá ghi 'Miễn phí' và không có số tiền — em nhìn dòng giá dưới tên phần mềm là biết."
+        },
+        {
+          "hoi": "Máy của một bạn có Word, Unikey, Kiran's Typing Tutor, Kids Games Learning Science. Phần mềm nào KHÔNG miễn phí?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Word",
+            "Unikey",
+            "Kiran's Typing Tutor"
+          ],
+          "dung": 0,
+          "goiy": "Chú ý phần mềm của Microsoft.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Word là phần mềm của Microsoft nên không miễn phí, còn Unikey và Kiran's Typing Tutor đều là phần mềm miễn phí."
+        },
+        {
+          "hoi": "Phần mềm nào dưới đây là miễn phí?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Fast Math for Kids (giá 43.900 đ)",
+            "TUX PAINT (giá 53.900 đ)",
+            "Unikey - Bàn phím tiếng Việt (Miễn phí)"
+          ],
+          "dung": 2,
+          "goiy": "Tìm phần mềm không có số tiền.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Unikey ghi 'Miễn phí' và không có số tiền, còn Fast Math for Kids và TUX PAINT đều có giá nên không miễn phí."
+        }
+      ],
+      "goc": 190,
+      "mau": "#d79a2b",
+      "ten": "Phần mềm miễn phí",
+      "chiDan": null,
+      "thongTin": "Phần mềm do cá nhân hoặc tổ chức sản xuất để đáp ứng nhu cầu làm việc, học tập, giải trí. Có phần mềm miễn phí và phần mềm không miễn phí. Ví dụ: PowerPoint của Microsoft không miễn phí, Kiran's Typing Tutor miễn phí.",
+      "videoUrl": null,
+      "videoTieuDe": null
+    },
+    {
+      "cau": [
+        {
+          "hoi": "Ai có quyền cho phép hoặc không cho phép người khác sử dụng phần mềm?",
+          "muc": "BIẾT",
+          "chon": [
+            "Người mua máy tính",
+            "Tác giả của phần mềm",
+            "Người dùng đầu tiên"
+          ],
+          "dung": 1,
+          "goiy": "Người làm ra phần mềm.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Phần mềm là sản phẩm trí tuệ và tài sản của tác giả, nên chỉ tác giả mới có quyền quyết định ai được dùng."
+        },
+        {
+          "hoi": "Phần mềm đã được tác giả cho phép sử dụng được gọi là gì?",
+          "muc": "BIẾT",
+          "chon": [
+            "Phần mềm trái phép",
+            "Phần mềm hết hạn",
+            "Phần mềm có bản quyền"
+          ],
+          "dung": 2,
+          "goiy": "Gọi theo việc được phép.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Phần mềm đã được tác giả cho phép sử dụng được gọi là phần mềm có bản quyền."
+        },
+        {
+          "hoi": "Vì sao Kiran's Typing Tutor miễn phí vẫn là phần mềm có bản quyền?",
+          "muc": "HIỂU",
+          "chon": [
+            "Vì tác giả cho phép sử dụng miễn phí",
+            "Vì cô giáo đã mua phần mềm",
+            "Vì phần mềm không có tác giả"
+          ],
+          "dung": 0,
+          "goiy": "Quan trọng là tác giả có cho phép hay không.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Miễn phí không có nghĩa là không có bản quyền — tác giả của Kiran's Typing Tutor đã cho phép mọi người dùng miễn phí, nên nó vẫn là phần mềm có bản quyền."
+        },
+        {
+          "hoi": "Phần mềm trình chiếu báo Product Activation Failed vì đã hết hạn. Cách làm đúng là gì?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Tìm cách vẫn dùng được mà không trả tiền",
+            "Trả phí cho nhà sản xuất để tiếp tục dùng bình thường",
+            "Cài đi cài lại nhiều lần"
+          ],
+          "dung": 1,
+          "goiy": "Phần mềm có bản quyền hết hạn thì cần làm gì với nhà sản xuất?",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Khi phần mềm có bản quyền hết hạn, cách đúng là trả phí cho nhà sản xuất để tiếp tục dùng bình thường — không tìm cách dùng lậu."
+        },
+        {
+          "hoi": "Một bạn khoe tìm được cách dùng phần mềm có bản quyền mà không trả tiền. Hậu quả của việc dùng trái phép là gì?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Vi phạm pháp luật, ảnh hưởng quyền lợi người làm phần mềm, mất an toàn cho máy",
+            "Chỉ tiết kiệm được tiền, không ảnh hưởng gì",
+            "Giúp tác giả được nhiều người biết đến"
+          ],
+          "dung": 0,
+          "goiy": "Đoạn hội thoại nêu nhiều hậu quả, không chỉ một.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Dùng phần mềm trái phép vừa vi phạm pháp luật, vừa ảnh hưởng quyền lợi của người làm ra phần mềm, vừa gây mất an toàn cho máy tính của em."
+        }
+      ],
+      "goc": 245,
+      "mau": "#2f6fa0",
+      "ten": "Phần mềm có bản quyền",
+      "chiDan": null,
+      "thongTin": "Mỗi phần mềm là sản phẩm trí tuệ và là tài sản của tác giả. Tác giả có quyền cho phép hoặc không cho phép người khác sử dụng. Phần mềm đã được tác giả cho phép gọi là phần mềm có bản quyền. Dùng trái phép là vi phạm pháp luật và gây mất an toàn cho máy tính.",
+      "videoUrl": null,
+      "videoTieuDe": null
+    },
+    {
+      "cau": [
+        {
+          "hoi": "Bài học khẳng định em chỉ được sử dụng loại phần mềm nào?",
+          "muc": "BIẾT",
+          "chon": [
+            "Phần mềm có bản quyền",
+            "Bất kỳ phần mềm nào tải được",
+            "Chỉ phần mềm không miễn phí"
+          ],
+          "dung": 0,
+          "goiy": "Câu kết luận của mục 2.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Bài học khẳng định em chỉ được sử dụng phần mềm có bản quyền — tức phần mềm đã được tác giả cho phép."
+        },
+        {
+          "hoi": "Đâu là một lí do nên dùng phần mềm có bản quyền?",
+          "muc": "BIẾT",
+          "chon": [
+            "Được xem nhiều đoạn video quảng cáo",
+            "Không bao giờ phải trả tiền",
+            "Giữ an toàn thông tin trong máy tính"
+          ],
+          "dung": 2,
+          "goiy": "Một trong bốn lí do ở sơ đồ.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Dùng phần mềm có bản quyền giúp giữ an toàn cho thông tin trong máy tính của em — đó là một trong bốn lí do ở sơ đồ."
+        },
+        {
+          "hoi": "Vì sao dùng phần mềm có bản quyền là bảo vệ người làm ra phần mềm?",
+          "muc": "HIỂU",
+          "chon": [
+            "Vì phần mềm là của nhà trường",
+            "Vì phần mềm là sản phẩm trí tuệ và tài sản của tác giả",
+            "Vì ai cũng được sao chép tự do"
+          ],
+          "dung": 1,
+          "goiy": "Phần mềm thuộc về ai?",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Phần mềm là sản phẩm trí tuệ và tài sản của tác giả — dùng bản quyền là tôn trọng và bảo vệ công sức của người đã làm ra nó."
+        },
+        {
+          "hoi": "Phần mềm trên máy của em gặp trục trặc và em muốn được nhà sản xuất hỗ trợ. Em cần dùng loại phần mềm nào?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Phần mềm dùng trái phép",
+            "Phần mềm tải về không rõ nguồn",
+            "Phần mềm có bản quyền"
+          ],
+          "dung": 2,
+          "goiy": "Hỗ trợ dành cho người dùng được phép.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Chỉ người dùng phần mềm có bản quyền mới được nhà sản xuất hỗ trợ khi gặp sự cố — phần mềm dùng trái phép hay không rõ nguồn thì không."
+        },
+        {
+          "hoi": "Em biết một người anh dùng phần mềm không có bản quyền. Em nên nói gì với anh ấy?",
+          "muc": "VẬN DỤNG",
+          "chon": [
+            "Không sao, nhiều người cũng làm vậy",
+            "Anh nên dùng phần mềm có bản quyền để an toàn cho máy và không vi phạm pháp luật",
+            "Anh cho em dùng chung với nhé"
+          ],
+          "dung": 1,
+          "goiy": "Nêu lí do, nói nhẹ nhàng.",
+          "videoUrl": null,
+          "videoTieuDe": null,
+          "giaiThich": "Em nên khuyên anh dùng phần mềm có bản quyền — vừa an toàn cho máy tính, vừa không vi phạm pháp luật."
+        }
+      ],
+      "goc": 295,
+      "mau": "#e07a3a",
+      "ten": "Vì sao dùng bản quyền",
+      "chiDan": null,
+      "thongTin": "Em chỉ được sử dụng phần mềm có bản quyền. Lí do: giữ an toàn thông tin trên máy tính, tránh vi phạm pháp luật, có thể được nhà sản xuất hỗ trợ khi gặp sự cố, và bảo vệ quyền lợi người làm ra sản phẩm có ích cho xã hội.",
+      "videoUrl": null,
+      "videoTieuDe": null
+    }
+  ],
+  "slug": "tin4-bai-5-6",
+  "phuDe": "Thao tác với tệp, thư mục và dùng phần mềm khi được phép",
+  "xuatBan": true,
+  "phongGiua": "Phòng Tin học",
+  "tenTroChoi": "Ôn tập 3D"
+}

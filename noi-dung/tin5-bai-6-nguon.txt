@@ -1,0 +1,142 @@
+NGUỒN TỪNG CÂU — TIN 5 BÀI 6 "ĐỊNH DẠNG KÍ TỰ VÀ BỐ TRÍ HÌNH ẢNH TRONG VĂN BẢN"
+Slug: tin5-bai-6 | App: ontap3d.vercel.app
+Nguồn chính: SGK Tin học 5 KNTT Bài 6, tr.29–32 (bản quét: sgk-bai6/trang-1..4.png)
+Nguồn bổ sung: TUẦN 11-2.docx (T1) và TUẦN 12.docx (T2) — mục tiêu/mức độ
+6 nhà × 5 câu = 30 câu | 10 BIẾT / 10 HIỂU / 10 VẬN DỤNG
+Dạng câu hỏi: 18 trắc nghiệm (choice, đáp án đúng A=6, B=6, C=6) + 6 Đúng/Sai (truefalse: 3 Đúng / 3 Sai) + 3 sắp xếp (reorder, nhà 1/3/5) + 3 điền từ (fillblank, nhà 2/4/6)
+Hình SGK đính kèm: 8 file trong hinh/bai6/ (mỗi file < 150KB), gắn vào 16/30 câu.
+
+================================================================
+NHÀ 1 — PHÔNG CHỮ (màu #c4553b, góc 10) — B,B,H,H,V
+================================================================
+Câu 1 [BIẾT | choice | đáp án A] — "Định dạng kí tự trong văn bản là làm gì?"
+  Nguồn: SGK tr.29 — Mục tiêu "Sau bài này em sẽ: Định dạng được kí tự để trình bày văn bản đẹp hơn: chọn phông, kiểu, kích thước, màu sắc cho chữ." (+ T1 Mục I.1)
+  Hình: (không)
+Câu 2 [BIẾT | choice | đáp án B] — "Muốn đổi phông chữ cho một đoạn văn, em cần làm gì trước tiên?"
+  Nguồn: SGK tr.30 mục a) — "để định dạng kí tự trong phần mềm soạn thảo văn bản, trước tiên em cần chọn phần văn bản, sau đó em sử dụng các lệnh trong nhóm lệnh Font của dải lệnh Home (Hình 31)."
+  Hình: hinh/bai6/hinh31-nhom-font.png (Hình 31)
+Câu 3 [HIỂU | truefalse | đáp án SAI] — "Muốn đổi phông chữ cho một đoạn văn, em chỉ cần nháy vào lệnh phông chữ mà không cần chọn văn bản trước."
+  Nguồn: SGK tr.30 mục a) (như Câu 2) — phải chọn phần văn bản TRƯỚC khi dùng lệnh.
+  Hình: (không)
+Câu 4 [HIỂU | choice | đáp án C] — "Vì sao cùng một câu chúc mừng, khi đổi sang phông chữ khác thì văn bản trông khác đi?"
+  Nguồn: SGK tr.30 mục a) + Hình 32 (kết quả định dạng theo nhận xét của An: tiêu đề nổi bật, dễ đọc, dễ ghi nhớ) — hiểu bản chất: phông chữ quyết định hình dáng chữ.
+  Hình: hinh/bai6/hinh32-ket-qua-dinh-dang.png (Hình 32)
+Câu 5 [VẬN DỤNG | reorder | thứ tự đúng: 1→2→3] — "Xếp đúng thứ tự các bước định dạng toàn bộ văn bản 'Kem cầu vồng hoa quả' theo Nhiệm vụ 1."
+  Nguồn: SGK tr.31, Nhiệm vụ 1, Hướng dẫn a) Định dạng toàn bộ văn bản: "Bước 1: Chọn toàn bộ văn bản. Bước 2: Nháy chuột vào lệnh phông chữ để chọn phông Verdana. Bước 3: Nháy chuột vào lệnh cỡ chữ và chọn cỡ chữ 12."
+  Hình: hinh/bai6/hinh34-nhiem-vu-1.png (Hình 34)
+
+================================================================
+NHÀ 2 — KIỂU CHỮ (màu #2f7a5b, góc 65) — B,B,H,H,V
+================================================================
+Câu 6 [BIẾT | choice | đáp án C] — "Trong nhóm lệnh Font ở Hình 31, những kiểu chữ nào được khoanh đỏ?"
+  Nguồn: SGK tr.30, Hình 31 "Các lệnh định dạng kí tự" — nhóm nút B, I, U khoanh đỏ, chú thích "Kiểu chữ (đậm, nghiêng, gạch chân)".
+  Hình: hinh/bai6/hinh31-nhom-font.png (Hình 31)
+Câu 7 [BIẾT | choice | đáp án A] — "Muốn làm cho một từ quan trọng nổi bật hơn trong văn bản, em có thể dùng kiểu chữ nào?"
+  Nguồn: SGK tr.30, Hình 29 (nhận xét của An: các tiêu đề nổi bật thì văn bản dễ đọc hơn) + T1 Hoạt động 5 Củng cố (in đậm).
+  Hình: (không)
+Câu 8 [HIỂU | truefalse | đáp án ĐÚNG] — "Chữ nghiêng và chữ gạch chân đều giúp chữ được nhấn mạnh, dễ chú ý hơn."
+  Nguồn: SGK tr.30, Hình 31 (kiểu chữ đậm, nghiêng, gạch chân) + T1 Mục HSKT: tác dụng làm chữ nổi bật hơn, dễ đọc hơn.
+  Hình: (không)
+Câu 9 [HIỂU | fillblank | đáp án: đậm (phụ: in đậm, bold, chữ đậm)] — "Lệnh B trong nhóm Font dùng để làm chữ ___."
+  Nguồn: SGK tr.30, Hình 31 — nút B trong nhóm Kiểu chữ (đậm, nghiêng, gạch chân).
+  Hình: hinh/bai6/hinh31-nhom-font.png (Hình 31)
+Câu 10 [VẬN DỤNG | choice | đáp án B] — "Soạn thông báo họp lớp, muốn mọi người chú ý đến ngày giờ họp..."
+  Nguồn: T1 Hoạt động 3 Luyện tập (văn bản thông báo) + Hoạt động 5 Củng cố (in đậm, gạch chân để nhấn mạnh) — vận dụng tác dụng của kiểu chữ.
+  Hình: (không)
+
+================================================================
+NHÀ 3 — CỠ VÀ MÀU CHỮ (màu #8a63c9, góc 120) — B,H,H,V,V
+================================================================
+Câu 11 [BIẾT | choice | đáp án B] — "Đổi cỡ chữ trong văn bản là thay đổi điều gì?"
+  Nguồn: SGK tr.29 (mục tiêu: chọn kích thước cho chữ) + tr.30 Hình 31 (lệnh Cỡ chữ) + T1 Mục I.1.
+  Hình: (không)
+Câu 12 [HIỂU | choice | đáp án C] — "Vì sao tiêu đề thường dùng cỡ chữ to hơn nội dung?"
+  Nguồn: SGK tr.30, Hình 29 — nhận xét của An: "Các tiêu đề nổi bật thì văn bản dễ đọc hơn." + Hình 32 (tiêu đề đã định dạng to, đậm, màu xanh).
+  Hình: hinh/bai6/hinh32-ket-qua-dinh-dang.png (Hình 32)
+Câu 13 [HIỂU | truefalse | đáp án SAI] — "Muốn chữ dễ đọc, em nên chọn màu chữ giống hệt màu nền của trang."
+  Nguồn: SGK tr.31 Ghi nhớ (định dạng kí tự giúp văn bản đẹp hơn, dễ đọc) + T1 Mục I.3 Phẩm chất (trình bày văn bản rõ ràng) — hiểu: màu chữ cần tương phản với nền.
+  Hình: (không)
+Câu 14 [VẬN DỤNG | reorder | thứ tự đúng: 1→2→3] — "Xếp đúng thứ tự các bước định dạng tiêu đề 'Kem cầu vồng hoa quả' theo Nhiệm vụ 1."
+  Nguồn: SGK tr.31–32, Nhiệm vụ 1, Hướng dẫn b) Định dạng tiêu đề văn bản: "Bước 1: Chọn dòng tiêu đề. Bước 2: ... chọn phông chữ Tahoma, cỡ chữ 16 và kiểu chữ đậm. Bước 3: Nháy chuột vào lệnh màu chữ và chọn màu xanh Blue (Hình 35)."
+  Hình: hinh/bai6/hinh35-chon-mau.png (Hình 35)
+Câu 15 [VẬN DỤNG | choice | đáp án A] — "Theo Hình 34, tiêu đề 'Kem cầu vồng hoa quả' được định dạng như thế nào?"
+  Nguồn: SGK tr.31, Hình 34 "Yêu cầu định dạng kí tự" — ô yêu cầu tiêu đề: "Phông chữ Tahoma, cỡ chữ 16, màu xanh, kiểu chữ đậm".
+  Hình: hinh/bai6/hinh34-nhiem-vu-1.png (Hình 34)
+
+================================================================
+NHÀ 4 — CHÈN HÌNH ẢNH (màu #d79a2b, góc 175) — B,H,H,V,V
+================================================================
+Câu 16 [BIẾT | choice | đáp án A] — "Sau khi chèn hình ảnh minh họa vào văn bản, em có thể làm gì với hình ảnh đó?"
+  Nguồn: SGK tr.30 — "sau khi chèn hình ảnh minh họa vào văn bản, em có thể di chuyển hình ảnh đến vị trí hợp lí để văn bản được trình bày đẹp hơn."
+  Hình: (không)
+Câu 17 [HIỂU | choice | đáp án B] — "Vì sao nên chèn hình ảnh minh họa vào văn bản 'Kem cầu vồng hoa quả'?"
+  Nguồn: SGK tr.30, Hình 30 — nhận xét của Minh: "Hình ảnh cốc kem minh họa hấp dẫn." + Hình 28 (văn bản có hình cốc kem).
+  Hình: hinh/bai6/hinh28-kem-cau-vong.png (Hình 28)
+Câu 18 [HIỂU | truefalse | đáp án ĐÚNG] — "Hình ảnh chèn vào văn bản cần phù hợp với nội dung thì mới giúp người đọc hiểu rõ hơn."
+  Nguồn: T2 Mục I.3 Phẩm chất: "bố trí hình ảnh hợp lý để văn bản thêm sinh động và dễ hiểu" + SGK tr.30 (hình minh họa cho văn bản kem).
+  Hình: (không)
+Câu 19 [VẬN DỤNG | fillblank | đáp án: vị trí (phụ: cách bố trí, bố trí, vị trí bố trí)] — "Muốn hình ảnh nằm bên phải chữ như góp ý của bạn Minh, em cần thay đổi ___ của hình ảnh."
+  Nguồn: SGK tr.30, Hình 30 — góp ý của Minh: "Ảnh đặt bên phải chữ thì văn bản đẹp hơn." + tr.32, Hình 36 (hình ảnh đã được thay đổi vị trí sang bên phải).
+  Hình: hinh/bai6/hinh36-doi-vi-tri-anh.png (Hình 36)
+Câu 20 [VẬN DỤNG | choice | đáp án C] — "Hình quá to, che mất dòng chữ chúc mừng. Em nên làm gì?"
+  Nguồn: T1 Hoạt động 1, Nhiệm vụ 1: "thay đổi vị trí và kích thước của hình ảnh." + T2 Mục HSKT: "thay đổi kích thước".
+  Hình: (không)
+
+================================================================
+NHÀ 5 — BỐ TRÍ HÌNH ẢNH (màu #2f6fa0, góc 235) — B,B,H,V,V
+================================================================
+Câu 21 [BIẾT | choice | đáp án B] — "Muốn thay đổi cách bố trí hình ảnh, em chọn hình rồi nháy chuột vào lệnh nào?"
+  Nguồn: SGK tr.30 mục b) — "Em chọn hình ảnh và nháy chuột vào lệnh Layout Options xuất hiện ở bên cạnh hình ảnh. Khi đó bảng chọn các cách bố trí hình ảnh sẽ xuất hiện (Hình 33)."
+  Hình: hinh/bai6/hinh33-layout-options.png (Hình 33)
+Câu 22 [BIẾT | choice | đáp án A] — "Trong bảng Layout Options ở Hình 33, cách bố trí nào đặt hình ảnh cùng dòng với chữ?"
+  Nguồn: SGK tr.30, Hình 33 "Thay đổi cách bố trí hình ảnh" — mục "In Line with Text" trong bảng Layout Options.
+  Hình: hinh/bai6/hinh33-layout-options.png (Hình 33)
+Câu 23 [HIỂU | truefalse | đáp án SAI] — "Sau khi chèn hình ảnh vào văn bản thì không thể thay đổi cách bố trí của hình ảnh nữa."
+  Nguồn: SGK tr.31, Ghi nhớ: "Có thể thay đổi cách bố trí hình ảnh trong văn bản để văn bản được trình bày đẹp hơn."
+  Hình: (không)
+Câu 24 [VẬN DỤNG | reorder | thứ tự đúng: 1→2→3] — "Xếp đúng thứ tự các bước thay đổi cách bố trí hình ảnh trong văn bản."
+  Nguồn: SGK tr.30 mục b) — "Em chọn hình ảnh và nháy chuột vào lệnh [Layout Options] xuất hiện ở bên cạnh hình ảnh... Em nháy chuột để chọn một cách bố trí hợp lí cho hình ảnh."
+  Hình: hinh/bai6/hinh33-layout-options.png (Hình 33)
+Câu 25 [VẬN DỤNG | choice | đáp án C] — "Theo góp ý của bạn Minh, hình ảnh cốc kem trong văn bản 'Kem cầu vồng hoa quả' nên đặt ở đâu?"
+  Nguồn: SGK tr.30, Hình 30 — góp ý của Minh: "Ảnh đặt bên phải chữ thì văn bản đẹp hơn." + tr.32, Nhiệm vụ 2 + Hình 36 (di chuyển hình ảnh đến vị trí bên phải chữ).
+  Hình: hinh/bai6/hinh36-doi-vi-tri-anh.png (Hình 36)
+
+================================================================
+NHÀ 6 — HOÀN THIỆN VĂN BẢN (màu #e07a3a, góc 280) — B,B,H,V,V
+================================================================
+Câu 26 [BIẾT | choice | đáp án B] — "Nhiệm vụ 2 trong SGK yêu cầu em làm gì?"
+  Nguồn: SGK tr.32 — "NHIỆM VỤ 2: Thay đổi vị trí của hình ảnh." (Lưu ý: KHBD T2 gọi Nhiệm vụ 2 là "Chỉnh sửa và hoàn thiện văn bản" — bản này bám SGK làm nguồn chính.)
+  Hình: hinh/bai6/hinh36-doi-vi-tri-anh.png (Hình 36)
+Câu 27 [BIẾT | choice | đáp án A] — "Sau khi định dạng xong văn bản, em nháy chuột vào nút lệnh nào để lưu tệp?"
+  Nguồn: SGK tr.32 — "Nháy chuột vào nút lệnh [Save] để lưu tệp." (sau phần c) Định dạng các đầu mục).
+  Hình: (không)
+Câu 28 [HIỂU | truefalse | đáp án ĐÚNG] — "Định dạng kí tự giúp văn bản đẹp hơn, dễ đọc và dễ ghi nhớ."
+  Nguồn: SGK tr.31, Ghi nhớ: "Định dạng kí tự (phông chữ, kiểu chữ, cỡ chữ, màu chữ,...) giúp em trình bày văn bản đẹp hơn, dễ đọc và dễ ghi nhớ."
+  Hình: hinh/bai6/hinh-ghi-nho.png (khung Ghi nhớ, tr.31)
+Câu 29 [VẬN DỤNG | fillblank | đáp án: lưu (phụ: nháy nút Save, Save, lưu lại)] — "Sau khi định dạng và đổi vị trí hình ảnh xong, em cần ___ tệp để không bị mất bài."
+  Nguồn: SGK tr.32 — "Nháy chuột vào nút lệnh [Save] để lưu tệp." + T2 Hoạt động 3 Luyện tập, Nhiệm vụ 2, bước 2: "Lưu văn bản."
+  Hình: (không)
+Câu 30 [VẬN DỤNG | choice | đáp án C] — "Đã làm xong văn bản 'Kem cầu vồng hoa quả'... trước khi nộp bài, kiểm tra lại điều gì?"
+  Nguồn: SGK tr.31–32 (Nhiệm vụ 1 + Nhiệm vụ 2 + lưu tệp) + T2 Hoạt động 4 Vận dụng (trình bày sản phẩm) — tổng hợp các bước hoàn thiện.
+  Hình: (không)
+
+================================================================
+DANH SÁCH HÌNH SGK ĐÃ CẮT (hinh/bai6/) — tất cả < 150KB
+================================================================
+- hinh28-kem-cau-vong.png (525×630, 134.681 byte) — Hình 28, SGK tr.29 — dùng cho Câu 17
+- hinh31-nhom-font.png (535×295, 77.188 byte) — Hình 31, SGK tr.30 — dùng cho Câu 2, 6, 9
+- hinh32-ket-qua-dinh-dang.png (530×285, 62.344 byte) — Hình 32, SGK tr.30 — dùng cho Câu 4, 12
+- hinh33-layout-options.png (490×380, 84.666 byte) — Hình 33, SGK tr.30 — dùng cho Câu 21, 22, 24
+- hinh-ghi-nho.png (965×255, 103.751 byte) — khung Ghi nhớ, SGK tr.31 — dùng cho Câu 28
+- hinh34-nhiem-vu-1.png (1075×465, 95.920 byte) — Hình 34, SGK tr.31 — dùng cho Câu 5, 15
+- hinh35-chon-mau.png (610×350, 92.639 byte) — Hình 35, SGK tr.32 — dùng cho Câu 14
+- hinh36-doi-vi-tri-anh.png (1075×425, 148.152 byte) — Hình 36, SGK tr.32 — dùng cho Câu 19, 25, 26
+
+================================================================
+GHI CHÚ
+================================================================
+- Tất cả câu hỏi bám sát SGK Tin học 5 KNTT Bài 6 (tr.29–32) là chính; KHBD T1/T2 chỉ bổ sung mục tiêu/mức độ (Câu 7, 8, 10, 13, 18, 20, 29, 30).
+- Không dùng tên/ảnh học sinh thật. Nội dung kid-safe.
+- Tên nhà giữ đúng 6 tên bản cũ (Phông chữ, Kiểu chữ, Cỡ và màu chữ, Chèn hình ảnh, Bố trí hình ảnh, Hoàn thiện văn bản); giữ nguyên goc/mau/chiDan; thongTin cập nhật theo SGK.
+- Thay đổi so với bản cũ: Nhiệm vụ 2 theo SGK là "Thay đổi vị trí của hình ảnh" (bản cũ theo KHBD T2 ghi "Chỉnh sửa và hoàn thiện văn bản").
+- File JSON chưa nạp lên Supabase — chờ thầy Phong duyệt.
