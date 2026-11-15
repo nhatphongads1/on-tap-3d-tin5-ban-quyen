@@ -194,6 +194,20 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .certin .btn.go{background:#1e6fd9;color:#fff;border-color:#1e6fd9;font-weight:700}
 #certp{display:none}
 @media print{@page{size:A4 landscape;margin:0}body>*:not(#certp){display:none!important}#certp{display:block!important;position:static}#certp img{width:297mm;height:210mm;display:block}body{background:#fff;overflow:visible}}
+
+.clk{position:fixed;z-index:6;left:max(12px,env(safe-area-inset-left,0px));top:calc(64px + env(safe-area-inset-top,0px));background:#1e6fd9;color:#fff;font:700 15px var(--font);padding:8px 16px;border-radius:999px;box-shadow:0 6px 20px rgba(10,30,30,.3);pointer-events:none}
+.clk[hidden]{display:none}.clk.low{background:#c0392b;animation:clkp 1s infinite}
+@keyframes clkp{50%{opacity:.7}}
+@media (max-width:560px){.clk{top:calc(148px + env(safe-area-inset-top,0px))}}
+.gvf label{display:block;font-size:13px;color:var(--ink-soft);margin:8px 0 3px}
+.gvf input{width:100%;box-sizing:border-box;font:500 16px var(--font);padding:10px 12px;border:2px solid #b9cdea;border-radius:12px}
+.gvbtns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.gvbtns .btn{box-shadow:none;border:1px solid var(--line);font-size:14px;padding:11px 16px}
+.gvbtns .btn.go{background:#1e6fd9;color:#fff;border-color:#1e6fd9;font-weight:700}
+.gvl{list-style:none;margin:6px 0 0;padding:0;max-height:34vh;overflow:auto}
+.gvl li{display:flex;align-items:center;gap:8px;padding:5px 0;border-top:1px solid var(--line);font-size:14px}
+.gvl li i{width:11px;height:11px;border-radius:50%;border:1px solid rgba(0,0,0,.25);flex:none}.gvl li b{flex:1}.gvl li em{font-style:normal;color:var(--ink-soft)}
+.gvs{font:800 26px var(--font);color:#12376b;margin:4px 0}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1e6fd9"/><path d="M0 46Q32 38 64 46V64H0Z" fill="#4a97f2"/><polygon points="44.0,5.5 45.4,9.1 49.2,9.3 46.3,11.7 47.2,15.4 44.0,13.4 40.8,15.4 41.7,11.7 38.8,9.3 42.6,9.1" fill="#ffd54a"/><polygon points="38,28 44,19 50,28" fill="#cfe4ff"/><rect x="38" y="28" width="12" height="20" fill="#fff"/><rect x="42" y="32" width="4" height="5" rx="1" fill="#1e6fd9"/><polygon points="5,33 21,21 37,33" fill="#cfe4ff"/><rect x="8" y="33" width="26" height="15" fill="#fff"/><path d="M14 41l4 4 9-9" fill="none" stroke="#1e6fd9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="48" width="56" height="3.5" rx="1.75" fill="#fff"/></symbol></svg>
@@ -246,6 +260,22 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div class="mm" id="mm"><canvas id="mmc" width="160" height="160" aria-label="Bản đồ nhỏ, phía trên là hướng Bắc"></canvas></div>
 <div class="certbox" id="cert" hidden><div class="certin" role="dialog" aria-modal="true" aria-label="Giấy chứng nhận"><canvas id="certc" aria-label="Giấy chứng nhận hoàn thành bài ôn tập"></canvas><div class="row"><button class="btn go" id="certDl" type="button">Tải ảnh PNG</button><button class="btn" id="certPrint" type="button">In (A4)</button><button class="btn" id="certClose" type="button">Đóng</button></div></div></div>
 <div id="certp" aria-hidden="true"></div>
+<div class="clk" id="clk" hidden role="timer"></div>
+<div class="guide" id="gv" hidden><div class="gcard gvf" style="max-width:520px" role="dialog" aria-modal="true" aria-labelledby="gvTitle">
+  <div class="ghead"><svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg><span id="gvTitle" style="margin:0;color:#1e6fd9;font-size:16px">Phòng của thầy</span></div>
+  <div id="gvCreate"><label for="gvMa">Mã phòng (chữ không dấu, số; ví dụ 5a1)</label><input id="gvMa" maxlength="24" autocomplete="off">
+    <label for="gvBai">Mã bài ôn tập</label><input id="gvBai" maxlength="61" autocomplete="off" list="gvBaiL"><datalist id="gvBaiL"><option value="tin5-ban-quyen"><option value="tin4-bai-5-6"></datalist>
+    <label for="gvPhut">Thời lượng chơi (phút)</label><input id="gvPhut" type="number" min="1" max="240" value="15">
+    <label for="gvPin">Mã thầy (ít nhất 4 ký tự, chỉ thầy biết)</label><input id="gvPin" type="password" autocomplete="new-password">
+    <div class="gvbtns"><button class="btn go" id="gvMake" type="button">Tạo phòng</button></div></div>
+  <div id="gvPinRow" hidden><label for="gvPin2">Nhập mã thầy để điều khiển phòng</label><input id="gvPin2" type="password" autocomplete="current-password"><div class="gvbtns"><button class="btn go" id="gvEnter" type="button">Vào điều khiển</button></div></div>
+  <div id="gvCtl" hidden><div class="gvs" id="gvState"></div><div id="gvInfo" style="font-size:13px;color:var(--ink-soft)"></div>
+    <div class="gvbtns"><button class="btn go" id="gvStart" type="button">Bắt đầu</button><button class="btn" id="gvPlus" type="button">Gia hạn +5 phút</button><button class="btn" id="gvStop" type="button">Dừng</button><button class="btn" id="gvReset" type="button">Đặt lại</button><button class="btn" id="gvQuick" type="button">Tới nhà nhanh: Tắt</button></div>
+    <div style="font-size:12.5px;color:var(--ink-soft)">Link cho học sinh: <b id="gvLink" style="word-break:break-all"></b> <button class="btn" id="gvCopy" type="button" style="padding:6px 10px">Chép</button></div>
+    <div style="margin-top:10px;font-weight:700" id="gvCount"></div><ul class="gvl" id="gvList"></ul>
+    <div class="gvbtns"><button class="btn" id="gvDel" type="button">Xoá phòng</button></div></div>
+  <div id="gvMsg" role="alert" style="min-height:18px;font-size:13px;font-weight:600"></div>
+</div></div>
 <div class="roster" id="roster" aria-live="polite"><h4 id="rTitle">Đang chơi (1)</h4><div class="rs" id="rStat"></div><ul id="rList"></ul></div>
 <div class="guide" id="entry" hidden><div class="gcard" role="dialog" aria-modal="true" aria-labelledby="et">
   <div class="ghead"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>Vào khuôn viên ôn tập</div>
@@ -784,6 +814,7 @@ function refresh(){
   barrier.visible=!allDone();
 }
 function visitHouse(i){
+  {const ph=phase();if(ph==='wait'){toast('Đang chờ thầy bấm Bắt đầu nhé');return}if(ph==='end'){toast('Đã hết giờ làm nhiệm vụ');return}}
   if(i>hDone){toast('Hoàn thành nhà trước để mở');return}
   if(i<hDone){toast('Nhà này em đã hoàn thành rồi');return}
   if(!QUICK){const d=houseObjs[i].door;if(Math.hypot(player.position.x-d.x,player.position.z-d.z)>9){toast('Nhà này còn xa. Em đi theo mũi tên chỉ hướng để tìm nhé');return}}
@@ -1026,6 +1057,7 @@ function buildSwatches(){
     b.onclick=()=>{myColor=c;[...sw.children].forEach(x=>x.setAttribute('aria-checked',x===b))};sw.appendChild(b)});
 }
 function openEntry(){
+  if(GV){openGV();return}
   const sv=lsGet('ontap3d_ten'),sc=lsGet('ontap3d_mau');
   if(sv&&cleanName(sv)&&!nameBad(sv))$('eName').value=cleanName(sv);
   myColor=SHIRTS.indexOf(sc)>=0?sc:SHIRTS[Math.floor(Math.random()*SHIRTS.length)];
@@ -1079,7 +1111,7 @@ function mpStart(){
   t.onload=()=>{try{mpConnect()}catch(e){mpFail()}};t.onerror=mpFail;document.head.appendChild(t);
   setTimeout(()=>{if(!MP.ok&&!MP.failed)mpFail()},10000);
 }
-function meta(){return{n:myName,c:myColor,d:hDone}}
+function meta(){return GV?{n:'Thầy',c:SHIRTS[0],d:0,r:'gv'}:{n:myName,c:myColor,d:hDone}}
 function mpConnect(){
   const C=window.SUPABASE_CFG;
   MP.sb=window.supabase.createClient(C.url,C.key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},realtime:{params:{eventsPerSecond:5}}});
@@ -1099,7 +1131,7 @@ function mpConnect(){
 function syncPresence(){
   if(!MP.ch)return;let st={};try{st=MP.ch.presenceState()||{}}catch(e){return}
   Object.keys(st).forEach(k=>{
-    if(k===myId||(MP.peers.size>=120&&!MP.peers.has(k)))return;const m=(st[k]&&st[k][0])||{};
+    if(k===myId||(MP.peers.size>=120&&!MP.peers.has(k)))return;const m=(st[k]&&st[k][0])||{};if(m.r==='gv'){if(MP.peers.has(k))dropPeer(k);return}
     let p=MP.peers.get(k);if(!p){p={id:k,x:0,z:0,r:0,tx:0,tz:0,tr:0,has:false,mv:0,av:null,lbl:null,ph:Math.random()*6,seen:performance.now(),stale:false};MP.peers.set(k,p)}
     p.name=safeName(m.n);p.color=SHIRTS.indexOf(m.c)>=0?m.c:SHIRTS[0];p.done=Math.max(0,Math.min(HOUSES.length,parseInt(m.d,10)||0));
     if(p.lbl){p.lbl.el.firstChild.textContent=p.name;p.lbl.el.firstChild.style.setProperty('--c',p.color)}
@@ -1201,7 +1233,7 @@ function navTarget(){
   if(hDone<6){const h=houseObjs[hDone];return{x:h.door.x,z:h.door.z,name:(hDone+1)+' · '+h.name}}
   return{x:A.x,z:A.z,name:'Đỉnh Tháp'};
 }
-$('bQuick').hidden=!GV;
+$('bQuick').hidden=true;
 function syncQuickUI(){$('bQuick').textContent='Tới nhà nhanh: '+(QUICK?'Bật':'Tắt');$('bQuick').classList.toggle('on',QUICK);$('bQuick').setAttribute('aria-pressed',QUICK)}
 $('bQuick').onclick=()=>{QUICK=!QUICK;syncQuickUI();refresh();toast(QUICK?'Đã bật nút tới nhà nhanh':'Đã tắt: các em tự đi tìm nhà')};
 syncQuickUI();
@@ -1334,6 +1366,95 @@ $('certDl').onclick=()=>{
 $('certPrint').onclick=()=>{
   try{$('certp').innerHTML='';const im=new Image();im.src=$('certc').toDataURL('image/png');im.onload=()=>{$('certp').appendChild(im);setTimeout(()=>window.print(),150)}}catch(e){toast('Máy này chưa in được.')}
 };
+
+/* ============ PHÒNG CỦA THẦY: mã thầy (PIN), giờ chơi đồng bộ theo giờ máy chủ ============
+   Bảng phong chỉ có cấu hình (mã, bài, thời lượng, giờ bắt đầu, băm PIN). Không có dữ liệu học sinh. */
+const RM={on:false,loaded:false,st:null,off:0,ended:false,pin:'',ok:false,clkT:0};
+function rpc(fn,body){return fetch(window.SUPABASE_CFG.url+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:window.SUPABASE_CFG.key,Authorization:'Bearer '+window.SUPABASE_CFG.key,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json())}
+function srvNow(){return Date.now()+RM.off}
+function roomEnd(){const s=RM.st;return s.batDau+(s.phut+s.giaHan)*60000}
+function phase(){if(!RM.on)return 'free';const s=RM.st;if(!s.batDau)return 'wait';if(s.dung||srvNow()>=roomEnd())return 'end';return 'run'}
+function roomApply(d){
+  RM.loaded=true;
+  if(!d||!d.ma||d.loi){RM.on=false;RM.st=null;return}
+  RM.on=true;RM.st=d;RM.off=d.now-Date.now();
+  if(!GV){QUICK=!!d.nhanh;syncQuickUI()}
+  if($('eRoom')&&!$('entry').hidden){const p=phase();$('eRoom').textContent='Phòng '+d.ma.toUpperCase()+': '+(p==='wait'?'chờ thầy bấm Bắt đầu':p==='run'?'đang trong giờ chơi':'đã hết giờ')}
+}
+function roomPoll(){if(!window.SUPABASE_CFG)return;rpc('lay_phong',{p_ma:ROOM}).then(roomApply).catch(()=>{})}
+roomPoll();setInterval(roomPoll,4000);
+const fmt=ms=>{const t=Math.max(0,Math.ceil(ms/1000)),m=Math.floor(t/60),s=t%60;return m+':'+(s<10?'0':'')+s};
+function clockTick(){
+  const ph=phase(),el=$('clk');
+  if(ph==='free'||(GV&&false)){el.hidden=true;RM.ended=false;return}
+  el.hidden=GV;
+  let txt='';
+  if(ph==='wait')txt='Chờ thầy bấm Bắt đầu…';
+  else if(ph==='run'){const left=roomEnd()-srvNow();txt='Còn '+fmt(left);el.classList.toggle('low',left<60000)}
+  else txt='Hết giờ';
+  if(el.textContent!==txt)el.textContent=txt;
+  if(ph==='end'&&!RM.ended&&entered){
+    RM.ended=true;if(!$('quiz').hidden)closeQuiz();
+    if(!honorShown){$('hs').textContent=allDone()?'Em đã hoàn thành cả '+HOUSES.length+' nhà ôn tập '+window.CAU_HINH.phuDe+'.':'Hết giờ. Em hoàn thành '+hDone+'/'+HOUSES.length+' nhà.';showHonor()}
+    else toast('Đã hết giờ làm nhiệm vụ');
+  }
+  if(ph!=='end')RM.ended=false;
+  if(GV)gvRender();
+}
+setInterval(clockTick,500);
+
+/* ---- màn hình thầy: ?gv=1 ---- */
+function ssGet(k){try{return sessionStorage.getItem(k)}catch(e){return null}}
+function ssSet(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}
+function gvMsg(t,bad){const m=$('gvMsg');m.textContent=t||'';m.style.color=bad?'#c0392b':'#1e5fb8'}
+function gvCall(hanh,val){
+  return rpc('dieu_khien_phong',{p_ma:ROOM,p_pin:RM.pin,p_hanh:hanh,p_gia_tri:val==null?null:val}).then(d=>{
+    if(d&&d.loi){gvMsg(d.loi,true);if(hanh==='kiem_tra'){RM.ok=false;ssSet('ot3d_pin_'+ROOM,'')}return null}
+    RM.ok=true;roomApply(d);gvRender();return d;
+  }).catch(()=>{gvMsg('Chưa kết nối được. Kiểm tra mạng rồi thử lại.',true)});
+}
+function gvLink(){return location.origin+location.pathname+'?bai='+MPSLUG+'&phong='+ROOM}
+function openGV(){
+  $('gv').hidden=false;
+  const hasRoom=/[?&]phong=/.test(location.search);
+  $('gvMa').value=hasRoom?ROOM:'';$('gvBai').value=MPSLUG;
+  $('gvCreate').hidden=hasRoom;$('gvCtl').hidden=true;
+  if(hasRoom){
+    $('gvTitle').textContent='Phòng '+ROOM.toUpperCase();
+    const p=ssGet('ot3d_pin_'+ROOM);if(p){RM.pin=p;gvCall('kiem_tra').then(d=>{if(d)gvOpenCtl()})}else $('gvPinRow').hidden=false;
+    myName='Thầy';mpStart();
+  }
+}
+function gvOpenCtl(){$('gvPinRow').hidden=true;$('gvCtl').hidden=false;gvMsg('');gvRender()}
+$('gvEnter').onclick=()=>{RM.pin=$('gvPin2').value;gvCall('kiem_tra').then(d=>{if(d){ssSet('ot3d_pin_'+ROOM,RM.pin);gvOpenCtl()}})};
+$('gvMake').onclick=()=>{
+  const ma=$('gvMa').value.trim().toLowerCase(),pin=$('gvPin').value,bai=$('gvBai').value.trim().toLowerCase(),ph=parseInt($('gvPhut').value,10)||15;
+  if(!/^[a-z0-9_-]{1,24}$/.test(ma)){gvMsg('Mã phòng chỉ gồm chữ không dấu, số, - và _ (tối đa 24).',true);return}
+  if(pin.length<4){gvMsg('Mã thầy cần ít nhất 4 ký tự.',true);return}
+  if(!/^[a-z0-9-]{2,61}$/.test(bai)){gvMsg('Mã bài không hợp lệ.',true);return}
+  rpc('tao_phong',{p_ma:ma,p_pin:pin,p_bai:bai,p_phut:Math.min(240,Math.max(1,ph))}).then(d=>{
+    if(d&&d.ma){ssSet('ot3d_pin_'+ma,pin);location.search='?gv=1&bai='+encodeURIComponent(bai)+'&phong='+encodeURIComponent(ma)}
+    else gvMsg((d&&(d.message||d.loi))||'Chưa tạo được phòng.',true);
+  }).catch(()=>gvMsg('Chưa kết nối được.',true));
+};
+$('gvStart').onclick=()=>gvCall('bat_dau');
+$('gvPlus').onclick=()=>gvCall('gia_han',5);
+$('gvStop').onclick=()=>gvCall('dung');
+$('gvReset').onclick=()=>gvCall('dat_lai');
+$('gvQuick').onclick=()=>gvCall(RM.st&&RM.st.nhanh?'nhanh_tat':'nhanh_bat');
+$('gvDel').onclick=()=>{if(confirm('Xoá phòng này?'))gvCall('xoa').then(()=>{ssSet('ot3d_pin_'+ROOM,'');location.search='?gv=1'})};
+$('gvCopy').onclick=()=>{try{navigator.clipboard.writeText(gvLink());gvMsg('Đã chép link cho học sinh.')}catch(e){gvMsg(gvLink())}};
+function gvRender(){
+  if($('gv').hidden||$('gvCtl').hidden||!RM.st)return;
+  const s=RM.st,ph=phase();
+  $('gvState').textContent=ph==='wait'?'Chưa bắt đầu':ph==='run'?'Đang chơi · còn '+fmt(roomEnd()-srvNow()):'Đã hết giờ';
+  $('gvInfo').textContent='Bài: '+s.bai+' · Thời lượng: '+(s.phut+s.giaHan)+' phút';
+  $('gvQuick').textContent='Tới nhà nhanh: '+(s.nhanh?'Bật':'Tắt');$('gvLink').textContent=gvLink();
+  const list=[...MP.peers.values()].filter(p=>!p.stale).sort((a,b)=>b.done-a.done);
+  $('gvCount').textContent='Đang trong phòng: '+list.length+' em';
+  const ul=$('gvList');ul.textContent='';
+  list.forEach(p=>{const li=document.createElement('li');const i=document.createElement('i');i.style.background=p.color;const b=document.createElement('b');b.textContent=p.name;const e=document.createElement('em');e.textContent=p.done+'/'+HOUSES.length+' chốt';li.appendChild(i);li.appendChild(b);li.appendChild(e);ul.appendChild(li)});
+}
 
 /* ---------- vòng lặp ---------- */
 const skyK=[new THREE.Color('#b9e0f0'),new THREE.Color('#f2b48a'),new THREE.Color('#0d1530')];
