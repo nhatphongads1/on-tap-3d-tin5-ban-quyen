@@ -286,6 +286,10 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   <div id="gvPinRow" hidden><label for="gvPin2">Nhập mã thầy để điều khiển phòng</label><input id="gvPin2" type="password" autocomplete="current-password"><div class="gvbtns"><button class="btn go" id="gvEnter" type="button">Vào điều khiển</button></div></div>
   <div id="gvCtl" hidden><div class="gvs" id="gvState"></div><div id="gvInfo" style="font-size:13px;color:var(--ink-soft)"></div>
     <div class="gvbtns"><button class="btn go" id="gvStart" type="button">Bắt đầu</button><button class="btn" id="gvPlus" type="button">Gia hạn +5 phút</button><button class="btn" id="gvStop" type="button">Dừng</button><button class="btn" id="gvReset" type="button">Đặt lại</button><button class="btn" id="gvQuick" type="button">Tới nhà nhanh: Tắt</button></div>
+    <div class="gvf" style="border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0"><b style="font-size:13px">Chặng 3 Thí luyện</b>
+      <label style="display:flex;gap:8px;align-items:center"><input id="gvTlMo" type="checkbox" style="width:auto"> Mở thí luyện cho mọi em (kể cả chưa xong ôn tập)</label>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px"><div><label>Số câu</label><input id="gvTlCau" type="number" min="3" max="30"></div><div><label>Phút</label><input id="gvTlPhut" type="number" min="3" max="120"></div><div><label>Đạt từ %</label><input id="gvTlDat" type="number" min="30" max="100"></div><div><label>Số lượt</label><input id="gvTlLan" type="number" min="1" max="10"></div></div>
+      <div class="gvbtns"><button class="btn go" id="gvTlSave" type="button">Lưu cấu hình thí luyện</button></div></div>
     <div style="font-size:12.5px;color:var(--ink-soft)">Link cho học sinh: <b id="gvLink" style="word-break:break-all"></b> <button class="btn" id="gvCopy" type="button" style="padding:6px 10px">Chép</button></div>
     <div style="margin-top:10px;font-weight:700" id="gvCount"></div><ul class="gvl" id="gvList"></ul>
     <div class="gvbtns"><button class="btn" id="gvDel" type="button">Xoá phòng</button></div></div>
@@ -1405,6 +1409,7 @@ function roomApply(d){
   RM.loaded=true;
   if(!d||!d.ma||d.loi){RM.on=false;RM.st=null;RM.ghi=null;privText();return}
   RM.on=true;RM.st=d;RM.off=d.now-Date.now();RM.ghi=(d.ghi&&d.ghi.url&&d.ghi.khoa)?d.ghi:null;privText();
+  if(d.tl){TL.open=!!d.tl.mo;TL.min=+d.tl.phut||TL.min;TL.dat=+d.tl.dat||TL.dat;TL.max=+d.tl.lan||TL.max;TL.n=+d.tl.cau||TL.n;if(window.__stgReady)stageBar()}
   if(!GV){QUICK=!!d.nhanh;syncQuickUI()}
   if($('eRoom')&&!$('entry').hidden){const p=phase();$('eRoom').textContent='Phòng '+d.ma.toUpperCase()+': '+(p==='wait'?'chờ thầy bấm Bắt đầu':p==='run'?'đang trong giờ chơi':'đã hết giờ')}
 }
@@ -1452,7 +1457,7 @@ function openGV(){
     myName='Thầy';mpStart();
   }
 }
-function gvOpenCtl(){$('gvPinRow').hidden=true;$('gvCtl').hidden=false;gvMsg('');gvRender()}
+function gvOpenCtl(){$('gvPinRow').hidden=true;$('gvCtl').hidden=false;gvMsg('');gvTlFill(true);gvRender()}
 $('gvEnter').onclick=()=>{RM.pin=$('gvPin2').value;gvCall('kiem_tra').then(d=>{if(d){ssSet('ot3d_pin_'+ROOM,RM.pin);gvOpenCtl()}})};
 $('gvMake').onclick=()=>{
   const ma=$('gvMa').value.trim().toLowerCase(),pin=$('gvPin').value,bai=$('gvBai').value.trim().toLowerCase(),ph=parseInt($('gvPhut').value,10)||15;
@@ -1468,6 +1473,8 @@ $('gvStart').onclick=()=>gvCall('bat_dau');
 $('gvPlus').onclick=()=>gvCall('gia_han',5);
 $('gvStop').onclick=()=>gvCall('dung');
 $('gvReset').onclick=()=>gvCall('dat_lai');
+function gvTlFill(force){const t=RM.st&&RM.st.tl;if(!t)return;[['gvTlCau',t.cau],['gvTlPhut',t.phut],['gvTlDat',t.dat],['gvTlLan',t.lan]].forEach(a=>{const e=$(a[0]);if(force||document.activeElement!==e)e.value=a[1]});if(force||document.activeElement!==$('gvTlMo'))$('gvTlMo').checked=!!t.mo}
+$('gvTlSave').onclick=()=>rpc('cau_hinh_thi',{p_ma:ROOM,p_pin:RM.pin,p_mo:$('gvTlMo').checked,p_phut:+$('gvTlPhut').value||15,p_dat:+$('gvTlDat').value||80,p_lan:+$('gvTlLan').value||3,p_cau:+$('gvTlCau').value||10}).then(d=>{if(d&&d.loi)gvMsg(d.loi,true);else{roomApply(d);gvTlFill(true);gvMsg('Đã lưu cấu hình thí luyện.')}}).catch(()=>gvMsg('Chưa kết nối được.',true));
 $('gvQuick').onclick=()=>gvCall(RM.st&&RM.st.nhanh?'nhanh_tat':'nhanh_bat');
 $('gvDel').onclick=()=>{if(confirm('Xoá phòng này?'))gvCall('xoa').then(()=>{ssSet('ot3d_pin_'+ROOM,'');location.search='?gv=1'})};
 $('gvCopy').onclick=()=>{try{navigator.clipboard.writeText(gvLink());gvMsg('Đã chép link cho học sinh.')}catch(e){gvMsg(gvLink())}};
