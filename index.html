@@ -216,6 +216,12 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .opt.sel{background:#dcecff;border-color:#1e6fd9}
 .tresb p{margin:6px 0;font-size:14px;line-height:1.5}
 @media (max-width:560px){.stg{top:calc(150px + env(safe-area-inset-top,0px))}}
+
+.selb{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:8px 0}
+.selb button{font:600 15px var(--font);padding:14px 10px;border:2px solid #b9cdea;border-radius:14px;background:#f2f7ff;color:#12376b;cursor:pointer;text-align:center}
+.selb button:hover:not(:disabled){background:#dcecff;border-color:#1e6fd9}.selb button:disabled{opacity:.5;cursor:default}
+.selb.list{grid-template-columns:1fr}.selb.list button{text-align:left;font-size:14.5px}
+.selb h4{grid-column:1/-1;margin:8px 0 0;font-size:12.5px;color:#52615f;text-transform:uppercase;letter-spacing:.03em}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1e6fd9"/><path d="M0 46Q32 38 64 46V64H0Z" fill="#4a97f2"/><polygon points="44.0,5.5 45.4,9.1 49.2,9.3 46.3,11.7 47.2,15.4 44.0,13.4 40.8,15.4 41.7,11.7 38.8,9.3 42.6,9.1" fill="#ffd54a"/><polygon points="38,28 44,19 50,28" fill="#cfe4ff"/><rect x="38" y="28" width="12" height="20" fill="#fff"/><rect x="42" y="32" width="4" height="5" rx="1" fill="#1e6fd9"/><polygon points="5,33 21,21 37,33" fill="#cfe4ff"/><rect x="8" y="33" width="26" height="15" fill="#fff"/><path d="M14 41l4 4 9-9" fill="none" stroke="#1e6fd9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="48" width="56" height="3.5" rx="1.75" fill="#fff"/></symbol></svg>
@@ -270,10 +276,11 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div class="certbox" id="cert" hidden><div class="certin" role="dialog" aria-modal="true" aria-label="Giấy chứng nhận"><canvas id="certc" aria-label="Giấy chứng nhận hoàn thành bài ôn tập"></canvas><div class="row"><button class="btn go" id="certDl" type="button">Tải ảnh PNG</button><button class="btn" id="certPrint" type="button">In (A4)</button><button class="btn" id="certClose" type="button">Đóng</button></div></div></div>
 <div id="certp" aria-hidden="true"></div>
 <div class="clk" id="clk" hidden role="timer"></div>
+<div class="guide" id="sel" hidden><div class="gcard" style="max-width:560px" role="dialog" aria-modal="true" aria-labelledby="selT"><div class="ghead"><svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg>Chọn bài ôn tập</div><h3 id="selT" style="margin-top:0"></h3><div id="selB" class="selb"></div><div class="grow"><button class="btn" id="selBack" type="button" hidden>Quay lại</button></div></div></div>
 <div class="stg" id="stg" role="group" aria-label="Ba chặng"><button id="stg1" type="button">1 Trải nghiệm</button><button id="stg2" type="button">2 Ôn tập</button><button id="stg3" type="button">3 Thí luyện</button><button id="stgSkip" class="skip" type="button">Bỏ qua, vào ôn tập</button></div>
 <div class="quiz" id="info" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="inT"><small id="inSm"></small><h2 id="inT"></h2><div class="linfo" id="inB" style="white-space:pre-wrap;font-size:14.5px;line-height:1.55;margin-bottom:8px"></div><div id="inV"></div>
   <div class="row"><span style="font-size:12px;color:var(--ink-soft)" id="inS"></span><span><button class="btn go" id="inOk" type="button" style="background:#1e6fd9;color:#fff">Đã đọc, nhận huy hiệu</button> <button class="btn" id="inX" type="button">Đóng</button></span></div></div></div>
-<div class="quiz" id="test" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="tqQ"><div><small id="tqH">Thí luyện</small><span class="lv" id="tqLv"></span></div><div class="dots" id="tqD"></div><h2 id="tqQ"></h2><div id="tqO"></div>
+<div class="quiz" id="test" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="tqQ"><div><small id="tqH">Thí luyện</small><span class="lv" id="tqLv"></span></div><div class="dots" id="tqD"></div><h2 id="tqQ"></h2><div id="tqO"></div><div class="fb" id="tqF" aria-live="polite"></div>
   <div class="row"><span style="font-size:12px;color:var(--ink-soft)" id="tqS"></span><span><button class="btn" id="tqPrev" type="button">Câu trước</button> <button class="btn" id="tqNext" type="button">Câu tiếp</button> <button class="btn" id="tqSubmit" type="button" hidden style="background:#1e6fd9;color:#fff">Nộp bài</button></span></div></div></div>
 <div class="quiz" id="tres" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="tresT"><h2 id="tresT"></h2><div class="tresb" id="tresB"></div><div class="row" id="tresR" style="justify-content:flex-end;flex-wrap:wrap;margin-top:8px"></div></div></div>
 <div class="guide" id="gv" hidden><div class="gcard gvf" style="max-width:520px" role="dialog" aria-modal="true" aria-labelledby="gvTitle">
@@ -288,7 +295,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
     <div class="gvbtns"><button class="btn go" id="gvStart" type="button">Bắt đầu</button><button class="btn" id="gvPlus" type="button">Gia hạn +5 phút</button><button class="btn" id="gvStop" type="button">Dừng</button><button class="btn" id="gvReset" type="button">Đặt lại</button><button class="btn" id="gvQuick" type="button">Tới nhà nhanh: Tắt</button></div>
     <div class="gvf" style="border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0"><b style="font-size:13px">Chặng 3 Thí luyện</b>
       <label style="display:flex;gap:8px;align-items:center"><input id="gvTlMo" type="checkbox" style="width:auto"> Mở thí luyện cho mọi em (kể cả chưa xong ôn tập)</label>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px"><div><label>Số câu</label><input id="gvTlCau" type="number" min="3" max="30"></div><div><label>Phút</label><input id="gvTlPhut" type="number" min="3" max="120"></div><div><label>Đạt từ %</label><input id="gvTlDat" type="number" min="30" max="100"></div><div><label>Số lượt</label><input id="gvTlLan" type="number" min="1" max="10"></div></div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px"><div><label>Số câu</label><input id="gvTlCau" type="number" min="3" max="30"></div><div><label>Phút</label><input id="gvTlPhut" type="number" min="3" max="120"></div><div><label>Đạt từ %</label><input id="gvTlDat" type="number" min="30" max="100"></div><div><label>Số lượt</label><input id="gvTlLan" type="number" min="1" max="99"></div><div><label>Sai tối đa</label><input id="gvTlSai" type="number" min="1" max="30"></div></div>
       <div class="gvbtns"><button class="btn go" id="gvTlSave" type="button">Lưu cấu hình thí luyện</button></div></div>
     <div style="font-size:12.5px;color:var(--ink-soft)">Link cho học sinh: <b id="gvLink" style="word-break:break-all"></b> <button class="btn" id="gvCopy" type="button" style="padding:6px 10px">Chép</button></div>
     <div style="margin-top:10px;font-weight:700" id="gvCount"></div><ul class="gvl" id="gvList"></ul>
@@ -333,6 +340,27 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   function start(){
     if(started||!threeOk||!dataOk)return;started=true;
     var s=document.createElement('script');s.text=document.getElementById('game-src').textContent;document.body.appendChild(s);
+  }
+  if(!/[?&]bai=/.test(location.search)&&!/[?&]gv=1(&|$)/.test(location.search)){showSelect();return}
+  function showSelect(){
+    var L=document.getElementById('load');if(L)L.style.display='none';
+    var box=document.getElementById('sel'),T=document.getElementById('selT'),B=document.getElementById('selB'),K=document.getElementById('selBack');box.hidden=false;
+    var data=[{khoi:4,mon:'Tin học',ma:'5',ten:'Thao tác với tệp và thư mục',slug:'tin4-bai-5-6',coDe:true},{khoi:4,mon:'Tin học',ma:'6',ten:'Sử dụng phần mềm khi được phép',slug:'tin4-bai-5-6',coDe:true},{khoi:5,mon:'Tin học',ma:'5',ten:'Bản quyền nội dung thông tin',slug:'tin5-ban-quyen',coDe:true}],st={khoi:0,mon:''};
+    function btn(txt,fn,dis){var b=document.createElement('button');b.type='button';b.textContent=txt;if(dis)b.disabled=true;else b.onclick=fn;B.appendChild(b);return b}
+    function go(sl){var ph=location.search.match(/[?&]phong=[^&]*/);location.search='?bai='+sl+(ph?'&'+ph[0].slice(1):'')}
+    function render(){
+      B.textContent='';B.className='selb';K.hidden=!st.khoi;
+      if(!st.khoi){T.textContent='Em học lớp mấy?';[1,2,3,4,5].forEach(function(k){var has=data.some(function(x){return x.khoi===k&&x.coDe});btn('Lớp '+k+(has?'':' (sắp có)'),function(){st.khoi=k;render()},!data.some(function(x){return x.khoi===k}))});return}
+      if(!st.mon){T.textContent='Lớp '+st.khoi+': em chọn môn';var ms={};data.forEach(function(x){if(x.khoi===st.khoi)ms[x.mon]=1});Object.keys(ms).forEach(function(m){btn(m,function(){st.mon=m;render()})});btn('Công nghệ (sắp có)',null,true);return}
+      T.textContent=st.mon+' '+st.khoi+': em chọn bài';B.className='selb list';var cd='';
+      data.filter(function(x){return x.khoi===st.khoi&&x.mon===st.mon}).forEach(function(x){
+        if(x.chuDe&&x.chuDe!==cd){cd=x.chuDe;var h=document.createElement('h4');h.textContent='Chủ đề: '+cd;B.appendChild(h)}
+        btn('Bài '+x.ma+'. '+x.ten+(x.coDe?'':'  — Sắp có'),function(){go(x.slug)},!x.coDe)});
+    }
+    K.onclick=function(){if(st.mon)st.mon='';else st.khoi=0;render()};
+    render();
+    var C=window.SUPABASE_CFG;
+    if(C&&window.fetch)fetch(C.url+'/rest/v1/rpc/danh_muc',{method:'POST',headers:{'apikey':C.key,'Authorization':'Bearer '+C.key,'Content-Type':'application/json'},body:'{}'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.length){data=d;render()}}).catch(function(){});
   }
   var t=document.createElement('script');t.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
   t.onload=t.onerror=function(){threeOk=true;start()};document.head.appendChild(t);
@@ -1336,7 +1364,7 @@ window.__dbg={tp:(x,z)=>teleport(x,z,0),houses:()=>HP.map(h=>[+h.x.toFixed(1),+h
 const CERT_SIGN=(function(){const m=location.search.match(/[?&]ky=([^&]{1,60})/);let t='';try{t=m?decodeURIComponent(m[1].replace(/\+/g,' ')):''}catch(e){}t=cleanName(t).slice(0,40);return t||window.CAU_HINH.chuKy||'Thầy Phong – Giáo viên Tin học'})();
 const CERT_W=1754,CERT_H=1240;
 function badgeOf(){const pct=total/allMax();return pct>=.9?['Xuất sắc','#d79a2b']:pct>=.75?['Giỏi','#2f9a5d']:pct>=.5?['Khá','#2f78c4']:['Cố gắng','#7a6a8f']}
-function certReason(){return TEST.passed?'':'Em cần vượt qua bài thí luyện (đạt từ '+TL.dat+'%) để nhận giấy chứng nhận.'}
+function certReason(){return TEST.passed?'':'Em cần hoàn thành bài thí luyện (trả lời đúng hết, sai tối đa '+TL.sai+' lần) để nhận giấy chứng nhận.'}
 function wrapText(g,text,x,y,maxW,lh){
   const words=text.split(' ');let line='',yy=y;
   words.forEach(w=>{const t=line?line+' '+w:w;if(g.measureText(t).width>maxW&&line){g.fillText(line,x,yy);line=w;yy+=lh}else line=t});
@@ -1358,11 +1386,11 @@ function drawCert(cv,kind){
   g.fillStyle=B;let fs=130;g.font='800 '+fs+'px '+F;while(g.measureText(myName).width>1300&&fs>60){fs-=6;g.font='800 '+fs+'px '+F}
   g.fillText(myName,CERT_W/2,570);
   g.strokeStyle='#cfdcee';g.lineWidth=3;g.beginPath();g.moveTo(CERT_W/2-520,602);g.lineTo(CERT_W/2+520,602);g.stroke();
-  g.fillStyle='#1c2a29';g.font='500 42px '+F;g.fillText(kind==='khen'?'đã hoàn thành bài ôn tập':'đã vượt qua bài thí luyện',CERT_W/2,676);
+  g.fillStyle='#1c2a29';g.font='500 42px '+F;g.fillText(kind==='khen'?'đã hoàn thành bài ôn tập':'đã hoàn thành bài thí luyện',CERT_W/2,676);
   g.fillStyle=D;g.font='700 52px '+F;const endY=wrapText(g,window.CAU_HINH.tenTroChoi+' – '+window.CAU_HINH.phuDe,CERT_W/2,750,1250,64);
-  const bd=kind==='khen'?badgeOf():badgeOfPct(TEST.pct);
+  const bd=kind==='khen'?badgeOf():badgeOfPct(100-5*TEST.wrong);
   g.fillStyle='#1c2a29';g.font='500 42px '+F;g.fillText('với kết quả',CERT_W/2,endY+64);
-  g.fillStyle=B;g.font='800 84px '+F;g.fillText(kind==='khen'?total+' / '+allMax()+' điểm':TEST.correct+' / '+TEST.n+' câu đúng ('+TEST.pct+'%)',CERT_W/2,endY+146);
+  g.fillStyle=B;g.font='800 84px '+F;g.fillText(kind==='khen'?total+' / '+allMax()+' điểm':'Hoàn thành '+TEST.pct+'% · sai '+TEST.wrong+' lần',CERT_W/2,endY+146);
   g.fillStyle=bd[1];const bw=360,bh=64,bx=CERT_W/2-bw/2,by=endY+172;
   g.beginPath();g.roundRect?g.roundRect(bx,by,bw,bh,32):g.rect(bx,by,bw,bh);g.fill();
   g.fillStyle='#fff';g.font='700 36px '+F;g.fillText('Huy hiệu '+bd[0],CERT_W/2,by+45);
@@ -1409,7 +1437,7 @@ function roomApply(d){
   RM.loaded=true;
   if(!d||!d.ma||d.loi){RM.on=false;RM.st=null;RM.ghi=null;privText();return}
   RM.on=true;RM.st=d;RM.off=d.now-Date.now();RM.ghi=(d.ghi&&d.ghi.url&&d.ghi.khoa)?d.ghi:null;privText();
-  if(d.tl){TL.open=!!d.tl.mo;TL.min=+d.tl.phut||TL.min;TL.dat=+d.tl.dat||TL.dat;TL.max=+d.tl.lan||TL.max;TL.n=+d.tl.cau||TL.n;if(window.__stgReady)stageBar()}
+  if(d.tl){TL.open=!!d.tl.mo;TL.min=+d.tl.phut||TL.min;TL.dat=+d.tl.dat||TL.dat;TL.max=+d.tl.lan||TL.max;TL.sai=+d.tl.sai||TL.sai;TL.n=+d.tl.cau||TL.n;if(window.__stgReady)stageBar()}
   if(!GV){QUICK=!!d.nhanh;syncQuickUI()}
   if($('eRoom')&&!$('entry').hidden){const p=phase();$('eRoom').textContent='Phòng '+d.ma.toUpperCase()+': '+(p==='wait'?'chờ thầy bấm Bắt đầu':p==='run'?'đang trong giờ chơi':'đã hết giờ')}
 }
@@ -1448,6 +1476,7 @@ function gvCall(hanh,val){
 function gvLink(){return location.origin+location.pathname+'?bai='+MPSLUG+'&phong='+ROOM}
 function openGV(){
   $('gv').hidden=false;
+  rpc('danh_muc',{}).then(d=>{const dl=$('gvBaiL');if(Array.isArray(d)&&dl){dl.textContent='';const seen={};d.forEach(x=>{if(x.slug&&!seen[x.slug]){seen[x.slug]=1;const o=document.createElement('option');o.value=x.slug;o.label='Tin học '+x.khoi+' · Bài '+x.ma+' · '+x.ten;dl.appendChild(o)}})}}).catch(()=>{});
   const hasRoom=/[?&]phong=/.test(location.search);
   $('gvMa').value=hasRoom?ROOM:'';$('gvBai').value=MPSLUG;
   $('gvCreate').hidden=hasRoom;$('gvCtl').hidden=true;
@@ -1473,8 +1502,8 @@ $('gvStart').onclick=()=>gvCall('bat_dau');
 $('gvPlus').onclick=()=>gvCall('gia_han',5);
 $('gvStop').onclick=()=>gvCall('dung');
 $('gvReset').onclick=()=>gvCall('dat_lai');
-function gvTlFill(force){const t=RM.st&&RM.st.tl;if(!t)return;[['gvTlCau',t.cau],['gvTlPhut',t.phut],['gvTlDat',t.dat],['gvTlLan',t.lan]].forEach(a=>{const e=$(a[0]);if(force||document.activeElement!==e)e.value=a[1]});if(force||document.activeElement!==$('gvTlMo'))$('gvTlMo').checked=!!t.mo}
-$('gvTlSave').onclick=()=>rpc('cau_hinh_thi',{p_ma:ROOM,p_pin:RM.pin,p_mo:$('gvTlMo').checked,p_phut:+$('gvTlPhut').value||15,p_dat:+$('gvTlDat').value||80,p_lan:+$('gvTlLan').value||3,p_cau:+$('gvTlCau').value||10}).then(d=>{if(d&&d.loi)gvMsg(d.loi,true);else{roomApply(d);gvTlFill(true);gvMsg('Đã lưu cấu hình thí luyện.')}}).catch(()=>gvMsg('Chưa kết nối được.',true));
+function gvTlFill(force){const t=RM.st&&RM.st.tl;if(!t)return;[['gvTlCau',t.cau],['gvTlPhut',t.phut],['gvTlDat',t.dat],['gvTlLan',t.lan],['gvTlSai',t.sai]].forEach(a=>{const e=$(a[0]);if(force||document.activeElement!==e)e.value=a[1]});if(force||document.activeElement!==$('gvTlMo'))$('gvTlMo').checked=!!t.mo}
+$('gvTlSave').onclick=()=>rpc('cau_hinh_thi',{p_ma:ROOM,p_pin:RM.pin,p_mo:$('gvTlMo').checked,p_phut:+$('gvTlPhut').value||15,p_dat:+$('gvTlDat').value||100,p_lan:+$('gvTlLan').value||99,p_cau:+$('gvTlCau').value||10,p_sai:+$('gvTlSai').value||5}).then(d=>{if(d&&d.loi)gvMsg(d.loi,true);else{roomApply(d);gvTlFill(true);gvMsg('Đã lưu cấu hình thí luyện.')}}).catch(()=>gvMsg('Chưa kết nối được.',true));
 $('gvQuick').onclick=()=>gvCall(RM.st&&RM.st.nhanh?'nhanh_tat':'nhanh_bat');
 $('gvDel').onclick=()=>{if(confirm('Xoá phòng này?'))gvCall('xoa').then(()=>{ssSet('ot3d_pin_'+ROOM,'');location.search='?gv=1'})};
 $('gvCopy').onclick=()=>{try{navigator.clipboard.writeText(gvLink());gvMsg('Đã chép link cho học sinh.')}catch(e){gvMsg(gvLink())}};
@@ -1529,7 +1558,7 @@ window.addEventListener('online',()=>{SC.last=0});
 function privText(){const e=$('ePriv');if(!e)return;e.textContent=(RM.on&&RM.ghi)?'Các bạn cùng phòng thấy tên và nhân vật của em trong lúc chơi. Điểm của em được thầy lưu để theo dõi. Vị trí chỉ truyền tạm, không được lưu. Không có tin nhắn do bạn tự gõ.':'Các bạn cùng phòng thấy tên và nhân vật của em trong lúc chơi. Tên, điểm và vị trí chỉ truyền tạm thời, không được lưu ở đâu cả. Không có tin nhắn do bạn tự gõ.'}
 
 /* ============ BA CHẶNG: 1 Trải nghiệm · 2 Ôn tập · 3 Thí luyện (trong tháp) ============ */
-const TL={n:Math.min(30,Math.max(3,parseInt(CFGP.get('cau'),10)||10)),min:Math.min(120,Math.max(3,parseInt(CFGP.get('tl'),10)||15)),dat:Math.min(100,Math.max(30,parseInt(CFGP.get('dat'),10)||80)),max:Math.min(10,Math.max(1,parseInt(CFGP.get('lan'),10)||3)),open:CFGP.get('mo')==='1'};
+const TL={n:Math.min(30,Math.max(3,parseInt(CFGP.get('cau'),10)||10)),min:Math.min(120,Math.max(3,parseInt(CFGP.get('tl'),10)||15)),dat:Math.min(100,Math.max(30,parseInt(CFGP.get('dat'),10)||100)),max:Math.min(99,Math.max(1,parseInt(CFGP.get('lan'),10)||99)),sai:Math.min(30,Math.max(1,parseInt(CFGP.get('sai'),10)||5)),open:CFGP.get('mo')==='1'};
 function exploredCount(){return explored.filter(Boolean).length}
 function nearDoor(i){const d=houseObjs[i].door;return Math.hypot(player.position.x-d.x,player.position.z-d.z)<=9}
 function badgeOfPct(p){return p>=90?['Xuất sắc','#d79a2b']:p>=80?['Giỏi','#2f9a5d']:p>=65?['Khá','#2f78c4']:['Đạt','#7a6a8f']}
@@ -1652,54 +1681,60 @@ function tresShow(title,html,btns){
 }
 function openTestIntro(){
   if(!testOpen()){toast('Hoàn thành đủ '+HOUSES.length+' chốt ôn tập để mở Thí luyện');return}
-  if(TEST.passed){tresShow('Em đã đạt thí luyện',['Kết quả tốt nhất của em: '+TEST.best+'%. Em có thể nhận giấy chứng nhận ở bàn bên phải.'],[['Nhận giấy chứng nhận',()=>{$('tres').hidden=true;openCert('cert')},true],['Đóng',()=>{$('tres').hidden=true}]]);return}
+  if(TEST.passed){tresShow('Em đã hoàn thành thí luyện',['Em đã hoàn thành '+TEST.pct+'% và chỉ sai '+TEST.wrong+' lần. Em nhận giấy chứng nhận ở bàn bên phải nhé.'],[['Nhận giấy chứng nhận',()=>{$('tres').hidden=true;openCert('cert')},true],['Đóng',()=>{$('tres').hidden=true}]]);return}
   if(TEST.att>=TL.max){tresShow('Đã hết lượt thi',['Em đã dùng hết '+TL.max+' lượt thi. Em hãy nhờ thầy mở thêm lượt nhé.'],[['Đóng',()=>{$('tres').hidden=true}]]);return}
-  tresShow('Bài thí luyện',['Gồm '+Math.min(TL.n,BANK.reduce((a,h)=>a+h.length,0))+' câu trộn các chốt, đủ ba mức. Không có gợi ý, không báo đúng sai từng câu; em nộp bài thì mới chấm.','Thời gian: '+TL.min+' phút. Đạt từ '+TL.dat+'% thì nhận giấy chứng nhận. Em có '+(TL.max-TEST.att)+' lượt thi.'],[['Bắt đầu thi',startTest,true],['Chưa thi',()=>{$('tres').hidden=true}]]);
+  const n=Math.min(TL.n,BANK.reduce((a,h)=>a+h.length,0));
+  tresShow('Bài thí luyện',['Gồm '+n+' câu trộn các chốt, đủ ba mức, không có gợi ý. Em trả lời từng câu: sai thì được thử lại câu đó, nhưng cả bài em chỉ được sai tối đa '+TL.sai+' lần.','Em phải trả lời đúng '+(TL.dat>=100?'hết các câu':'ít nhất '+TL.dat+'% số câu')+' mới nhận giấy chứng nhận. Thời gian: '+TL.min+' phút.'+(TL.max<99?' Em có '+(TL.max-TEST.att)+' lượt thi.':'')],[['Bắt đầu thi',startTest,true],['Chưa thi',()=>{$('tres').hidden=true}]]);
 }
 function startTest(){
-  $('tres').hidden=true;TEST.att++;const items=buildTest();TQ={items:items,i:0,end:Date.now()+TL.min*60000,done:false};
+  $('tres').hidden=true;TEST.att++;const items=buildTest().map(x=>Object.assign(x,{ok:false,tried:[]}));TQ={items:items,i:0,wrong:0,end:Date.now()+TL.min*60000,done:false};
   $('test').hidden=false;renderTQ();clearInterval(TQ.tm);TQ.tm=setInterval(tickTQ,1000);tickTQ();mpMeta();
 }
+function okCount(){return TQ.items.filter(x=>x.ok).length}
 function tickTQ(){
   if(!TQ||TQ.done)return;const left=TQ.end-Date.now();
-  $('tqS').textContent='Còn '+fmt(left)+' · đã trả lời '+TQ.items.filter(x=>x.pick>=0).length+'/'+TQ.items.length;
-  if(left<=0)submitTest(true);
+  $('tqS').textContent='Còn '+fmt(left)+' · đúng '+okCount()+'/'+TQ.items.length+' · sai '+TQ.wrong+'/'+TL.sai;
+  if(left<=0)failTest('time');
 }
 function renderTQ(){
-  const it=TQ.items[TQ.i];
-  $('tqH').textContent='Thí luyện · Câu '+(TQ.i+1)+'/'+TQ.items.length;const lv=$('tqLv');lv.textContent=it.lv;lv.className='lv '+LVC[it.lv];
-  const d=$('tqD');d.textContent='';TQ.items.forEach((x,k)=>{const i=document.createElement('i');if(x.pick>=0)i.className='d';if(k===TQ.i)i.className='c';d.appendChild(i)});
+  const it=TQ.items[TQ.i],n=TQ.items.length;
+  $('tqH').textContent='Thí luyện · Câu '+(TQ.i+1)+'/'+n;const lv=$('tqLv');lv.textContent=it.lv;lv.className='lv '+LVC[it.lv];
+  const d=$('tqD');d.textContent='';TQ.items.forEach((x,k)=>{const i=document.createElement('i');if(x.ok)i.className='d';if(k===TQ.i)i.className='c';d.appendChild(i)});
   $('tqQ').textContent=it.q;const o=$('tqO');o.textContent='';
-  it.o.forEach((t,k)=>{const b=document.createElement('button');b.className='opt'+(it.pick===k?' sel':'');b.textContent=t;b.onclick=()=>{it.pick=k;renderTQ()};o.appendChild(b)});
-  $('tqPrev').disabled=TQ.i===0;const last=TQ.i===TQ.items.length-1;$('tqNext').hidden=last;$('tqSubmit').hidden=!last;
-  speak('Câu hỏi. '+it.q+' A. '+it.o[0]+'. B. '+it.o[1]+'. C. '+it.o[2]+'.');
+  it.o.forEach((t,k)=>{const b=document.createElement('button');b.className='opt'+(it.ok&&k===it.a?' ok':it.tried.indexOf(k)>=0?' no':'');b.textContent=t;b.disabled=it.ok||it.tried.indexOf(k)>=0;b.onclick=()=>answerTQ(k);o.appendChild(b)});
+  $('tqF').textContent=it.ok?'Đúng rồi!':(it.tried.length?'Chưa đúng, em thử lại nhé.':'');
+  const all=okCount()/n*100>=TL.dat;
+  $('tqPrev').disabled=TQ.i===0;$('tqNext').hidden=all;$('tqNext').disabled=!it.ok||TQ.i===n-1;$('tqSubmit').hidden=!all;
+  tickTQ();speak('Câu hỏi. '+it.q+' A. '+it.o[0]+'. B. '+it.o[1]+'. C. '+it.o[2]+'.');
+}
+function answerTQ(k){
+  if(!TQ||TQ.done)return;const it=TQ.items[TQ.i];if(it.ok||it.tried.indexOf(k)>=0)return;
+  if(k===it.a){it.ok=true;it.pick=k;speak('Đúng rồi!')}
+  else{it.tried.push(k);TQ.wrong++;if(TQ.wrong>=TL.sai){failTest('sai');return}speak('Chưa đúng, em thử lại nhé.')}
+  renderTQ();
 }
 $('tqPrev').onclick=()=>{if(TQ&&TQ.i>0){TQ.i--;renderTQ()}};
-$('tqNext').onclick=()=>{if(TQ&&TQ.i<TQ.items.length-1){TQ.i++;renderTQ()}};
-$('tqSubmit').onclick=()=>{
-  const un=TQ.items.filter(x=>x.pick<0).length;
-  if(un&&!confirm('Em còn '+un+' câu chưa trả lời. Em vẫn nộp bài?'))return;
-  submitTest(false);
-};
-function submitTest(auto){
+$('tqNext').onclick=()=>{if(TQ&&TQ.i<TQ.items.length-1&&TQ.items[TQ.i].ok){TQ.i++;renderTQ()}};
+$('tqSubmit').onclick=()=>passTest();
+function leaveTest(){$('tres').hidden=true;exitTower();chang=2;stageUI();mpMeta()}
+function passTest(){
   if(!TQ||TQ.done)return;TQ.done=true;clearInterval(TQ.tm);stopSpeak();$('test').hidden=true;
-  const n=TQ.items.length,ok=TQ.items.filter(x=>x.pick===x.a).length,pct=Math.round(ok/n*100),pass=pct>=TL.dat;
-  const by={};TQ.items.forEach(x=>{by[x.lv]=by[x.lv]||[0,0];by[x.lv][1]++;if(x.pick===x.a)by[x.lv][0]++});
-  TEST.best=Math.max(TEST.best,pct);if(pass){TEST.passed=true;TEST.pct=pct;TEST.correct=ok;TEST.n=n}
-  mpMeta();drawBoard();
-  const lines=[(auto?'Hết giờ, bài của em được nộp tự động. ':'')+'Em đúng '+ok+'/'+n+' câu ('+pct+'%). Ngưỡng đạt: '+TL.dat+'%.',Object.keys(by).map(k=>k+': '+by[k][0]+'/'+by[k][1]).join(' · ')];
-  if(pass){
-    burst(innerWidth/2,innerHeight*.4,160,true);
-    tresShow('Chúc mừng em đã đạt!',lines.concat(['Em được nhận giấy chứng nhận.']),[['Nhận giấy chứng nhận',()=>{$('tres').hidden=true;openCert('cert')},true],['Đóng',()=>{$('tres').hidden=true}]]);
-    speak('Chúc mừng em đã đạt bài thí luyện với '+pct+' phần trăm.');
-  }else{
-    const left=TL.max-TEST.att;
-    tresShow('Chưa đạt, em cố gắng thêm nhé',lines.concat([left>0?'Em còn '+left+' lượt thi lại với bộ câu khác.':'Em đã dùng hết lượt thi. Em nhờ thầy mở thêm lượt nhé.']),(left>0?[['Thi lại',startTest,true]]:[]).concat([['Đóng',()=>{$('tres').hidden=true}]]));
-    speak('Em chưa đạt. Em cố gắng thêm nhé.');
-  }
+  const n=TQ.items.length,pct=Math.round(okCount()/n*100);
+  TEST.passed=true;TEST.pct=pct;TEST.correct=okCount();TEST.n=n;TEST.wrong=TQ.wrong;TEST.best=Math.max(TEST.best,Math.max(1,100-5*TQ.wrong));
+  mpMeta();drawBoard();burst(innerWidth/2,innerHeight*.4,160,true);
+  tresShow('Chúc mừng em đã hoàn thành!',['Em hoàn thành '+pct+'% bài thí luyện và chỉ sai '+TQ.wrong+' lần.','Em được nhận giấy chứng nhận.'],[['Nhận giấy chứng nhận',()=>{$('tres').hidden=true;openCert('cert')},true],['Đóng',()=>{$('tres').hidden=true}]]);
+  speak('Chúc mừng em đã hoàn thành bài thí luyện.');
+}
+function failTest(why){
+  if(!TQ||TQ.done)return;TQ.done=true;clearInterval(TQ.tm);stopSpeak();$('test').hidden=true;
+  const hetLuot=TEST.att>=TL.max;
+  const lines=[why==='sai'?'Em đã sai '+TL.sai+' lần, em quay ra ôn lại rồi làm lại nhé.':'Đã hết giờ làm bài. Em quay ra ôn lại rồi làm lại nhé.','Lần làm sau em sẽ gặp bộ câu khác.'];
+  if(hetLuot)lines.push('Em đã dùng hết '+TL.max+' lượt thi, em nhờ thầy mở thêm lượt nhé.');
+  tresShow(why==='sai'?'Em đã sai '+TL.sai+' lần':'Hết giờ',lines,[['Ra ngoài ôn lại',leaveTest,true]]);
+  speak(lines[0]);
 }
 /* tiến trình 3 chặng + hướng dẫn */
-GSTEPS.unshift({t:'Ba chặng: Trải nghiệm, Ôn tập, Thí luyện',x:'Chặng 1: đi dạo, ghé từng nhà đọc bài và nhận huy hiệu khám phá. Chặng 2: ôn tập sáu chốt, có gợi ý. Chặng 3: vào trong tháp làm bài thí luyện, đạt thì nhận giấy chứng nhận.',i:'<svg viewBox="0 0 220 110"><rect width="220" height="110" rx="14" fill="#dcecff"/><g font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle"><circle cx="40" cy="48" r="24" fill="#2f9a5d"/><text x="40" y="52" fill="#fff">1</text><text x="40" y="88" fill="#12376b">Trải nghiệm</text><circle cx="110" cy="48" r="24" fill="#1e6fd9"/><text x="110" y="52" fill="#fff">2</text><text x="110" y="88" fill="#12376b">Ôn tập</text><circle cx="180" cy="48" r="24" fill="#d79a2b"/><text x="180" y="52" fill="#fff">3</text><text x="180" y="88" fill="#12376b">Thí luyện</text></g><path d="M66 48h18M136 48h18" stroke="#12376b" stroke-width="3"/></svg>'});
+GSTEPS.unshift({t:'Ba chặng: Trải nghiệm, Ôn tập, Thí luyện',x:'Chặng 1: đi dạo, ghé từng nhà đọc bài và nhận huy hiệu khám phá. Chặng 2: ôn tập sáu chốt, có gợi ý. Chặng 3: vào trong tháp làm bài thí luyện, trả lời đúng hết (sai tối đa 5 lần) thì nhận giấy chứng nhận.',i:'<svg viewBox="0 0 220 110"><rect width="220" height="110" rx="14" fill="#dcecff"/><g font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle"><circle cx="40" cy="48" r="24" fill="#2f9a5d"/><text x="40" y="52" fill="#fff">1</text><text x="40" y="88" fill="#12376b">Trải nghiệm</text><circle cx="110" cy="48" r="24" fill="#1e6fd9"/><text x="110" y="52" fill="#fff">2</text><text x="110" y="88" fill="#12376b">Ôn tập</text><circle cx="180" cy="48" r="24" fill="#d79a2b"/><text x="180" y="52" fill="#fff">3</text><text x="180" y="88" fill="#12376b">Thí luyện</text></g><path d="M66 48h18M136 48h18" stroke="#12376b" stroke-width="3"/></svg>'});
 
 window.__stgReady=true;
 window.__dbg.tqAns=()=>TQ?TQ.items.map(x=>x.a):null;window.__dbg.testInfo=()=>({att:TEST.att,passed:TEST.passed,best:TEST.best,used:TEST.used.size,seen:SEEN.size});
