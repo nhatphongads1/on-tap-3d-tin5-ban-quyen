@@ -426,7 +426,8 @@ body:has(.notice:not([hidden])) .hud.bottom{display:none}
 </script>
 <script type="text/plain" id="game-src">
 (function(){const C=window.CAU_HINH,q=function(id){return document.getElementById(id)};
-  window.__BUILD_ID__='ontap3d-hopnhat-20261116-fix1';console.log('[ontap3d] build ontap3d-hopnhat-20261116-fix1');
+  window.__BUILD_ID__='ontap3d-hopnhat-20261116-sheet1';console.log('[ontap3d] build ontap3d-hopnhat-20261116-sheet1');
+  window.SHEET_URL='https://script.google.com/macros/s/AKfycbyVwkQTR9GuqHH_zSCrqRMDqH2Psc6P0dbBtCgcE_b5JjZ4SngZcvsczwH6XiPpcPQg/exec';
   document.title=C.tenTroChoi+' – '+C.phuDe+(window.__NHAP__?' (bản nháp)':'');
   q('tenGame').textContent=C.tenTroChoi+(window.__NHAP__?' · NHÁP':'');q('phuDe').textContent=C.phuDe;
   q('hs').textContent='Em đã hoàn thành cả 6 nhà ôn tập '+C.phuDe+'.';
@@ -1171,12 +1172,20 @@ function cauSaiList(){
 }
 function luuKetQua(loai,nhaSo){
   if(!hsInfo)return;
-  var SB=window.SUPABASE_CFG;if(!SB||!window.fetch)return;
+  if(!window.fetch)return;
   var sai=cauSaiList();
   var body={p_slug:SLUG,p_ho_ten:hsInfo.ten,p_lop:lopChuoi(),p_loai:loai,p_nha_so:nhaSo||null,p_diem:total,p_tong_cau:allQ(),p_dung_lan_dau:firstTry,p_so_cau_sai:sai.length,p_thoi_gian_giay:Math.round((Date.now()-T0)/1000),p_cau_sai:sai,p_diem_hop_qua:giftTotal,p_phien:PHIEN};
+  var SB=window.SUPABASE_CFG;
+  if(SB){
   fetch(SB.url+'/rest/v1/rpc/luu_ket_qua',{method:'POST',headers:{'apikey':SB.key,'Authorization':'Bearer '+SB.key,'Content-Type':'application/json'},body:JSON.stringify(body)})
     .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status)})
     .catch(function(e){console.warn('Không lưu được kết quả ôn tập 3D:',e&&e.message?e.message:e)});
+  }
+  if(loai==='hoan_thanh'&&window.SHEET_URL){
+    try{
+      fetch(window.SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({thoiGian:new Date().toLocaleString('vi-VN',{timeZone:'Asia/Ho_Chi_Minh'}),hoTen:hsInfo.ten,lop:lopChuoi(),bai:SLUG,diem:total,diemHopQua:giftTotal,tongCau:allQ(),dungLanDau:firstTry,soCauSai:sai.length,thoiGianGiay:Math.round((Date.now()-T0)/1000),cauSai:sai,phien:PHIEN})}).catch(function(e){console.warn('Không ghi được kết quả vào Google Sheet:',e&&e.message?e.message:e)});
+    }catch(e){console.warn('Không ghi được kết quả vào Google Sheet:',e&&e.message?e.message:e)}
+  }
 }
 let noticeLearn=false;
 function showNotice(ti,nd,learn){
