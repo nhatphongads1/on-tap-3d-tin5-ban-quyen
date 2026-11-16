@@ -225,6 +225,13 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 
 #act{position:fixed;z-index:6;left:50%;bottom:calc(72px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#2f9a5d;color:#fff;border-color:#2f9a5d;font-weight:700;font-size:14px;padding:12px 20px;max-width:calc(100% - 24px);white-space:normal;text-align:center}
 #act[hidden]{display:none}
+
+.qimg:empty{display:none}.qimg{margin:0 0 10px}
+.qimg button{display:block;width:100%;border:0;background:none;padding:0;cursor:zoom-in}
+.qimg img{display:block;max-width:100%;max-height:32vh;margin:0 auto;object-fit:contain;border:1px solid var(--line);border-radius:10px;background:#fff}
+.qimg small{display:block;text-align:center;font-size:11px;color:var(--ink-soft);margin-top:2px}
+#zoom{position:fixed;inset:0;z-index:40;background:rgba(5,15,30,.86);display:flex;align-items:center;justify-content:center;padding:14px;cursor:zoom-out}
+#zoom[hidden]{display:none}#zoom img{max-width:100%;max-height:100%;border-radius:8px;background:#fff}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1e6fd9"/><path d="M0 46Q32 38 64 46V64H0Z" fill="#4a97f2"/><polygon points="44.0,5.5 45.4,9.1 49.2,9.3 46.3,11.7 47.2,15.4 44.0,13.4 40.8,15.4 41.7,11.7 38.8,9.3 42.6,9.1" fill="#ffd54a"/><polygon points="38,28 44,19 50,28" fill="#cfe4ff"/><rect x="38" y="28" width="12" height="20" fill="#fff"/><rect x="42" y="32" width="4" height="5" rx="1" fill="#1e6fd9"/><polygon points="5,33 21,21 37,33" fill="#cfe4ff"/><rect x="8" y="33" width="26" height="15" fill="#fff"/><path d="M14 41l4 4 9-9" fill="none" stroke="#1e6fd9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="48" width="56" height="3.5" rx="1.75" fill="#fff"/></symbol></svg>
@@ -254,7 +261,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div class="hud bottom"><input id="chat" type="text" maxlength="80" placeholder="Nhắn gì đó… (Enter để gửi)" autocomplete="off" aria-label="Nhắn tin trong khuôn viên"></div>
 
 <div class="quiz" id="quiz" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="qq">
-  <div><small id="qh">Nhiệm vụ</small><span class="lv" id="qlv"></span><button class="spk" id="qsp" title="Đọc lại câu hỏi" aria-label="Đọc lại câu hỏi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="#1e6fd9"/><path d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="#1e6fd9" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="dots" id="qd"></div><div id="qlearn"></div><h2 id="qq"></h2><div id="qvid"></div><div id="qo"></div><div class="fb" id="qf" aria-live="polite"></div><div id="qhint"></div>
+  <div><small id="qh">Nhiệm vụ</small><span class="lv" id="qlv"></span><button class="spk" id="qsp" title="Đọc lại câu hỏi" aria-label="Đọc lại câu hỏi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="#1e6fd9"/><path d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="#1e6fd9" stroke-width="2" stroke-linecap="round"/></svg></button></div><div class="dots" id="qd"></div><div id="qlearn"></div><h2 id="qq"></h2><div class="qimg" id="qimg"></div><div id="qvid"></div><div id="qo"></div><div class="fb" id="qf" aria-live="polite"></div><div id="qhint"></div>
   <div class="row"><span style="font-size:12px;color:var(--ink-soft)" id="qs"></span><span><button class="btn" id="qn" hidden>Câu tiếp</button> <button class="btn" id="qc">Đóng</button></span></div>
 </div></div>
 <div class="honor" id="honor" hidden><div class="hcard" role="dialog" aria-modal="true" aria-labelledby="hh"><svg class="lg hlg" viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>
@@ -280,12 +287,13 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div class="certbox" id="cert" hidden><div class="certin" role="dialog" aria-modal="true" aria-label="Giấy chứng nhận"><canvas id="certc" aria-label="Giấy chứng nhận hoàn thành bài ôn tập"></canvas><div class="row"><button class="btn go" id="certDl" type="button">Tải ảnh PNG</button><button class="btn" id="certPrint" type="button">In (A4)</button><button class="btn" id="certClose" type="button">Đóng</button></div></div></div>
 <div id="certp" aria-hidden="true"></div>
 <div class="clk" id="clk" hidden role="timer"></div>
+<div id="zoom" hidden role="dialog" aria-label="Xem hình lớn"><img alt=""></div>
 <button class="btn" id="act" hidden type="button"></button>
 <div class="guide" id="sel" hidden><div class="gcard" style="max-width:560px" role="dialog" aria-modal="true" aria-labelledby="selT"><div class="ghead"><svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg>Chọn bài ôn tập</div><h3 id="selT" style="margin-top:0"></h3><div id="selB" class="selb"></div><div class="grow"><button class="btn" id="selBack" type="button" hidden>Quay lại</button></div></div></div>
 <div class="stg" id="stg" role="group" aria-label="Ba chặng"><button id="stg1" type="button">1 Trải nghiệm</button><button id="stg2" type="button">2 Ôn tập</button><button id="stg3" type="button">3 Thí luyện</button><button id="stgSkip" class="skip" type="button">Bỏ qua, vào ôn tập</button></div>
 <div class="quiz" id="info" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="inT"><small id="inSm"></small><h2 id="inT"></h2><div class="linfo" id="inB" style="white-space:pre-wrap;font-size:14.5px;line-height:1.55;margin-bottom:8px"></div><div id="inV"></div>
   <div class="row"><span style="font-size:12px;color:var(--ink-soft)" id="inS"></span><span><button class="btn go" id="inOk" type="button" style="background:#1e6fd9;color:#fff">Đã đọc, nhận huy hiệu</button> <button class="btn" id="inX" type="button">Đóng</button></span></div></div></div>
-<div class="quiz" id="test" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="tqQ"><div><small id="tqH">Thí luyện</small><span class="lv" id="tqLv"></span></div><div class="dots" id="tqD"></div><h2 id="tqQ"></h2><div id="tqO"></div><div class="fb" id="tqF" aria-live="polite"></div>
+<div class="quiz" id="test" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="tqQ"><div><small id="tqH">Thí luyện</small><span class="lv" id="tqLv"></span></div><div class="dots" id="tqD"></div><h2 id="tqQ"></h2><div class="qimg" id="tqImg"></div><div id="tqO"></div><div class="fb" id="tqF" aria-live="polite"></div>
   <div class="row"><span style="font-size:12px;color:var(--ink-soft)" id="tqS"></span><span><button class="btn" id="tqPrev" type="button">Câu trước</button> <button class="btn" id="tqNext" type="button">Câu tiếp</button> <button class="btn" id="tqSubmit" type="button" hidden style="background:#1e6fd9;color:#fff">Nộp bài</button></span></div></div></div>
 <div class="quiz" id="tres" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="tresT"><h2 id="tresT"></h2><div class="tresb" id="tresB"></div><div class="row" id="tresR" style="justify-content:flex-end;flex-wrap:wrap;margin-top:8px"></div></div></div>
 <div class="guide" id="gv" hidden><div class="gcard gvf" style="max-width:520px" role="dialog" aria-modal="true" aria-labelledby="gvTitle">
@@ -783,7 +791,7 @@ let sayObj=null;
 function say(t,obj){sayObj=obj;sayLbl.el.firstChild.textContent=t;sayLbl.el.classList.remove('hide');sayT=4.2}
 
 /* ---- nhà, câu hỏi, điểm ---- */
-const BANK=window.CAU_HINH.nha.map((n,hi)=>n.cau.map((c,ci)=>({key:hi+'-'+ci,lv:c.muc,q:c.hoi,o:c.chon,a:c.dung,h:c.goiy,vurl:c.videoUrl||'',vtit:c.videoTieuDe||''})));
+const BANK=window.CAU_HINH.nha.map((n,hi)=>n.cau.map((c,ci)=>({key:hi+'-'+ci,lv:c.muc,q:c.hoi,o:c.chon,a:c.dung,h:c.goiy,img:c.hinhUrl||'',alt:c.hinhMoTa||'',vurl:c.videoUrl||'',vtit:c.videoTieuDe||''})));
 const PHAT=window.CAU_HINH.nha.map((n,i)=>{const p=parseInt(n.phat,10);return p>=1&&p<=BANK[i].length?p:BANK[i].length});
 const HOUSES=window.CAU_HINH.nha.map(n=>({name:n.ten,hint:n.chiDan||'',info:n.thongTin||'',vurl:n.videoUrl||'',vtit:n.videoTieuDe||'',qs:[]}));
 function hashStr(t){let h=2166136261;for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
@@ -941,7 +949,7 @@ function renderQ(){
   $('qh').textContent='Nhà '+(curH+1)+' · '+hs.name+' · Nhiệm vụ';
   const lv=$('qlv');lv.textContent=q.lv;lv.className='lv '+LVC[q.lv];
   $('qd').innerHTML='';for(let k=0;k<hs.qs.length;k++){const d=document.createElement('i');if(k<prog[curH])d.className='d';else if(k===qi)d.className='c';$('qd').appendChild(d)}
-  $('qq').textContent=q.q;$('qf').textContent='';$('qhint').textContent='';$('qs').textContent='Câu '+(qi+1)+'/'+hs.qs.length+' · tối đa '+BASE[q.lv]+' điểm';$('qn').hidden=true;
+  $('qq').textContent=q.q;setImg($('qimg'),q.img,q.alt);$('qf').textContent='';$('qhint').textContent='';$('qs').textContent='Câu '+(qi+1)+'/'+hs.qs.length+' · tối đa '+BASE[q.lv]+' điểm';$('qn').hidden=true;
   const o=$('qo');o.textContent='';delete o.dataset.done;
   q.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;b.onclick=()=>answer(i,b);o.appendChild(b)});
   renderMedia(hs,q);
@@ -1681,7 +1689,7 @@ function buildTest(){
     pick.forEach(x=>out.push(x));
   });
   for(let i=out.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));const t=out[i];out[i]=out[j];out[j]=t}
-  return out.map(x=>{const perm=[0,1,2];for(let a=2;a>0;a--){const b=Math.floor(rng()*(a+1));const t=perm[a];perm[a]=perm[b];perm[b]=t}TEST.used.add(x.key);return{lv:x.q.lv,q:x.q.q,o:perm.map(k=>x.q.o[k]),a:perm.indexOf(x.q.a),pick:-1}});
+  return out.map(x=>{const perm=[0,1,2];for(let a=2;a>0;a--){const b=Math.floor(rng()*(a+1));const t=perm[a];perm[a]=perm[b];perm[b]=t}TEST.used.add(x.key);return{img:x.q.img,alt:x.q.alt,lv:x.q.lv,q:x.q.q,o:perm.map(k=>x.q.o[k]),a:perm.indexOf(x.q.a),pick:-1}});
 }
 function tresShow(title,html,btns){
   $('tresT').textContent=title;const b=$('tresB');b.textContent='';(html||[]).forEach(t=>{const p=document.createElement('p');p.textContent=t;b.appendChild(p)});
@@ -1709,7 +1717,7 @@ function renderTQ(){
   const it=TQ.items[TQ.i],n=TQ.items.length;
   $('tqH').textContent='Thí luyện · Câu '+(TQ.i+1)+'/'+n;const lv=$('tqLv');lv.textContent=it.lv;lv.className='lv '+LVC[it.lv];
   const d=$('tqD');d.textContent='';TQ.items.forEach((x,k)=>{const i=document.createElement('i');if(x.ok)i.className='d';if(k===TQ.i)i.className='c';d.appendChild(i)});
-  $('tqQ').textContent=it.q;const o=$('tqO');o.textContent='';
+  $('tqQ').textContent=it.q;setImg($('tqImg'),it.img,it.alt);const o=$('tqO');o.textContent='';
   it.o.forEach((t,k)=>{const b=document.createElement('button');b.className='opt'+(it.ok&&k===it.a?' ok':it.tried.indexOf(k)>=0?' no':'');b.textContent=t;b.disabled=it.ok||it.tried.indexOf(k)>=0;b.onclick=()=>answerTQ(k);o.appendChild(b)});
   $('tqF').textContent=it.ok?'Đúng rồi!':(it.tried.length?'Chưa đúng, em thử lại nhé.':'');
   const all=okCount()/n*100>=TL.dat;
@@ -1835,6 +1843,19 @@ $('bGreen').onclick=()=>openCert('xanh');
 window.__dbg.trash=()=>({items:TX.items.map(i=>[i.ten,i.type,Math.round(i.x),Math.round(i.z)]),bins:TX.bins.map(b=>[b.type,b.x,b.z]),gp:GP.pts,hold:TX.hold&&TX.hold.ten,on:TX.on});
 window.__dbg.txAct=txAct;
 
+/* ---- hình trong câu hỏi: chỉ nhận tệp hinh_*.jpg/png cùng trang hoặc https; tải lười; bấm để phóng to ---- */
+function setImg(box,url,alt){
+  box.textContent='';
+  if(!url||!/^(hinh_[A-Za-z0-9_.\-]+\.(jpg|jpeg|png|webp)|https:\/\/[^\s"'<>]+)$/.test(url))return;
+  const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Phóng to hình: '+(alt||'hình minh hoạ'));
+  const im=document.createElement('img');im.loading='lazy';im.decoding='async';im.alt=alt||'Hình minh hoạ';im.src=url;
+  im.onerror=()=>{box.textContent=''};
+  b.appendChild(im);b.onclick=()=>{const z=$('zoom'),zi=z.firstChild;zi.src=url;zi.alt=im.alt;z.hidden=false};
+  box.appendChild(b);
+  const t=document.createElement('small');t.textContent=(alt||'')+' (bấm để phóng to)';box.appendChild(t);
+}
+$('zoom').onclick=()=>{$('zoom').hidden=true};
+window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('zoom').hidden)$('zoom').hidden=true});
 /* ---------- vòng lặp ---------- */
 const skyK=[new THREE.Color('#b9e0f0'),new THREE.Color('#f2b48a'),new THREE.Color('#0d1530')];
 const hemiK=[[new THREE.Color('#ffffff'),.8],[new THREE.Color('#ffd9b0'),.7],[new THREE.Color('#5b6cb0'),.5]];
