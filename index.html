@@ -1680,7 +1680,7 @@ let TQ=null;
 function buildTest(){
   const rng=mulberry(hashStr(myName+'|T|'+Date.now()+'|'+TEST.att));
   const all=[];BANK.forEach((hs,i)=>hs.forEach(q=>all.push({q:q,key:q.key,h:i})));
-  const nB=Math.round(TL.n*.3),nH=Math.round(TL.n*.4),need={'BIẾT':nB,'HIỂU':nH,'VẬN DỤNG':TL.n-nB-nH},out=[];
+  const NN=Math.min(TL.n,all.length),nB=Math.round(NN*.4),nH=Math.round(NN*.35),need={'BIẾT':nB,'HIỂU':nH,'VẬN DỤNG':NN-nB-nH},out=[];
   Object.keys(need).forEach(lv=>{
     const pool=all.filter(x=>x.q.lv===lv&&!TEST.used.has(x.key)),unseen=pool.filter(x=>!SEEN.has(x.key)),seen=pool.filter(x=>SEEN.has(x.key)),pick=[];
     const take=arr=>{while(arr.length&&pick.length<need[lv])pick.push(arr.splice(Math.floor(rng()*arr.length),1)[0])};
@@ -1688,6 +1688,7 @@ function buildTest(){
     if(pick.length<need[lv])take(all.filter(x=>x.q.lv===lv&&pick.indexOf(x)<0));
     pick.forEach(x=>out.push(x));
   });
+  {const left=all.filter(x=>out.indexOf(x)<0);while(out.length<NN&&left.length)out.push(left.splice(Math.floor(rng()*left.length),1)[0])}
   for(let i=out.length-1;i>0;i--){const j=Math.floor(rng()*(i+1));const t=out[i];out[i]=out[j];out[j]=t}
   return out.map(x=>{const perm=[0,1,2];for(let a=2;a>0;a--){const b=Math.floor(rng()*(a+1));const t=perm[a];perm[a]=perm[b];perm[b]=t}TEST.used.add(x.key);return{img:x.q.img,alt:x.q.alt,lv:x.q.lv,q:x.q.q,o:perm.map(k=>x.q.o[k]),a:perm.indexOf(x.q.a),pick:-1}});
 }
