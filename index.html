@@ -222,6 +222,9 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .selb button:hover:not(:disabled){background:#dcecff;border-color:#1e6fd9}.selb button:disabled{opacity:.5;cursor:default}
 .selb.list{grid-template-columns:1fr}.selb.list button{text-align:left;font-size:14.5px}
 .selb h4{grid-column:1/-1;margin:8px 0 0;font-size:12.5px;color:#52615f;text-transform:uppercase;letter-spacing:.03em}
+
+#act{position:fixed;z-index:6;left:50%;bottom:calc(72px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:#2f9a5d;color:#fff;border-color:#2f9a5d;font-weight:700;font-size:14px;padding:12px 20px;max-width:calc(100% - 24px);white-space:normal;text-align:center}
+#act[hidden]{display:none}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#1e6fd9"/><path d="M0 46Q32 38 64 46V64H0Z" fill="#4a97f2"/><polygon points="44.0,5.5 45.4,9.1 49.2,9.3 46.3,11.7 47.2,15.4 44.0,13.4 40.8,15.4 41.7,11.7 38.8,9.3 42.6,9.1" fill="#ffd54a"/><polygon points="38,28 44,19 50,28" fill="#cfe4ff"/><rect x="38" y="28" width="12" height="20" fill="#fff"/><rect x="42" y="32" width="4" height="5" rx="1" fill="#1e6fd9"/><polygon points="5,33 21,21 37,33" fill="#cfe4ff"/><rect x="8" y="33" width="26" height="15" fill="#fff"/><path d="M14 41l4 4 9-9" fill="none" stroke="#1e6fd9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="48" width="56" height="3.5" rx="1.75" fill="#fff"/></symbol></svg>
@@ -229,12 +232,13 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div id="labels"></div>
 
 <div class="hud top">
-  <div class="title"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg><b id="tenGame">Ôn tập 3D</b><small id="phuDe"></small><span class="prog">Điểm <b id="pts">0</b> · Nhà <span id="score">0/6</span><span class="pbar"><em id="pfill"></em></span></span></div>
+  <div class="title"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg><b id="tenGame">Ôn tập 3D</b><small id="phuDe"></small><span class="prog">Điểm <b id="pts">0</b> · Nhà <span id="score">0/6</span> · Xanh <b id="gpts">0</b><span class="pbar"><em id="pfill"></em></span></span></div>
   <div class="bar" id="bar">
     <button class="btn" id="bHelp">Hướng dẫn</button>
     <button class="btn on" id="bRoom" aria-pressed="true">Bạn chơi cùng</button>
     <button class="btn on" id="bMap" aria-pressed="true">Bản đồ nhỏ</button>
     <button class="btn" id="bCert">Giấy chứng nhận</button>
+    <button class="btn" id="bGreen">Giấy khen xanh</button>
     <button class="btn" id="bQuick" hidden aria-pressed="false">Tới nhà nhanh: Tắt</button>
     <button class="btn on" id="bVoice" aria-pressed="true">Giọng đọc: Bật</button>
     <button class="btn on" id="bSound" aria-pressed="true">Âm thanh: Bật</button>
@@ -259,10 +263,10 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   <div class="htot"><span id="hTot">0</span><span style="font-size:15px;color:var(--ink-soft)"> / <span id="hMax">270</span> điểm</span></div>
   <span class="badge" id="hBadge">Giỏi</span>
   <div class="stats" id="hSend" hidden style="margin:0 0 8px"><span id="hSendT"></span><button class="btn" id="hResend" hidden type="button">Gửi lại điểm</button></div>
-  <div class="stats"><span><b id="hFirst">0</b>đúng ngay lần đầu</span><span><b id="hRetry">0</b>lần thử lại</span></div>
+  <div class="stats"><span><b id="hFirst">0</b>đúng ngay lần đầu</span><span><b id="hRetry">0</b>lần thử lại</span><span><b id="hGp">0</b>điểm xanh</span></div>
   <table><thead><tr><th>Nhà</th><th>Biết</th><th>Hiểu</th><th>Vận dụng</th><th>Tổng</th></tr></thead><tbody id="hTb"></tbody></table>
   <input id="nick" type="text" maxlength="20" placeholder="Biệt danh (không bắt buộc, không lưu)" autocomplete="off" aria-label="Biệt danh tuỳ chọn">
-  <div class="row"><button class="btn" id="hCert">Giấy khen ôn tập</button><button class="btn" id="hPlay">Chơi lại</button><button class="btn" id="hPeak">Lên Đỉnh Tháp</button><button class="btn" id="hClose">Đóng</button></div>
+  <div class="row"><button class="btn" id="hGreen">Giấy khen xanh</button><button class="btn" id="hCert">Giấy khen ôn tập</button><button class="btn" id="hPlay">Chơi lại</button><button class="btn" id="hPeak">Lên Đỉnh Tháp</button><button class="btn" id="hClose">Đóng</button></div>
 </div></div>
 <div class="guide" id="guide" hidden><div class="gcard" role="dialog" aria-modal="true" aria-labelledby="gt">
   <div class="ghead"><svg class="lg " viewBox="0 0 64 64" role="img" aria-label="Biểu tượng Ôn tập 3D"><use href="#logo"/></svg>Cách chơi<span id="gn">1/5</span></div>
@@ -276,6 +280,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 <div class="certbox" id="cert" hidden><div class="certin" role="dialog" aria-modal="true" aria-label="Giấy chứng nhận"><canvas id="certc" aria-label="Giấy chứng nhận hoàn thành bài ôn tập"></canvas><div class="row"><button class="btn go" id="certDl" type="button">Tải ảnh PNG</button><button class="btn" id="certPrint" type="button">In (A4)</button><button class="btn" id="certClose" type="button">Đóng</button></div></div></div>
 <div id="certp" aria-hidden="true"></div>
 <div class="clk" id="clk" hidden role="timer"></div>
+<button class="btn" id="act" hidden type="button"></button>
 <div class="guide" id="sel" hidden><div class="gcard" style="max-width:560px" role="dialog" aria-modal="true" aria-labelledby="selT"><div class="ghead"><svg class="lg " viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"/></svg>Chọn bài ôn tập</div><h3 id="selT" style="margin-top:0"></h3><div id="selB" class="selb"></div><div class="grow"><button class="btn" id="selBack" type="button" hidden>Quay lại</button></div></div></div>
 <div class="stg" id="stg" role="group" aria-label="Ba chặng"><button id="stg1" type="button">1 Trải nghiệm</button><button id="stg2" type="button">2 Ôn tập</button><button id="stg3" type="button">3 Thí luyện</button><button id="stgSkip" class="skip" type="button">Bỏ qua, vào ôn tập</button></div>
 <div class="quiz" id="info" hidden><div class="card" role="dialog" aria-modal="true" aria-labelledby="inT"><small id="inSm"></small><h2 id="inT"></h2><div class="linfo" id="inB" style="white-space:pre-wrap;font-size:14.5px;line-height:1.55;margin-bottom:8px"></div><div id="inV"></div>
@@ -293,6 +298,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   <div id="gvPinRow" hidden><label for="gvPin2">Nhập mã thầy để điều khiển phòng</label><input id="gvPin2" type="password" autocomplete="current-password"><div class="gvbtns"><button class="btn go" id="gvEnter" type="button">Vào điều khiển</button></div></div>
   <div id="gvCtl" hidden><div class="gvs" id="gvState"></div><div id="gvInfo" style="font-size:13px;color:var(--ink-soft)"></div>
     <div class="gvbtns"><button class="btn go" id="gvStart" type="button">Bắt đầu</button><button class="btn" id="gvPlus" type="button">Gia hạn +5 phút</button><button class="btn" id="gvStop" type="button">Dừng</button><button class="btn" id="gvReset" type="button">Đặt lại</button><button class="btn" id="gvQuick" type="button">Tới nhà nhanh: Tắt</button></div>
+    <label style="display:flex;gap:8px;align-items:center;margin:6px 0;font-size:13px"><input id="gvRac" type="checkbox" checked style="width:auto"> Bật nhặt rác tự giác (điểm xanh)</label>
     <div class="gvf" style="border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0"><b style="font-size:13px">Chặng 3 Thí luyện</b>
       <label style="display:flex;gap:8px;align-items:center"><input id="gvTlMo" type="checkbox" style="width:auto"> Mở thí luyện cho mọi em (kể cả chưa xong ôn tập)</label>
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px"><div><label>Số câu</label><input id="gvTlCau" type="number" min="3" max="30"></div><div><label>Phút</label><input id="gvTlPhut" type="number" min="3" max="120"></div><div><label>Đạt từ %</label><input id="gvTlDat" type="number" min="30" max="100"></div><div><label>Số lượt</label><input id="gvTlLan" type="number" min="1" max="99"></div><div><label>Sai tối đa</label><input id="gvTlSai" type="number" min="1" max="30"></div></div>
@@ -1001,7 +1007,7 @@ function showHonor(){
   honorShown=true;mpCheer('dinh',6);scoreSend();
   const pct=total/allMax(),bd=pct>=.9?['Xuất sắc','#d79a2b']:pct>=.75?['Giỏi','#2f9a5d']:pct>=.5?['Khá','#2f78c4']:['Cố gắng','#7a6a8f'];
   $('hTot').textContent=total;$('hBadge').textContent='Huy hiệu '+bd[0];$('hBadge').style.background=bd[1];
-  $('hMax').textContent=allMax();$('hFirst').textContent=firstTry+'/'+allQ();$('hRetry').textContent=retries;
+  $('hMax').textContent=allMax();$('hGp').textContent=GP.pts;$('hFirst').textContent=firstTry+'/'+allQ();$('hRetry').textContent=retries;
   const tb=$('hTb');tb.textContent='';
   HOUSES.forEach((h,i)=>{const tr=document.createElement('tr');
     [(i+1)+'. '+h.name,lvSum(i,'BIẾT'),lvSum(i,'HIỂU'),lvSum(i,'VẬN DỤNG'),got[i].reduce((a,c)=>a+c,0)].forEach(v=>{const td=document.createElement('td');td.textContent=v;tr.appendChild(td)});tb.appendChild(tr)});
@@ -1380,17 +1386,17 @@ function drawCert(cv,kind){
   g.strokeStyle='#8fb8f0';g.lineWidth=3;g.strokeRect(62,62,CERT_W-124,CERT_H-124);
   [[62,62],[CERT_W-62,62],[62,CERT_H-62],[CERT_W-62,CERT_H-62]].forEach(p=>{g.fillStyle=B;g.beginPath();g.arc(p[0],p[1],14,0,6.283);g.fill()});
   g.textAlign='center';g.fillStyle=B;g.font='700 34px '+F;g.fillText('ÔN TẬP 3D · KHUÔN VIÊN HỌC TẬP',CERT_W/2,168);
-  g.fillStyle=D;g.font='800 118px '+F;g.fillText(kind==='khen'?'GIẤY KHEN':'GIẤY CHỨNG NHẬN',CERT_W/2,306);
+  g.fillStyle=D;g.font='800 118px '+F;g.fillText(kind==='xanh'?'GIẤY KHEN XANH':kind==='khen'?'GIẤY KHEN':'GIẤY CHỨNG NHẬN',CERT_W/2,306);
   g.strokeStyle='#ffd54a';g.lineWidth=8;g.beginPath();g.moveTo(CERT_W/2-300,342);g.lineTo(CERT_W/2+300,342);g.stroke();
-  g.fillStyle='#52615f';g.font='500 40px '+F;g.fillText(kind==='khen'?'Khen em':'Chứng nhận em',CERT_W/2,430);
+  g.fillStyle='#52615f';g.font='500 40px '+F;g.fillText(kind==='khen'||kind==='xanh'?'Khen em':'Chứng nhận em',CERT_W/2,430);
   g.fillStyle=B;let fs=130;g.font='800 '+fs+'px '+F;while(g.measureText(myName).width>1300&&fs>60){fs-=6;g.font='800 '+fs+'px '+F}
   g.fillText(myName,CERT_W/2,570);
   g.strokeStyle='#cfdcee';g.lineWidth=3;g.beginPath();g.moveTo(CERT_W/2-520,602);g.lineTo(CERT_W/2+520,602);g.stroke();
-  g.fillStyle='#1c2a29';g.font='500 42px '+F;g.fillText(kind==='khen'?'đã hoàn thành bài ôn tập':'đã hoàn thành bài thí luyện',CERT_W/2,676);
+  g.fillStyle='#1c2a29';g.font='500 42px '+F;g.fillText(kind==='xanh'?'đã giữ gìn khuôn viên sạch đẹp':kind==='khen'?'đã hoàn thành bài ôn tập':'đã hoàn thành bài thí luyện',CERT_W/2,676);
   g.fillStyle=D;g.font='700 52px '+F;const endY=wrapText(g,window.CAU_HINH.tenTroChoi+' – '+window.CAU_HINH.phuDe,CERT_W/2,750,1250,64);
-  const bd=kind==='khen'?badgeOf():badgeOfPct(100-5*TEST.wrong);
+  const bd=kind==='xanh'?['Người bạn xanh','#2f9a5d']:kind==='khen'?badgeOf():badgeOfPct(100-5*TEST.wrong);
   g.fillStyle='#1c2a29';g.font='500 42px '+F;g.fillText('với kết quả',CERT_W/2,endY+64);
-  g.fillStyle=B;g.font='800 84px '+F;g.fillText(kind==='khen'?total+' / '+allMax()+' điểm':'Hoàn thành '+TEST.pct+'% · sai '+TEST.wrong+' lần',CERT_W/2,endY+146);
+  g.fillStyle=B;g.font='800 84px '+F;g.fillText(kind==='xanh'?'Điểm xanh: '+GP.pts:kind==='khen'?total+' / '+allMax()+' điểm':'Hoàn thành '+TEST.pct+'% · sai '+TEST.wrong+' lần',CERT_W/2,endY+146);
   g.fillStyle=bd[1];const bw=360,bh=64,bx=CERT_W/2-bw/2,by=endY+172;
   g.beginPath();g.roundRect?g.roundRect(bx,by,bw,bh,32):g.rect(bx,by,bw,bh);g.fill();
   g.fillStyle='#fff';g.font='700 36px '+F;g.fillText('Huy hiệu '+bd[0],CERT_W/2,by+45);
@@ -1411,7 +1417,7 @@ function drawCert(cv,kind){
 }
 let certBusy=false;
 function openCert(kind){
-  kind=kind||'cert';const why=kind==='khen'?(allDone()?'':'Em cần hoàn thành đủ '+HOUSES.length+' chốt ôn tập.'):certReason();if(why){toast(why);return}
+  kind=kind||'cert';const why=kind==='khen'?(allDone()?'':'Em cần hoàn thành đủ '+HOUSES.length+' chốt ôn tập.'):kind==='xanh'?(GP.pts>=GP.need?'':'Em cần đạt ít nhất '+GP.need+' điểm xanh (nhặt rác bỏ đúng thùng) để nhận giấy khen xanh.'):certReason();if(why){toast(why);return}
   if(certBusy)return;certBusy=true;
   const go=()=>{drawCert($('certc'),kind);$('cert').hidden=false;certBusy=false;try{$('certDl').focus()}catch(e){}};
   try{Promise.race([document.fonts.load('800 60px "Be Vietnam Pro"'),new Promise(r=>setTimeout(r,1200))]).then(go,go)}catch(e){go()}
@@ -1437,6 +1443,7 @@ function roomApply(d){
   RM.loaded=true;
   if(!d||!d.ma||d.loi){RM.on=false;RM.st=null;RM.ghi=null;privText();return}
   RM.on=true;RM.st=d;RM.off=d.now-Date.now();RM.ghi=(d.ghi&&d.ghi.url&&d.ghi.khoa)?d.ghi:null;privText();
+  if(typeof TX!=='undefined'){TX.on=(CFGP.get('rac')!=='0')&&d.rac!==false}
   if(d.tl){TL.open=!!d.tl.mo;TL.min=+d.tl.phut||TL.min;TL.dat=+d.tl.dat||TL.dat;TL.max=+d.tl.lan||TL.max;TL.sai=+d.tl.sai||TL.sai;TL.n=+d.tl.cau||TL.n;if(window.__stgReady)stageBar()}
   if(!GV){QUICK=!!d.nhanh;syncQuickUI()}
   if($('eRoom')&&!$('entry').hidden){const p=phase();$('eRoom').textContent='Phòng '+d.ma.toUpperCase()+': '+(p==='wait'?'chờ thầy bấm Bắt đầu':p==='run'?'đang trong giờ chơi':'đã hết giờ')}
@@ -1504,12 +1511,14 @@ $('gvStop').onclick=()=>gvCall('dung');
 $('gvReset').onclick=()=>gvCall('dat_lai');
 function gvTlFill(force){const t=RM.st&&RM.st.tl;if(!t)return;[['gvTlCau',t.cau],['gvTlPhut',t.phut],['gvTlDat',t.dat],['gvTlLan',t.lan],['gvTlSai',t.sai]].forEach(a=>{const e=$(a[0]);if(force||document.activeElement!==e)e.value=a[1]});if(force||document.activeElement!==$('gvTlMo'))$('gvTlMo').checked=!!t.mo}
 $('gvTlSave').onclick=()=>rpc('cau_hinh_thi',{p_ma:ROOM,p_pin:RM.pin,p_mo:$('gvTlMo').checked,p_phut:+$('gvTlPhut').value||15,p_dat:+$('gvTlDat').value||100,p_lan:+$('gvTlLan').value||99,p_cau:+$('gvTlCau').value||10,p_sai:+$('gvTlSai').value||5}).then(d=>{if(d&&d.loi)gvMsg(d.loi,true);else{roomApply(d);gvTlFill(true);gvMsg('Đã lưu cấu hình thí luyện.')}}).catch(()=>gvMsg('Chưa kết nối được.',true));
+$('gvRac').onchange=()=>rpc('bat_rac',{p_ma:ROOM,p_pin:RM.pin,p_bat:$('gvRac').checked}).then(d=>{if(d&&d.loi)gvMsg(d.loi,true);else{roomApply(d);gvMsg('Đã lưu.')}}).catch(()=>gvMsg('Chưa kết nối được.',true));
 $('gvQuick').onclick=()=>gvCall(RM.st&&RM.st.nhanh?'nhanh_tat':'nhanh_bat');
 $('gvDel').onclick=()=>{if(confirm('Xoá phòng này?'))gvCall('xoa').then(()=>{ssSet('ot3d_pin_'+ROOM,'');location.search='?gv=1'})};
 $('gvCopy').onclick=()=>{try{navigator.clipboard.writeText(gvLink());gvMsg('Đã chép link cho học sinh.')}catch(e){gvMsg(gvLink())}};
 function gvRender(){
   if($('gv').hidden||$('gvCtl').hidden||!RM.st)return;
   const s=RM.st,ph=phase();
+  if(document.activeElement!==$('gvRac'))$('gvRac').checked=s.rac!==false;
   $('gvState').textContent=ph==='wait'?'Chưa bắt đầu':ph==='run'?'Đang chơi · còn '+fmt(roomEnd()-srvNow()):'Đã hết giờ';
   $('gvInfo').textContent='Bài: '+s.bai+' · Thời lượng: '+(s.phut+s.giaHan)+' phút · Sổ điểm Google Sheet: '+(RM.ghi?'đã nối':'chưa nối');
   $('gvQuick').textContent='Tới nhà nhanh: '+(s.nhanh?'Bật':'Tắt');$('gvLink').textContent=gvLink();
@@ -1538,7 +1547,7 @@ function scorePost(p){
 }
 function scoreSend(){
   if(GV||!entered||!RM.on||!RM.ghi||!RM.ghi.url||!RM.ghi.khoa)return;
-  const full=allDone(),p={k:RM.ghi.khoa,id:myId,phong:ROOM,ten:myName,lop:LOP,bai:MPSLUG,diem:total,toida:allMax(),dung1:firstTry,tong:hDone,muc:full?badgeOf()[0]:'Chưa hoàn thành',tg:Math.round((Date.now()-T0)/1000)};
+  const full=allDone(),p={k:RM.ghi.khoa,id:myId,phong:ROOM,ten:myName,lop:LOP,bai:MPSLUG,diem:total,toida:allMax(),dung1:firstTry,tong:hDone,muc:full?badgeOf()[0]:'Chưa hoàn thành',xanh:GP.pts,tg:Math.round((Date.now()-T0)/1000)};
   const pend=pendList().filter(x=>x.id!==p.id);pend.push(p);pendSave(pend);
   scoreUI('sending');
   scorePost(p).then(ok=>{
@@ -1740,6 +1749,92 @@ window.__stgReady=true;
 window.__dbg.tqAns=()=>TQ?TQ.items.map(x=>x.a):null;window.__dbg.testInfo=()=>({att:TEST.att,passed:TEST.passed,best:TEST.best,used:TEST.used.size,seen:SEEN.size});
 window.__dbg.enter=enterTower;
 
+/* ============ RÁC TỰ GIÁC: nhặt rác, bỏ đúng thùng, điểm xanh (cục bộ từng máy, không gửi mạng) ============ */
+const GP={pts:0,drops:0,wrong:0,cap:Math.min(300,Math.max(10,parseInt(CFGP.get('xcap'),10)||60)),per:3,need:15};
+const TX={on:CFGP.get('rac')!=='0',items:[],bins:[],hold:null,n:12,group:new THREE.Group(),t:0,capMsg:false};
+scene.add(TX.group);
+const TYPES={
+  huuco:{ten:'Hữu cơ',mau:'#3fa66a',items:[['Vỏ chuối','#f2d230','box',.5,.12,.2],['Lõi táo','#d8543a','sph',.2],['Lá khô','#a0722a','box',.5,.05,.4]]},
+  taiche:{ten:'Tái chế',mau:'#2f78c4',items:[['Chai nhựa','#8fd0ee','cyl',.16,.55],['Lon nước','#b8bec2','cyl',.16,.3],['Giấy cũ','#f4f1ea','box',.4,.06,.5]]},
+  khac:{ten:'Rác khác',mau:'#8d9895',items:[['Túi snack','#d94b4b','box',.4,.1,.5],['Bao nylon','#e8edf0','box',.45,.05,.45],['Vỏ kẹo','#e377b0','box',.25,.05,.25]]}
+};
+const TKEYS=Object.keys(TYPES);
+function mkItem(t,def){
+  const m=mat(def[1],{flatShading:true}),o=new THREE.Group();let mesh;
+  if(def[2]==='box')mesh=new THREE.Mesh(new THREE.BoxGeometry(def[3],def[4],def[5]),m);
+  else if(def[2]==='cyl')mesh=new THREE.Mesh(new THREE.CylinderGeometry(def[3],def[3],def[4],8),m);
+  else mesh=new THREE.Mesh(new THREE.SphereGeometry(def[3],8,6),m);
+  mesh.position.y=.28;mesh.rotation.y=Math.random()*6;o.add(mesh);
+  const ring=new THREE.Mesh(new THREE.RingGeometry(.45,.6,16),new THREE.MeshBasicMaterial({color:'#ffe08a',side:THREE.DoubleSide,transparent:true,opacity:.8}));
+  ring.rotation.x=-Math.PI/2;ring.position.y=.07;o.add(ring);
+  return o;
+}
+function trashSpot(){
+  for(let k=0;k<60;k++){
+    const a=Math.random()*Math.PI*2,r=9+Math.random()*40,x=Math.cos(a)*r,z=Math.sin(a)*r,h=hAt(x,z);
+    if(h<.5||h>6||Math.abs(x)<7.5&&Math.abs(z)<6.5)continue;
+    if(Math.hypot(x+12,z-5)<9||Math.hypot(x-PEAK.x,z-PEAK.z)<19||blocked(x,z))continue;
+    if(HP.some(q=>Math.hypot(x-q.x,z-q.z)<6))continue;
+    return{x:x,z:z};
+  }
+  return{x:-3,z:16};
+}
+function spawnItem(it){
+  const t=TKEYS[Math.floor(Math.random()*3)],def=TYPES[t].items[Math.floor(Math.random()*3)],sp=trashSpot();
+  if(it.mesh){TX.group.remove(it.mesh)}
+  it.type=t;it.ten=def[0];it.mesh=mkItem(t,def);it.x=sp.x;it.z=sp.z;it.alive=true;it.t=0;
+  it.mesh.position.set(sp.x,hAt(sp.x,sp.z),sp.z);TX.group.add(it.mesh);
+}
+for(let i=0;i<TX.n;i++){const it={};TX.items.push(it);spawnItem(it)}
+/* thùng rác: 3 cụm quanh khuôn viên */
+[[0,13],[-18,17],[18,-15]].forEach(c=>{
+  TKEYS.forEach((t,j)=>{
+    const x=c[0]+(j-1)*2.6,z=c[1],y=Math.max(hAt(x,z),0);
+    const g=new THREE.Group();g.position.set(x,y,z);
+    const b=new THREE.Mesh(new THREE.CylinderGeometry(.62,.5,1.25,10),mat(TYPES[t].mau));b.position.y=.62;b.castShadow=true;g.add(b);
+    const l=new THREE.Mesh(new THREE.CylinderGeometry(.68,.68,.14,10),mat('#2d3436'));l.position.y=1.3;g.add(l);
+    TX.group.add(g);
+    const lb=addLabel(TYPES[t].ten,new THREE.Vector3(x,y+2.1,z),{color:TYPES[t].mau,max:20,nature:true});
+    TX.bins.push({x:x,z:z,type:t,lbl:lb});
+  });
+});
+function txVisible(){const v=TX.on&&!TOWER.in;TX.group.visible=v;TX.bins.forEach(b=>{if(!v)b.lbl.pos.set(0,-9999,0);else b.lbl.pos.set(b.x,Math.max(hAt(b.x,b.z),0)+2.1,b.z)})}
+function gpUI(){$('gpts').textContent=GP.pts}
+function txBusy(){return ['quiz','info','test','tres','honor','cert','entry','gv','sel','guide'].some(id=>{const e=$(id);return e&&!e.hidden})}
+function txNearest(arr,rad){let best=null,bd=rad;arr.forEach(o=>{if(o.alive===false)return;const d=Math.hypot(o.x-player.position.x,o.z-player.position.z);if(d<bd){bd=d;best=o}});return best}
+function txAct(){
+  if(!TX.on||TOWER.in||txBusy())return;
+  if(!TX.hold){
+    const it=txNearest(TX.items,2.0);if(!it)return;
+    TX.hold=it;it.alive=false;TX.group.remove(it.mesh);toast('Em nhặt: '+it.ten+'. Mang tới thùng đúng loại nhé');return;
+  }
+  const bin=txNearest(TX.bins,2.6);if(!bin){toast('Em mang tới gần một thùng rác rồi bấm bỏ vào nhé');return}
+  const it=TX.hold;
+  if(bin.type===it.type){
+    TX.hold=null;GP.drops++;
+    if(GP.pts<GP.cap){GP.pts=Math.min(GP.cap,GP.pts+GP.per);gpUI();toast('Đúng thùng rồi! +'+GP.per+' điểm xanh');burst(innerWidth/2,innerHeight*.45,40,false)}
+    else{if(!TX.capMsg){TX.capMsg=true;toast('Em đã đủ điểm xanh. Cảm ơn em đã giữ khuôn viên sạch đẹp!')}else toast('Cảm ơn em đã bỏ rác đúng thùng!')}
+    const old=it;setTimeout(()=>{if(GP.pts<GP.cap)spawnItem(old)},20000+Math.random()*20000);
+  }else{GP.wrong++;toast(it.ten+' thuộc thùng '+TYPES[it.type].ten+'. Em thử thùng khác nhé')}
+}
+$('act').onclick=txAct;
+window.addEventListener('keydown',e=>{if(e.code==='KeyE'&&e.target.tagName!=='INPUT')txAct()});
+function trashTick(dt,now){
+  if(now-TX.t<150)return;TX.t=now;
+  txVisible();
+  const btn=$('act');
+  if(!TX.on||TOWER.in||txBusy()||!entered){btn.hidden=true;return}
+  let txt='';
+  if(!TX.hold){const it=txNearest(TX.items,2.0);if(it)txt='Nhặt '+it.ten+' (E)'}
+  else{const b=txNearest(TX.bins,2.6);txt=b?'Bỏ '+TX.hold.ten+' vào thùng '+TYPES[b.type].ten+' (E)':'Đang cầm: '+TX.hold.ten+' · tìm thùng rác'}
+  btn.hidden=!txt;if(txt&&btn.textContent!==txt)btn.textContent=txt;
+  TX.items.forEach(it=>{if(it.alive){it.mesh.rotation.y+=dt*1.2}});
+}
+$('hGreen').onclick=()=>{hideHonor();openCert('xanh')};
+$('bGreen').onclick=()=>openCert('xanh');
+window.__dbg.trash=()=>({items:TX.items.map(i=>[i.ten,i.type,Math.round(i.x),Math.round(i.z)]),bins:TX.bins.map(b=>[b.type,b.x,b.z]),gp:GP.pts,hold:TX.hold&&TX.hold.ten,on:TX.on});
+window.__dbg.txAct=txAct;
+
 /* ---------- vòng lặp ---------- */
 const skyK=[new THREE.Color('#b9e0f0'),new THREE.Color('#f2b48a'),new THREE.Color('#0d1530')];
 const hemiK=[[new THREE.Color('#ffffff'),.8],[new THREE.Color('#ffd9b0'),.7],[new THREE.Color('#5b6cb0'),.5]];
@@ -1792,7 +1887,7 @@ function frame(){
   let zn=-1;houseObjs.forEach((h,i)=>{if(Math.hypot(player.position.x-h.door.x,player.position.z-h.door.z)<2.3)zn=i});
   if(zn!==lastZone){lastZone=zn;if(zn>=0&&$('quiz').hidden&&$('honor').hidden)visitHouse(zn)}
   const bob=moving?Math.abs(Math.sin(tAcc*11))*.08:0;
-  player.children[0].position.y=1.15+bob;mpUpdate(dt,moving);navUpdate(dt,performance.now());towerTick(dt,performance.now());
+  player.children[0].position.y=1.15+bob;mpUpdate(dt,moving);navUpdate(dt,performance.now());towerTick(dt,performance.now());trashTick(dt,performance.now());
   /* camera */
   if(mode==='over'&&!drag&&!reduce)cam.yaw+=dt*.045;
   const tgt=mode==='over'?{x:0,y:2,z:0}:{x:player.position.x,y:player.position.y+1.5,z:player.position.z};
