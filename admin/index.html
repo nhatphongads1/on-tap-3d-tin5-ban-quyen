@@ -109,6 +109,8 @@ ol.steps{padding-left:18px;margin:6px 0 0;font-size:13.5px;color:var(--soft)}
         <label class="f" for="tTen">Tên trò chơi</label><input type="text" id="tTen" maxlength="40">
         <label class="f" for="tDe">Tên bài ôn tập</label><input type="text" id="tDe" maxlength="80">
         <label class="f" for="tPhong">Tên toà nhà ở giữa</label><input type="text" id="tPhong" maxlength="30">
+        <label class="f" for="tVid">Video bài học cho Khu học tập (link YouTube/Vimeo — không bắt buộc)</label><input type="url" id="tVid" maxlength="200" placeholder="https://…">
+        <label class="f" for="tVidT">Tên video bài học</label><input type="text" id="tVidT" maxlength="80" placeholder="Ví dụ: Bài giảng Bản quyền nội dung thông tin">
       </section>
       <section class="card">
         <h2>6 ngôi nhà</h2>
@@ -158,7 +160,7 @@ function qOk(q){
 function shapeOk(c){return !!(c&&Array.isArray(c.nha)&&c.nha.length===6&&c.nha.every(function(n){return n&&Array.isArray(n.cau)&&n.cau.length>=1&&n.cau.length<=10&&n.cau.every(qOk)}))}
 function S(x){return x==null?'':String(x)}
 function normalize(c){
-  c.tenTroChoi=S(c.tenTroChoi);c.phuDe=S(c.phuDe);c.phongGiua=S(c.phongGiua);
+  c.tenTroChoi=S(c.tenTroChoi);c.phuDe=S(c.phuDe);c.phongGiua=S(c.phongGiua);c.videoHoc=S(c.videoHoc);c.videoHocTieuDe=S(c.videoHocTieuDe);
   c.nha.forEach(function(n,i){
     n.ten=S(n.ten);n.mau=/^#[0-9a-fA-F]{6}$/.test(n.mau||'')?n.mau:'#1f6fe0';n.goc=Number(n.goc)||i*60;
     n.thongTin=S(n.thongTin);n.videoUrl=S(n.videoUrl);n.videoTieuDe=S(n.videoTieuDe);n.chiDan=S(n.chiDan);
@@ -248,6 +250,7 @@ function issues(){
   if(!cfg.tenTroChoi.trim())r.push({h:-1,m:'Chưa có tên trò chơi'});
   if(!cfg.phuDe.trim())r.push({h:-1,m:'Chưa có tên bài ôn tập'});
   if(!cfg.phongGiua.trim())r.push({h:-1,m:'Chưa có tên toà nhà ở giữa'});
+  if(!okUrl(cfg.videoHoc))r.push({h:-1,m:'Link video bài học phải bắt đầu bằng https://'});
   cfg.nha.forEach(function(n,i){
     if(!n.ten.trim())r.push({h:i,m:'Nhà '+(i+1)+': chưa có tên nhà'});
     if(!okUrl(n.videoUrl))r.push({h:i,m:'Nhà '+(i+1)+': link video phải bắt đầu bằng https://'});
@@ -425,9 +428,9 @@ function renderEditor(){
 }
 function syncTop(){
   $('tSlug').value=slug;
-  [['tTen','tenTroChoi'],['tDe','phuDe'],['tPhong','phongGiua']].forEach(function(p){$(p[0]).value=cfg[p[1]]});
+  [['tTen','tenTroChoi'],['tDe','phuDe'],['tPhong','phongGiua'],['tVid','videoHoc'],['tVidT','videoHocTieuDe']].forEach(function(p){$(p[0]).value=cfg[p[1]]});
 }
-[['tTen','tenTroChoi'],['tDe','phuDe'],['tPhong','phongGiua']].forEach(function(p){$(p[0]).addEventListener('input',function(){cfg[p[1]]=$(p[0]).value;onEdit()})});
+[['tTen','tenTroChoi'],['tDe','phuDe'],['tPhong','phongGiua'],['tVid','videoHoc'],['tVidT','videoHocTieuDe']].forEach(function(p){$(p[0]).addEventListener('input',function(){cfg[p[1]]=$(p[0]).value;onEdit()})});
 $('tSlug').addEventListener('input',function(){slug=$('tSlug').value.trim().toLowerCase();refresh()});
 
 $('bDown').addEventListener('click',function(){
