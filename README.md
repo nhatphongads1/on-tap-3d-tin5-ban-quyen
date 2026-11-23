@@ -70,6 +70,22 @@ quyền gốc: `supabase/schema.sql` (bản cũ: 3 câu/nhà); các thay đổi 
 `supabase/migration-ket-qua-giai-thich.sql`. Không có khoá bí mật nào nằm trong
 kho này.
 
+## Nâng cấp 23/11/2026 — Khu học tập (theo mô hình "Thế giới thứ 2")
+
+- **Khu học tập:** nhà chờ 3D ở phía đông khuôn viên (gần văn phòng), có màn
+  hình lớn. Bấm vào nhà / nhãn "Khu học tập" / mục "Khu học tập" trong menu
+  "Vào nhà ▾" để mở panel xem video bài học ngay trong game. Video lấy từ
+  trường mới `videoHoc` + `videoHocTieuDe` trong dữ liệu bài (gắn qua
+  `/admin`, mục "Bài ôn tập"); nếu bài chưa có video chung, panel liệt kê
+  video của từng nhà; nếu không có video nào thì hiện ghi chú. Không cần
+  đổi RPC — trường mới ở cấp bài, tương thích dữ liệu cũ.
+- **Bản đồ nhỏ:** thêm marker tím (chấm + tam giác play) cho Khu học tập.
+- **Nhãn tên:** nút "Để sau" ở form vào chơi giờ cũng tạo nhãn tên trên đầu
+  nhân vật (trước đây chỉ có khi gõ tên rồi bấm "Vào chơi").
+- **Mùa Tuyết:** thêm vòng nguyệt quế Giáng sinh ở cửa văn phòng, màn hình
+  Khu học tập và cửa 6 nhà (hiện cùng cây thông + người tuyết khi bật
+  Mùa: Tuyết).
+
 ## Nội dung bài mới (chưa nạp — chờ duyệt)
 
 - Tin 5 Bài 6 "Định dạng kí tự và bố trí hình ảnh trong văn bản"
